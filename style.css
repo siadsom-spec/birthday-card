@@ -2,8 +2,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
-  background-color: #8b0000;
-  color: white;
+  background-color: #f7f7f7; /* Lighter background like the TikTok app */
+  color: #333; /* Darker text */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,14 +21,38 @@ body {
   display: block;
 }
 
-.envelope {
-  font-size: 80px;
+h1 {
+  font-family: 'Georgia', serif; /* A more elegant font like in image_40.png */
+  font-style: italic;
+  color: #8b0000;
+  margin-bottom: 20px;
+}
+
+.card-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   cursor: pointer;
+}
+
+/* Designing the red envelope image based on image_40.png */
+.envelope-img {
+  width: 100%;
+  max-width: 300px; /* Adjust size to match */
+  height: auto;
+  border-radius: 8px; /* Slightly rounded corners */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Soft shadow */
   transition: transform 0.3s;
 }
 
-.envelope:hover {
-  transform: scale(1.1);
+.card-btn:hover .envelope-img {
+  transform: translateY(-5px) rotate(-2deg); /* Added a slight hover tilt */
+}
+
+.click-text {
+  font-size: 14px;
+  color: #666;
+  margin-top: 10px;
 }
 
 .menu-grid {
@@ -38,15 +62,19 @@ body {
 }
 
 .menu-card {
-  background: rgba(255, 255, 255, 0.15);
+  background: white; /* Card background is now white */
+  color: #333;
   padding: 15px;
   border-radius: 12px;
+  border: 1px solid #ddd;
   cursor: pointer;
-  transition: background 0.3s;
+  width: 100px;
+  transition: all 0.3s;
 }
 
 .menu-card:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: #fffafa; /* Light red/white on hover */
+  border-color: #8b0000;
 }
 
 .menu-card span {
@@ -58,15 +86,21 @@ body {
   color: #333;
   padding: 20px;
   border-radius: 10px;
+  border: 1px solid #ddd;
   margin: 20px 0;
 }
 
 .back-btn {
-  background: white;
-  color: #8b0000;
+  background: #8b0000; /* Dark red background for back button */
+  color: white;
   border: none;
   padding: 10px 20px;
   border-radius: 20px;
   font-weight: bold;
   cursor: pointer;
+  transition: background 0.3s;
+}
+
+.back-btn:hover {
+  background: #a52a2a;
 }
