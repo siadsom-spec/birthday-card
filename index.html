@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Surprise Birthday Experience</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600;700&family=Playfair+Display:ital,wght@0,600;1,400&family=Caveat:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600;700&family=Playfair+Display:ital,wght@0,600;1,400&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
 
   <style>
     * {
@@ -238,7 +238,7 @@
        PAGE 4: MESSAGE & SCRAPBOOK PAGE
     ------------------------------------ */
     #page-message {
-      background: #700913; /* Redish dark theme like in screenshot */
+      background: #700913;
       background-image: radial-gradient(rgba(0,0,0,0.3) 15%, transparent 16%);
       background-size: 16px 16px;
       padding: 30px 15px 60px 15px;
@@ -254,20 +254,76 @@
       max-width: 420px;
       display: flex;
       flex-direction: column;
-      gap: 25px;
+      gap: 22px;
       align-items: center;
     }
 
-    .header-sticker {
+    /* TOP ROW WITH STICKER NOTE */
+    .top-layout-row {
+      display: flex;
+      width: 100%;
+      gap: 15px;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    .person-sticker {
       background: #ffffff;
-      color: #a8131d;
+      color: #800020;
       font-family: 'Caveat', cursive;
-      font-size: 32px;
-      padding: 6px 25px;
+      font-size: 26px;
+      padding: 6px 18px;
       border-radius: 8px;
-      transform: rotate(-2deg);
+      transform: rotate(-3deg);
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
       font-weight: bold;
+    }
+
+    /* GEESKA WARADDA (POST-IT NOTE) */
+    .corner-note {
+      background: #fef08a;
+      color: #1c1917;
+      padding: 14px;
+      border-radius: 10px;
+      width: 180px;
+      box-shadow: 4px 6px 15px rgba(0,0,0,0.3);
+      transform: rotate(2deg);
+      position: relative;
+      border: 1px solid #fde047;
+    }
+
+    .corner-note-text {
+      font-family: 'Caveat', cursive;
+      font-size: 18px;
+      line-height: 1.2;
+      height: 55px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 8px;
+    }
+
+    .note-actions {
+      display: flex;
+      gap: 5px;
+    }
+
+    .btn-note {
+      font-size: 10px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .btn-view {
+      background: #a8131d;
+      color: white;
+    }
+
+    .btn-edit {
+      background: #e2e8f0;
+      color: #334155;
     }
 
     /* ALPHABET CARDS (A, B, C, D, E) */
@@ -325,44 +381,6 @@
       margin-top: 4px;
     }
 
-    /* LONG PAPER NOTE AT BOTTOM */
-    .long-note-card {
-      background: #1c1917;
-      border: 1px solid #44403c;
-      border-radius: 16px;
-      padding: 22px;
-      width: 100%;
-      color: #f5f5f4;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-      position: relative;
-    }
-
-    .note-tag {
-      font-size: 12px;
-      color: #a8a29e;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 5px;
-    }
-
-    .note-textarea {
-      width: 100%;
-      min-height: 140px;
-      max-height: 300px;
-      background: transparent;
-      border: none;
-      color: #fef08a;
-      font-family: 'Caveat', cursive;
-      font-size: 22px;
-      line-height: 1.4;
-      resize: vertical;
-      outline: none;
-    }
-
-    .note-textarea::placeholder {
-      color: #78716c;
-    }
-
     .back-btn {
       background: #ffffff;
       color: #800020;
@@ -372,251 +390,14 @@
       font-weight: bold;
       cursor: pointer;
       box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      margin-top: 10px;
     }
 
-    /* MODAL FOR IMAGE DISPLAY */
+    /* MODAL FOR ANIMATED TEXT MESSAGE */
     .modal-overlay {
       display: none;
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
-      height: 100vh;
-      background: rgba(0,0,0,0.85);
-      z-index: 999;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-
-    .modal-overlay.active {
-      display: flex;
-    }
-
-    .modal-box {
-      background: #fff;
-      padding: 20px;
-      border-radius: 16px;
-      max-width: 350px;
-      width: 100%;
-      text-align: center;
-      color: #333;
-    }
-
-    .modal-box img {
-      width: 100%;
-      max-height: 250px;
-      object-fit: cover;
-      border-radius: 10px;
-      margin-bottom: 15px;
-    }
-
-    /* HIDDEN FILE INPUTS */
-    input[type="file"] {
-      display: none;
-    }
-  </style>
-</head>
-<body>
-
-  <section id="page-pos" class="page active">
-    <div class="pos-container">
-      <div class="pos-screen">
-        <div id="pin-display" class="pos-pin-display"></div>
-        <div class="pos-hint">Enter PIN (Default: 912)</div>
-      </div>
-
-      <div class="pos-keypad">
-        <button class="pos-btn" onclick="pressKey('1')">1</button>
-        <button class="pos-btn" onclick="pressKey('2')">2</button>
-        <button class="pos-btn" onclick="pressKey('3')">3</button>
-        <button class="pos-btn" onclick="pressKey('4')">4</button>
-        <button class="pos-btn" onclick="pressKey('5')">5</button>
-        <button class="pos-btn" onclick="pressKey('6')">6</button>
-        <button class="pos-btn" onclick="pressKey('7')">7</button>
-        <button class="pos-btn" onclick="pressKey('8')">8</button>
-        <button class="pos-btn" onclick="pressKey('9')">9</button>
-        <button class="pos-btn clear" onclick="clearKey()">C</button>
-        <button class="pos-btn" onclick="pressKey('0')">0</button>
-        <button class="pos-btn enter" onclick="submitKey()">✓</button>
-      </div>
-    </div>
-  </section>
-
-  <section id="page-balloon" class="page">
-    <h2>Sadiqq sent you balloons 🎈</h2>
-    <div class="balloon-wrapper" onclick="popBalloon()">
-      <div class="balloon-body">
-        <span id="balloon-count" class="balloon-number">1</span>
-      </div>
-      <div class="balloon-knot"></div>
-      <div class="balloon-string"></div>
-    </div>
-    <p style="color: #666; font-size: 14px;">Press to pop ✨</p>
-  </section>
-
-  <section id="page3" class="page">
-    <h1 class="menu-title">These are for you</h1>
-    <div class="menu-grid">
-      <div class="menu-card" onclick="showPage('page-message')">
-        <img src="https://i.postimg.cc/P5mQW5Zq/fd28b166029642a7a92f965be93dc657.webp" alt="Message">
-        <p>Message</p>
-      </div>
-      <div class="menu-card" onclick="alert('Flower section ✨')">
-        <img src="https://i.postimg.cc/xdVbnwsh/221693915545497b49634065bc732e4d.jpg" alt="Flower">
-        <p>Flower</p>
-      </div>
-      <div class="menu-card" onclick="alert('Cake section 🎂')">
-        <img src="https://cdn-icons-png.flaticon.com/512/2682/2682411.png" alt="Cake">
-        <p>Cake</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="page-message" class="page">
-    <div class="msg-container">
-      
-      <div class="header-sticker">person ⤵️</div>
-
-      <div class="cards-wrapper">
-        <div class="card-item" onclick="handleCardClick('A')">
-          <img id="img-preview-A" class="card-img-preview" alt="Preview A">
-          <span id="letter-A" class="card-letter">A</span>
-          <button class="upload-btn-mini" onclick="triggerUpload(event, 'A')">📷 Upload Image</button>
-          <input type="file" id="file-A" accept="image/*" onchange="previewImage(event, 'A')">
-        </div>
-
-        <div class="card-item" onclick="handleCardClick('B')">
-          <img id="img-preview-B" class="card-img-preview" alt="Preview B">
-          <span id="letter-B" class="card-letter">B</span>
-          <button class="upload-btn-mini" onclick="triggerUpload(event, 'B')">📷 Upload Image</button>
-          <input type="file" id="file-B" accept="image/*" onchange="previewImage(event, 'B')">
-        </div>
-
-        <div class="card-item" onclick="handleCardClick('C')">
-          <img id="img-preview-C" class="card-img-preview" alt="Preview C">
-          <span id="letter-C" class="card-letter">C</span>
-          <button class="upload-btn-mini" onclick="triggerUpload(event, 'C')">📷 Upload Image</button>
-          <input type="file" id="file-C" accept="image/*" onchange="previewImage(event, 'C')">
-        </div>
-
-        <div class="card-item" onclick="handleCardClick('D')">
-          <img id="img-preview-D" class="card-img-preview" alt="Preview D">
-          <span id="letter-D" class="card-letter">D</span>
-          <button class="upload-btn-mini" onclick="triggerUpload(event, 'D')">📷 Upload Image</button>
-          <input type="file" id="file-D" accept="image/*" onchange="previewImage(event, 'D')">
-        </div>
-
-        <div class="card-item" onclick="handleCardClick('E')">
-          <img id="img-preview-E" class="card-img-preview" alt="Preview E">
-          <span id="letter-E" class="card-letter">E</span>
-          <button class="upload-btn-mini" onclick="triggerUpload(event, 'E')">📷 Upload Image</button>
-          <input type="file" id="file-E" accept="image/*" onchange="previewImage(event, 'E')">
-        </div>
-      </div>
-
-      <div class="long-note-card">
-        <div class="note-tag">From: Someone / For: You</div>
-        <textarea class="note-textarea" placeholder="Dhallo farxad leh gofkayga aan ugu jeclahay adduunka. Waxaad tahay gofka ngu wanaagsan ee aan waligay jeclaan karo... (U qor farintaada dheer halkan)"></textarea>
-      </div>
-
-      <button class="back-btn" onclick="showPage('page3')">Back to Menu</button>
-    </div>
-  </section>
-
-  <div id="imageModal" class="modal-overlay">
-    <div class="modal-box">
-      <img id="modalImg" src="" alt="View">
-      <button class="back-btn" onclick="closeModal()">Close</button>
-    </div>
-  </div>
-
-  <script>
-    let enteredPin = "";
-    const correctPin = "912"; // Passcode-ka aad isticmaali kartid
-
-    function pressKey(num) {
-      if (enteredPin.length < 4) {
-        enteredPin += num;
-        document.getElementById('pin-display').innerText = "*".repeat(enteredPin.length);
-      }
-    }
-
-    function clearKey() {
-      enteredPin = "";
-      document.getElementById('pin-display').innerText = "";
-    }
-
-    function submitKey() {
-      if (enteredPin === correctPin || enteredPin.length > 0) {
-        showPage('page-balloon');
-      } else {
-        alert('Password-ka waa ku maamul!');
-        clearKey();
-      }
-    }
-
-    /* BALLOON LOGIC */
-    let balloonCount = 1;
-    function popBalloon() {
-      balloonCount++;
-      if (balloonCount <= 5) {
-        document.getElementById('balloon-count').innerText = balloonCount;
-      } else {
-        showPage('page3');
-      }
-    }
-
-    /* PAGE SWITCHER WITH ANIMATION */
-    function showPage(pageId) {
-      document.querySelectorAll('.page').forEach(p => {
-        p.classList.remove('active');
-      });
-      const target = document.getElementById(pageId);
-      if (target) {
-        target.classList.add('active');
-      }
-    }
-
-    /* IMAGE UPLOAD & PREVIEW LOGIC */
-    const imageStore = {};
-
-    function triggerUpload(event, letter) {
-      event.stopPropagation(); // Prevents card click
-      document.getElementById('file-' + letter).click();
-    }
-
-    function previewImage(event, letter) {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          imageStore[letter] = e.target.result;
-          
-          const imgEl = document.getElementById('img-preview-' + letter);
-          const letterEl = document.getElementById('letter-' + letter);
-          
-          imgEl.src = e.target.result;
-          imgEl.style.display = 'block';
-          letterEl.style.fontSize = '20px';
-        };
-        reader.readAsDataURL(file);
-      }
-    }
-
-    function handleCardClick(letter) {
-      if (imageStore[letter]) {
-        document.getElementById('modalImg').src = imageStore[letter];
-        document.getElementById('imageModal').classList.add('active');
-      } else {
-        alert('Fadlan marka hore taabo badhanka "Upload Image" si aad sawir ugu soo xulato kaardkan ' + letter);
-      }
-    }
-
-    function closeModal() {
-      document.getElementById('imageModal').classList.remove('active');
-    }
-  </script>
-</body>
-</html>
-
+      height:
