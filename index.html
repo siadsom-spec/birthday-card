@@ -6,7 +6,7 @@
   <title>Surprise Gift Service</title>
   
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600;700&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
   
   <style>
     * {
@@ -82,34 +82,99 @@
       transition: width 0.1s linear;
     }
 
-    /* PAGE 0.5: GREEN BOLO (STAMP) SCREEN */
-    #page-stamp {
-      background-color: #fdfaf6;
+    /* PAGE: BALLOON GAME */
+    #page-balloon {
+      background-color: #f7f3f0;
       flex-direction: column;
-      cursor: pointer;
-    }
-
-    .green-stamp {
-      width: 120px;
-      height: 120px;
-      background-color: #58cc02;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      box-shadow: 0 10px 25px rgba(88, 204, 2, 0.4);
-      animation: pulseStamp 1.5s infinite ease-in-out;
-    }
-
-    .stamp-star {
-      color: white;
-      font-size: 55px;
+      padding: 80px 20px 40px 20px;
+      transition: background-color 0.4s ease;
       user-select: none;
     }
 
-    @keyframes pulseStamp {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.1); }
+    .balloon-header {
+      text-align: center;
+    }
+
+    .balloon-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 38px;
+      color: #333333;
+      line-height: 1.2;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    /* BUFINA CAGARAN LEH DESIGN-KA SAWIRKA */
+    .balloon-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.1s ease;
+    }
+
+    .balloon-wrapper:active {
+      transform: scale(0.92);
+    }
+
+    .balloon-body {
+      width: 140px;
+      height: 175px;
+      background: radial-gradient(circle at 35% 35%, #76ec2a, #43b005);
+      border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      box-shadow: inset -10px -10px 20px rgba(0,0,0,0.15), 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    /* SHINE-KA DHINACA BUFINTA */
+    .balloon-body::before {
+      content: '';
+      position: absolute;
+      top: 22%;
+      left: 18%;
+      width: 25px;
+      height: 55px;
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 50%;
+      transform: rotate(-30deg);
+    }
+
+    .balloon-number {
+      color: white;
+      font-size: 48px;
+      font-weight: 700;
+      z-index: 2;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    }
+
+    .balloon-knot {
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 12px solid #3d9e04;
+      margin-top: -2px;
+    }
+
+    .balloon-string {
+      width: 2px;
+      height: 120px;
+      background-color: #d1d1d1;
+      margin-top: 0px;
+      transition: background-color 0.3s;
+    }
+
+    .click-prompt {
+      font-size: 14px;
+      color: #888888;
+      margin-bottom: 20px;
+      transition: color 0.3s;
     }
 
     /* PAGE 1: ENVELOPE */
@@ -341,11 +406,21 @@
     </div>
   </section>
 
-  <!-- PAGE 0.5: GREEN BOLO (STAMP) -->
-  <section id="page-stamp" class="page" onclick="showPage('page1')">
-    <div class="green-stamp">
-      <span class="stamp-star">💥</span>
+  <!-- PAGE 0.5: BALLOON TAP PAGE -->
+  <section id="page-balloon" class="page">
+    <div class="balloon-header">
+      <h2 id="balloon-title">Sadiqq sent<br>you a balloon</h2>
     </div>
+
+    <div class="balloon-wrapper" onclick="tapBalloon()">
+      <div class="balloon-body">
+        <span id="balloon-count" class="balloon-number">1</span>
+      </div>
+      <div class="balloon-knot"></div>
+      <div id="balloon-string" class="balloon-string"></div>
+    </div>
+
+    <p id="click-prompt" class="click-prompt">Press to pop ✨</p>
   </section>
 
   <!-- PAGE 1: ENVELOPE -->
@@ -421,6 +496,8 @@
   </section>
 
   <script>
+    let tapCount = 1;
+
     // SIMULATE LOADING BAR
     window.addEventListener('DOMContentLoaded', () => {
       let progress = 0;
@@ -431,11 +508,37 @@
         if (progress >= 100) {
           clearInterval(interval);
           setTimeout(() => {
-            showPage('page-stamp');
+            showPage('page-balloon');
           }, 300);
         }
       }, 50);
     });
+
+    function tapBalloon() {
+      tapCount++;
+      const countEl = document.getElementById('balloon-count');
+      const balloonPage = document.getElementById('page-balloon');
+      const titleEl = document.getElementById('balloon-title');
+      const stringEl = document.getElementById('balloon-string');
+      const promptEl = document.getElementById('click-prompt');
+
+      if (tapCount <= 3) {
+        countEl.innerText = tapCount;
+      }
+
+      if (tapCount === 2) {
+        // Beddel midabka bogga (Sida sawirka labaad - Purple Background)
+        balloonPage.style.backgroundColor = '#d822bd';
+        titleEl.style.display = 'none';
+        stringEl.style.backgroundColor = 'rgba(255, 255, 255, 0.7)';
+        promptEl.style.color = 'rgba(255, 255, 255, 0.8)';
+      } else if (tapCount >= 3) {
+        // Marka ay gaarto 3, toos u gudub Envelope Page
+        setTimeout(() => {
+          showPage('page1');
+        }, 200);
+      }
+    }
 
     function showPage(pageId) {
       const pages = document.querySelectorAll('.page');
