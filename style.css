@@ -2,128 +2,225 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', sans-serif;
 }
 
 body {
-  background-color: #1a3c27; /* Midabka dambe ee doogga ah */
-  background-image: radial-gradient(circle at top left, #295738, #11281a);
-  color: #ffffff;
+  background-color: #1a3c27;
+  background-image: radial-gradient(circle at top, #244d32, #0d2015);
+  color: #e2ece4;
+  padding: 20px 10px;
   display: flex;
   justify-content: center;
-  padding: 20px;
-  min-height: 100vh;
 }
 
-.container {
+.studio-container {
   width: 100%;
-  max-width: 420px; /* Cabbirka taleefanka ku habboon */
+  max-width: 440px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 18px;
 }
 
-/* Tabs-ka Sare */
-.tabs-header {
-  background: rgba(0, 0, 0, 0.2);
-  padding: 5px;
-  border-radius: 30px;
-  display: flex;
-  gap: 5px;
+.main-title {
+  font-family: serif;
+  font-size: 28px;
+  text-align: center;
+  color: #f0ede6;
 }
 
-.tab-btn {
-  flex: 1;
-  background: transparent;
-  border: none;
-  color: #a3c2ac;
-  padding: 10px 15px;
-  border-radius: 25px;
+.draft-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  padding: 12px;
+  border-radius: 20px;
+  font-size: 11px;
   font-weight: bold;
+  letter-spacing: 1px;
   cursor: pointer;
+}
+
+.see-how {
+  color: #d1dfd5;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  text-decoration: none;
+  letter-spacing: 1px;
+}
+
+/* Common Section Cards */
+.section-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  backdrop-filter: blur(8px);
+}
+
+.section-title {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #a3c7ad;
+}
+
+/* Input Fields */
+.form-row {
+  display: flex;
+  gap: 10px;
+}
+
+.field-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field-group label {
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #a3c7ad;
+}
+
+input[type="text"], textarea {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 12px;
+  color: #ffffff;
+  font-size: 14px;
+  outline: none;
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* Lock Screen horizontal scroll */
+.horizontal-scroll {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.theme-card {
+  min-width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.preview-img {
+  width: 90px;
+  height: 140px;
+  background: #2b4734;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  font-size: 13px;
+  font-size: 24px;
+  border: 2px solid transparent;
 }
 
-.tab-btn.active {
-  background: #ffffff;
-  color: #1a3c27;
+.theme-card.active .preview-img {
+  border-color: #ffffff;
 }
 
-.badge {
-  background: rgba(0, 0, 0, 0.15);
-  padding: 2px 7px;
-  border-radius: 50%;
-  font-size: 11px;
-}
-
-/* Button-ka Sabaynaya */
-.action-top {
+/* Palette Dots */
+.color-palette {
   display: flex;
-  justify-content: flex-end;
+  gap: 10px;
 }
 
-.primary-btn {
-  background-color: #2e7d32;
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 20px;
-  font-weight: bold;
+.dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  transition: 0.2s;
 }
+.dot.pink { background: #ff9ebb; }
+.dot.yellow { background: #ffd166; }
+.dot.white { background: #ffffff; }
+.dot.red { background: #ef476f; }
+.dot.blue { background: #118ab2; }
+.dot.green { background: #06d6a0; }
+.dot.active { outline: 2px solid #ffffff; outline-offset: 2px; }
 
-.primary-btn:hover {
-  background-color: #388e3c;
-}
-
-/* Card-ka Dhexe */
-.card-box {
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  padding: 25px 20px;
+/* PIN Box */
+.pin-box {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  border-radius: 15px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 15px;
+  gap: 8px;
 }
 
-.card-box h2 {
+.pin-box input {
   font-size: 20px;
-  font-weight: 600;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 4px;
 }
 
-.card-box p {
-  color: #c2d6c7;
-  font-size: 14px;
-  line-height: 1.5;
+.pin-hint {
+  font-size: 11px;
+  color: #8fae96;
 }
 
-/* Card-ka Hoose (White Box) */
-.bottom-card {
-  background: #ffffff;
-  color: #222222;
-  border-radius: 20px 20px 0 0;
-  padding: 25px 20px;
-  margin-top: 20px;
+/* Buttons & Controls */
+.flex-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.step-label {
+.delete-btn {
+  background: rgba(255, 100, 100, 0.2);
+  color: #ff9999;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.btn-group {
+  display: flex;
+  gap: 10px;
+}
+
+.action-btn {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 12px;
   font-size: 12px;
-  letter-spacing: 2px;
-  color: #777777;
-  display: block;
-  margin-bottom: 5px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-.bottom-card h3 {
-  font-size: 18px;
-  color: #1a3c27;
+.sub-text {
+  font-size: 11px;
+  color: #9bb8a3;
+  line-height: 1.4;
+}
+
+.audio-player {
+  width: 100%;
+  margin-top: 8px;
+  height: 35px;
 }
