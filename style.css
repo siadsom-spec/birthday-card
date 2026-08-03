@@ -7,48 +7,45 @@
 body {
   font-family: 'Poppins', sans-serif;
   background-color: #500000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
-  padding: 15px;
-}
-
-.card-container {
-  background-color: #8b0000;
-  width: 100%;
-  max-width: 600px;
-  min-height: 480px;
-  border: 12px solid #600000;
-  border-radius: 16px;
+  width: 100vw;
+  overflow-x: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-  text-align: center;
-  position: relative;
-  overflow: hidden;
 }
 
 .page {
   display: none;
-  width: 100%;
+  width: 100vw;
+  height: 100vh;
 }
 
 .page.active {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+/* PAGE 1: ENVELOPE CONTAINER */
 #page1 {
+  background-color: #500000;
+}
+
+.envelope-box {
   background-color: #fdfaf6;
-  padding: 30px 15px;
-  border-radius: 8px;
+  width: 90%;
+  max-width: 450px;
+  padding: 30px 20px;
+  border-radius: 12px;
+  text-align: center;
+  border: 8px solid #8b0000;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
 .script-title {
   font-family: 'Great Vibes', cursive;
-  font-size: 52px;
+  font-size: 48px;
   color: #8b0000;
   margin-bottom: 15px;
 }
@@ -62,7 +59,7 @@ body {
 
 .envelope-image {
   width: 100%;
-  max-width: 300px;
+  max-width: 280px;
   height: auto;
   border-radius: 8px;
   animation: bounceEnvelope 2s infinite ease-in-out;
@@ -79,31 +76,32 @@ body {
   margin-top: 10px;
 }
 
-/* Page 2 Photo Page */
+/* PAGE 2: FULL SCREEN BACKGROUND PHOTO */
 .photo-page {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100% !important;
-  height: 100% !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  /* Halkan geli link-ga sawirkaaga buuxinaya shaashadda */
   background-image: url('https://i.postimg.cc/jqkNPbJ1/da1478c736e944eb8f1ec711d8c60617.webp');
   background-size: cover;
   background-position: center;
-  border: 10px solid #8b0000;
-  border-radius: 10px;
+  background-repeat: no-repeat;
   display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  z-index: 99;
 }
 
 .photo-page.active {
   display: flex !important;
-  animation: openPop 0.8s ease-out forwards;
+  animation: fadeIn 0.8s ease-out forwards;
 }
 
-@keyframes openPop {
-  0% { opacity: 0; transform: scale(0.7); }
+@keyframes fadeIn {
+  0% { opacity: 0; transform: scale(0.95); }
   100% { opacity: 1; transform: scale(1); }
 }
 
@@ -114,14 +112,15 @@ body {
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   border: 1px solid rgba(255, 255, 255, 0.3);
-  max-width: 85%;
-  z-index: 5;
+  width: 85%;
+  max-width: 400px;
+  text-align: center;
   box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
 .script-title-white {
   font-family: 'Great Vibes', cursive;
-  font-size: 48px;
+  font-size: 44px;
   color: #ffffff;
   margin-bottom: 10px;
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
@@ -129,7 +128,7 @@ body {
 
 .sub-text {
   color: #ffffff;
-  font-size: 15px;
+  font-size: 14px;
   margin-bottom: 20px;
   text-shadow: 1px 1px 4px rgba(0,0,0,0.9);
 }
@@ -143,25 +142,32 @@ body {
   font-weight: bold;
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  transition: transform 0.2s, background 0.2s;
+  transition: transform 0.2s;
 }
 
 .next-btn:hover {
   transform: scale(1.08);
-  background-color: #ffe6e6;
 }
 
-/* Page 3 Menu */
-#page3, #page-message, #page-flower, #page-cake {
+/* OTHER PAGES & MENU */
+.menu-page, .content-page {
+  background-color: #500000;
+}
+
+.menu-box, .card-inner {
   background-color: #fdfaf6;
-  padding: 25px 15px;
-  border-radius: 8px;
+  width: 90%;
+  max-width: 450px;
+  padding: 30px 20px;
+  border-radius: 12px;
+  text-align: center;
+  border: 8px solid #8b0000;
 }
 
 .menu-grid {
   display: flex;
   justify-content: space-around;
-  margin-top: 25px;
+  margin-top: 20px;
   gap: 10px;
 }
 
@@ -172,23 +178,10 @@ body {
   border-radius: 10px;
   cursor: pointer;
   flex: 1;
-  transition: transform 0.2s, border-color 0.2s;
 }
 
-.menu-card:hover {
-  transform: translateY(-5px);
-  border-color: #8b0000;
-}
-
-.menu-card span {
-  font-size: 32px;
-}
-
-.menu-card p {
-  color: #333;
-  margin-top: 5px;
-  font-size: 14px;
-}
+.menu-card span { font-size: 32px; }
+.menu-card p { color: #333; margin-top: 5px; font-size: 14px; }
 
 .content-box {
   background: white;
