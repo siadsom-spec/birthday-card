@@ -84,7 +84,7 @@
       margin-top: 10px;
     }
 
-    /* PAGE 2: SAWIRKA IYO QORAALKA BILAASH SANDUUQ GADUUD AH */
+    /* PAGE 2: SAWIRKA IYO QORAALKA BILAASH SANDUUQ */
     #page2 {
       position: fixed;
       top: 0;
@@ -105,10 +105,9 @@
       overflow: hidden;
     }
 
-    /* QORAALKA WEYN LEH ANIMATION IYO SHADOW MADOW */
     .title-animated {
       font-family: 'Great Vibes', cursive;
-      font-size: 65px !important; /* Qoraal aad u weyn */
+      font-size: 65px !important;
       color: #ffffff !important;
       margin-bottom: 15px;
       text-shadow: 3px 3px 12px #000000, 0 0 25px rgba(0, 0, 0, 0.9);
@@ -119,7 +118,7 @@
 
     .sub-animated {
       color: #ffffff !important;
-      font-size: 22px !important; /* Qoraalka yar oo weyn */
+      font-size: 22px !important;
       margin-bottom: 30px;
       text-shadow: 2px 2px 8px #000000, 0 0 15px rgba(0, 0, 0, 0.9);
       text-align: center;
@@ -157,7 +156,7 @@
       50% { transform: scale(1.08); }
     }
 
-    /* ANIMATION-KA LOVE/WADNAYAAL DAADANAYA */
+    /* HEART ANIMATION */
     .heart-particle {
       position: absolute;
       color: #ff3366;
@@ -177,6 +176,79 @@
         opacity: 0;
       }
     }
+
+    /* PAGE 3 & OTHER SUB-PAGES */
+    .menu-page, .content-page {
+      background-color: #500000;
+    }
+
+    .menu-box, .card-inner {
+      background-color: #fdfaf6;
+      width: 90%;
+      max-width: 450px;
+      padding: 30px 20px;
+      border-radius: 12px;
+      text-align: center;
+      border: 6px solid #8b0000;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      animation: popIn 0.5s ease-out;
+    }
+
+    @keyframes popIn {
+      0% { opacity: 0; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .menu-grid {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 25px;
+      gap: 10px;
+    }
+
+    .menu-card {
+      background: white;
+      border: 2px solid #ddd;
+      padding: 15px 10px;
+      border-radius: 12px;
+      cursor: pointer;
+      flex: 1;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-5px);
+      border-color: #8b0000;
+    }
+
+    .menu-card span { font-size: 36px; }
+    .menu-card p { color: #333; margin-top: 8px; font-size: 14px; font-weight: 600; }
+
+    .content-box {
+      background: white;
+      color: #333;
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid #eee;
+      margin: 20px 0;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .back-btn {
+      background: #8b0000;
+      color: white;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+
+    .back-btn:hover {
+      background: #600000;
+    }
   </style>
 </head>
 <body>
@@ -186,17 +258,71 @@
     <div class="envelope-box">
       <h1 class="script-title">Happy Birthday!</h1>
       <div class="envelope-wrapper" onclick="openEnvelope()">
-        <img src="https://i.postimg.cc/qBGV4p7B/envelope.png" alt="Envelope" class="envelope-image">
+        <img src="https://i.postimg.cc/jdHxK6KL/ab4ad499ea014e3bbfd3074703568aa0.webp" alt="Envelope" class="envelope-image">
       </div>
       <p class="click-text">Taabo baqshadda si aad u furto ✨</p>
     </div>
   </section>
 
-  <!-- PAGE 2: SAWIRKA IYO QORAALKA (BILAASH SANDUUQ GADUUD AH) -->
+  <!-- PAGE 2: SAWIRKA IYO QORAALKA -->
   <section id="page2" class="page">
     <h1 class="title-animated">Happy Birthday! 🎉</h1>
     <p class="sub-animated">I hope this little gift will make you happy ❤️</p>
-    <button class="next-btn" onclick="alert('Ku soo dhawoow bogga xigta!')">Click here ✨</button>
+    <button class="next-btn" onclick="showPage('page3')">Click here ✨</button>
+  </section>
+
+  <!-- PAGE 3: MENU OPTIONS -->
+  <section id="page3" class="page menu-page">
+    <div class="menu-box">
+      <h2 style="color: #8b0000; margin-bottom: 20px; font-size: 26px;">These are for you ❤️</h2>
+      <div class="menu-grid">
+        <div class="menu-card" onclick="showPage('page-message')">
+          <span>💌</span>
+          <p>Message</p>
+        </div>
+        <div class="menu-card" onclick="showPage('page-flower')">
+          <span>💐</span>
+          <p>Flower</p>
+        </div>
+        <div class="menu-card" onclick="showPage('page-cake')">
+          <span>🎂</span>
+          <p>Cake</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUB PAGE: MESSAGE -->
+  <section id="page-message" class="page content-page">
+    <div class="card-inner">
+      <h2 style="color: #8b0000;">Hambalyo Dhalasho! 🎉</h2>
+      <div class="content-box">
+        <p>Waxaan kugu hambalyeynayaa dhalashadaada! Waxaan kuu wish-garaynayaa sannad buuxa farxad, caafimaad, iyo guul oo dhan.</p>
+      </div>
+      <button class="back-btn" onclick="showPage('page3')">Back to Menu</button>
+    </div>
+  </section>
+
+  <!-- SUB PAGE: FLOWER -->
+  <section id="page-flower" class="page content-page">
+    <div class="card-inner">
+      <h2 style="color: #8b0000;">Sunflower 🌻</h2>
+      <div class="content-box">
+        <p>Waxaad tahay qof gaar ah oo had iyo jeer iftiimiya nolosha dadka ku xeeran!</p>
+      </div>
+      <button class="back-btn" onclick="showPage('page3')">Back to Menu</button>
+    </div>
+  </section>
+
+  <!-- SUB PAGE: CAKE -->
+  <section id="page-cake" class="page content-page">
+    <div class="card-inner">
+      <h2 style="color: #8b0000;">Sweet Wishes 🎂</h2>
+      <div class="content-box">
+        <p>Aad iyo aad uga hel sannadkan cusub wax kasta oo aad ku riyoonaysay!</p>
+      </div>
+      <button class="back-btn" onclick="showPage('page3')">Back to Menu</button>
+    </div>
   </section>
 
   <script>
@@ -246,3 +372,4 @@
 
 </body>
 </html>
+
