@@ -35,7 +35,7 @@
     }
 
     .page.active {
-      display: flex;
+      display: flex !important;
     }
 
     /* PAGE 1: HOME STYLES */
@@ -149,18 +149,6 @@
       color: #f0ede6;
     }
 
-    .draft-btn {
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      color: #ffffff;
-      padding: 12px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: bold;
-      letter-spacing: 1px;
-      cursor: pointer;
-    }
-
     .section-card {
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.12);
@@ -197,7 +185,7 @@
       color: #a3c7ad;
     }
 
-    input[type="text"], textarea {
+    input[type="text"], textarea, select {
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 12px;
@@ -206,6 +194,59 @@
       font-size: 14px;
       outline: none;
       width: 100%;
+    }
+
+    /* 4 SQUARE BUTTONS (AFAR GEES) */
+    .four-cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .square-card {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .square-card:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .square-card span.icon {
+      font-size: 24px;
+    }
+
+    .square-card span.label {
+      font-size: 12px;
+      font-weight: bold;
+      color: #d1dfd5;
+    }
+
+    /* MEDIA UPLOAD BUTTONS */
+    .upload-btn-wrapper {
+      display: flex;
+      gap: 10px;
+    }
+
+    .file-btn {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px dashed rgba(255, 255, 255, 0.3);
+      padding: 12px;
+      border-radius: 12px;
+      text-align: center;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: bold;
     }
 
     .horizontal-scroll {
@@ -245,23 +286,6 @@
       box-shadow: 0 0 10px rgba(255,255,255,0.5);
     }
 
-    .btn-group {
-      display: flex;
-      gap: 10px;
-    }
-
-    .action-btn {
-      flex: 1;
-      background: rgba(255, 255, 255, 0.15);
-      color: white;
-      border: none;
-      padding: 12px;
-      border-radius: 12px;
-      font-size: 13px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
     .preview-main-btn {
       background: #e0a96d;
       color: #1a3c27;
@@ -274,16 +298,6 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
       width: 100%;
       margin-top: 10px;
-    }
-
-    .delete-btn {
-      background: rgba(255, 100, 100, 0.2);
-      color: #ff9999;
-      border: none;
-      padding: 6px 12px;
-      border-radius: 12px;
-      font-size: 10px;
-      cursor: pointer;
     }
 
     /* PREVIEW POPUP MODAL */
@@ -337,7 +351,7 @@
 
     .preview-lock-img {
       width: 100%;
-      height: 200px;
+      height: 180px;
       border-radius: 15px;
       object-fit: cover;
     }
@@ -385,7 +399,6 @@
       <button id="btn-back-home" class="back-nav">&larr; Back</button>
 
       <h1 class="main-title">The Link lasts forever</h1>
-      <button class="draft-btn">CREATE A DRAFT FROM AN OLD GIFT</button>
 
       <div class="form-row">
         <div class="field-group">
@@ -398,15 +411,37 @@
         </div>
       </div>
 
+      <div class="four-cards-grid">
+        <div class="square-card">
+          <span class="icon">📝</span>
+          <span class="label">Note</span>
+        </div>
+        <div class="square-card">
+          <span class="icon">🖼️</span>
+          <span class="label">Media</span>
+        </div>
+        <div class="square-card">
+          <span class="icon">🎵</span>
+          <span class="label">Music</span>
+        </div>
+        <div class="square-card">
+          <span class="icon">🎙️</span>
+          <span class="label">Voice Note</span>
+        </div>
+      </div>
+
       <div class="section-card">
-        <label class="section-title">BACKGROUND SONG</label>
+        <label class="section-title">BACKGROUND MUSIC LINK</label>
         <div class="field-group">
-          <label>YOUTUBE LINK</label>
-          <input type="text" placeholder="https://youtube.com/watch?v=...">
+          <label>SELECT PLATFORM</label>
+          <select id="musicPlatform" style="color: #ffffff; background: #264a32;">
+            <option value="YouTube">YouTube Link</option>
+            <option value="Spotify">Spotify Link</option>
+          </select>
         </div>
         <div class="field-group" style="margin-top: 5px;">
-          <label>SKIP TO</label>
-          <input type="text" value="1:30" style="width: 80px;">
+          <label>MUSIC LINK</label>
+          <input type="text" id="musicUrl" placeholder="Paste YouTube or Spotify link here...">
         </div>
       </div>
 
@@ -434,11 +469,23 @@
       </div>
 
       <div class="section-card">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <span class="section-title">WRITE U NOTE</span>
-          <button class="delete-btn">Delete note</button>
-        </div>
+        <span class="section-title">WRITE U NOTE</span>
         <textarea id="inputNote" rows="3" placeholder="Qor fariintaada halkan...">Dhalasho farxad leh qofkayga aan ugu jeclahay adduunka...</textarea>
+      </div>
+
+      <div class="section-card">
+        <span class="section-title">ADD PHOTO OR VIDEO</span>
+        <div class="upload-btn-wrapper">
+          <label class="file-btn">
+            📷 Add Photo
+            <input type="file" id="photoInput" accept="image/*" style="display:none;" onchange="handleFileSelect(this, 'Photo')">
+          </label>
+          <label class="file-btn">
+            🎥 Add Video
+            <input type="file" id="videoInput" accept="video/*" style="display:none;" onchange="handleFileSelect(this, 'Video')">
+          </label>
+        </div>
+        <p id="fileStatus" style="font-size: 11px; color: #a3c7ad; text-align: center; margin-top: 5px;"></p>
       </div>
 
       <button class="preview-main-btn" id="openPreviewBtn">👁️ PREVIEW GIFT</button>
@@ -458,19 +505,82 @@
         PIN: <span id="prevPin">----</span>
       </div>
 
-      <div style="background: rgba(255,255,255,0.05); padding: 12px; border-radius: 12px; width: 100%; text-align: left;">
+      <div style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 12px; width: 100%; text-align: left;">
+        <span style="font-size: 10px; color: #a3c7ad; font-weight: bold;">MUSIC LINK:</span>
+        <p id="prevMusic" style="font-size: 12px; color: #ffffff; word-break: break-all;"></p>
+      </div>
+
+      <div style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 12px; width: 100%; text-align: left;">
         <span style="font-size: 10px; color: #a3c7ad; font-weight: bold;">NOTE:</span>
-        <p id="prevNote" style="font-size: 13px; margin-top: 4px; color: #e0e0e0;"></p>
+        <p id="prevNote" style="font-size: 12px; margin-top: 4px; color: #e0e0e0;"></p>
       </div>
     </div>
   </div>
 
   <script>
+    // PAGE SWITCHING (Toos ah)
     const pageHome = document.getElementById('page-home');
     const pageBuilder = document.getElementById('page-builder');
     const goBuilderBtns = document.querySelectorAll('.btn-go-builder');
     const backHomeBtn = document.getElementById('btn-back-home');
 
-    // Page Switching Logic
-    goBuilderBtns.forEach
+    goBuilderBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        pageHome.classList.remove('active');
+        pageBuilder.classList.add('active');
+        window.scrollTo(0, 0);
+      });
+    });
+
+    backHomeBtn.addEventListener('click', () => {
+      pageBuilder.classList.remove('active');
+      pageHome.classList.add('active');
+      window.scrollTo(0, 0);
+    });
+
+    // Theme Selection
+    let selectedImageSrc = 'https://i.postimg.cc/jqkNPbJ1/da1478c736e944eb8f1ec711d8c60617.webp';
+    function selectTheme(element, imgSrc) {
+      document.querySelectorAll('.theme-card').forEach(card => card.classList.remove('selected'));
+      element.classList.add('selected');
+      selectedImageSrc = imgSrc;
+    }
+
+    // File Upload Handler
+    function handleFileSelect(input, type) {
+      if (input.files && input.files[0]) {
+        document.getElementById('fileStatus').innerText = `✓ ${type} uploaded: ${input.files[0].name}`;
+      }
+    }
+
+    // Modal Preview Logic
+    const previewModal = document.getElementById('previewModal');
+    const openPreviewBtn = document.getElementById('openPreviewBtn');
+    const closePreviewBtn = document.getElementById('closePreviewBtn');
+
+    openPreviewBtn.addEventListener('click', () => {
+      const fromVal = document.getElementById('inputFrom').value || '...';
+      const forVal = document.getElementById('inputFor').value || '...';
+      const pinVal = document.getElementById('inputPin').value || '----';
+      const noteVal = document.getElementById('inputNote').value || '(Fariin ma lagu qorin)';
+      const musicPlatform = document.getElementById('musicPlatform').value;
+      const musicUrl = document.getElementById('musicUrl').value || 'Link ma la gelin';
+
+      document.getElementById('prevHeading').innerText = `${fromVal} ➔ ${forVal}`;
+      document.getElementById('prevImg').src = selectedImageSrc;
+      document.getElementById('prevPin').innerText = pinVal;
+      document.getElementById('prevNote').innerText = noteVal;
+      document.getElementById('prevMusic').innerText = `[${musicPlatform}] ${musicUrl}`;
+
+      previewModal.classList.add('active');
+    });
+
+    closePreviewBtn.addEventListener('click', () => {
+      previewModal.classList.remove('active');
+    });
+  </script>
+
+</body>
+</html>
 
