@@ -76,7 +76,7 @@ body {
   margin-top: 10px;
 }
 
-/* PAGE 2: FULL SCREEN BACKGROUND PHOTO (BIXIN BORDER-KA GADUUDKA AH) */
+/* PAGE 2: FULL SCREEN BACKGROUND PHOTO */
 .photo-page {
   position: fixed;
   top: 0;
@@ -92,7 +92,8 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 99;
-  border: none !important; /* Border-kii gaduudka ahaa waa la bixiyay */
+  border: none !important;
+  overflow: hidden;
 }
 
 .photo-page.active {
@@ -105,25 +106,25 @@ body {
   100% { opacity: 1; }
 }
 
-/* SANDUUQA QORAALKA LEH ANIMATION CUSUB IYO QORAAL WEYN */
+/* SANDUUQA QORAALKA OO BILAASH BG GADUUD AH (GLASS & TRANSPARENT) */
 .photo-overlay {
-  background: rgba(139, 0, 0, 0.55);
+  background: rgba(0, 0, 0, 0.25); /* Background yar oo aad u cad oo hufan */
   padding: 35px 25px;
-  border-radius: 18px;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  width: 88%;
-  max-width: 420px;
+  border-radius: 20px;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  width: 90%;
+  max-width: 440px;
   text-align: center;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-  animation: slideUpText 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  animation: floatAnim 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes slideUpText {
+@keyframes floatAnim {
   0% {
     opacity: 0;
-    transform: translateY(40px) scale(0.9);
+    transform: translateY(50px) scale(0.85);
   }
   100% {
     opacity: 1;
@@ -133,45 +134,69 @@ body {
 
 .script-title-white {
   font-family: 'Great Vibes', cursive;
-  font-size: 54px; /* Qoraalka waa la weyneeyay */
+  font-size: 58px; /* QORAALKA AAD AYAA LOO WEYNEYNAY */
   color: #ffffff;
-  margin-bottom: 12px;
-  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.9);
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.9), 0 0 15px rgba(255, 255, 255, 0.5);
   line-height: 1.1;
+  animation: glowText 2s infinite alternate ease-in-out;
+}
+
+@keyframes glowText {
+  from { text-shadow: 2px 2px 10px rgba(0,0,0,0.9), 0 0 10px rgba(255,255,255,0.4); }
+  to { text-shadow: 2px 2px 12px rgba(0,0,0,0.9), 0 0 20px rgba(255,215,0,0.8); }
 }
 
 .sub-text {
   color: #ffffff;
-  font-size: 16px; /* Qoraalka yar waa la weyneeyay */
+  font-size: 18px; /* Qoraalka yar wa la weyneeyay */
   margin-bottom: 25px;
-  text-shadow: 1px 1px 5px rgba(0,0,0,0.9);
-  font-weight: 400;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.9);
+  font-weight: 500;
 }
 
 .next-btn {
   background-color: #ffffff;
   color: #8b0000;
   border: none;
-  padding: 12px 28px;
-  border-radius: 25px;
-  font-size: 15px;
+  padding: 14px 32px;
+  border-radius: 30px;
+  font-size: 16px;
   font-weight: bold;
   cursor: pointer;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  transition: transform 0.2s, background-color 0.2s;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+  transition: transform 0.2s;
   animation: pulseBtn 2s infinite ease-in-out;
 }
 
 @keyframes pulseBtn {
   0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
+  50% { transform: scale(1.08); }
 }
 
-.next-btn:hover {
-  background-color: #ffe6e6;
+/* HEART ANIMATION (LOVE CONFETTI) */
+.heart-particle {
+  position: absolute;
+  color: #ff3366;
+  font-size: 24px;
+  user-select: none;
+  pointer-events: none;
+  animation: fall 3.5s linear forwards;
+  z-index: 100;
 }
 
-/* OTHER PAGES & MENU */
+@keyframes fall {
+  0% {
+    transform: translateY(-10vh) rotate(0deg) scale(0.5);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(105vh) rotate(360deg) scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* MENU & CONTENT PAGES */
 .menu-page, .content-page {
   background-color: #500000;
 }
