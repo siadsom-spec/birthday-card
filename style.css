@@ -14,7 +14,6 @@ body {
   padding: 20px;
 }
 
-/* Container matching tablet style */
 .card-container {
   background-color: #fdfaf6;
   width: 100%;
@@ -25,9 +24,11 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 30px 20px;
+  padding: 20px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.3);
   text-align: center;
+  position: relative;
+  overflow: hidden;
 }
 
 .page {
@@ -54,40 +55,85 @@ body {
   cursor: pointer;
 }
 
-/* Base style for Envelope Image */
 .envelope-image {
   width: 100%;
   max-width: 320px;
   height: auto;
   border-radius: 8px;
-  /* Animation kaga dhigaya inuu hoos iyo kor si yar u sabbeeyo (Floating Animation) */
   animation: floatEnvelope 3s ease-in-out infinite;
   transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-/* Hover Animation: Marka la taabto ama cursor-ka la saaro */
 .envelope-wrapper:hover .envelope-image {
   transform: scale(1.08) rotate(-2deg);
   filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.25));
 }
 
-/* Smooth Floating Animation Frame */
 @keyframes floatEnvelope {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
 }
 
 .click-text {
   color: #666;
   font-size: 14px;
   margin-top: 10px;
+}
+
+/* --- PAGE 2 PHOTO BACKGROUND STYLES --- */
+.photo-page {
+  /* Sawirkaaga cusub oo background ah */
+  background-image: url('https://i.postimg.cc/jqkNPbJ1/da1478c736e944eb8f1ec711d8c60617.webp');
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+  padding: 60px 20px;
+  position: relative;
+  animation: zoomBg 10s infinite alternate ease-in-out;
+}
+
+/* Background Zoom Animation */
+@keyframes zoomBg {
+  0% { background-size: 100%; }
+  100% { background-size: 115%; }
+}
+
+/* Dark transparent overlay to make white text readable */
+.photo-overlay {
+  background: rgba(0, 0, 0, 0.45);
+  padding: 30px 15px;
+  border-radius: 10px;
+  backdrop-filter: blur(2px);
+}
+
+.script-title-white {
+  font-family: 'Great Vibes', cursive;
+  font-size: 45px;
+  color: #ffffff;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.sub-text {
+  color: #f0f0f0;
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+
+.next-btn {
+  background-color: #ffffff;
+  color: #8b0000;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.next-btn:hover {
+  transform: scale(1.05);
+  background-color: #ffe6e6;
 }
 
 /* Menu Grid */
