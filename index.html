@@ -107,7 +107,6 @@
       transition: color 0.3s;
     }
 
-    /* BUFINA CAGARAN LEH DESIGN-KA SAWIRKA */
     .balloon-wrapper {
       display: flex;
       flex-direction: column;
@@ -116,7 +115,6 @@
       transition: transform 0.15s ease;
     }
 
-    /* POP ANIMATION MARKA LA TAABTO */
     .pop-animation {
       animation: popEffect 0.25s ease-out forwards;
     }
@@ -139,7 +137,6 @@
       box-shadow: inset -10px -10px 20px rgba(0,0,0,0.15), 0 10px 20px rgba(0,0,0,0.1);
     }
 
-    /* SHINE-KA DHINACA BUFINTA */
     .balloon-body::before {
       content: '';
       position: absolute;
@@ -326,21 +323,22 @@
       }
     }
 
-    /* PAGE 3: MENU OPTIONS */
+    /* PAGE 3: NEW MENU DESIGN (NAQSHAD CUSUB) */
     .menu-page, .content-page {
-      background-color: #500000;
+      background: linear-gradient(135deg, #400000 0%, #700000 100%);
     }
 
     .menu-box, .card-inner {
-      background-color: #fdfaf6;
+      background: rgba(253, 250, 246, 0.95);
+      backdrop-filter: blur(10px);
       width: 90%;
-      max-width: 450px;
-      padding: 30px 20px;
-      border-radius: 12px;
+      max-width: 480px;
+      padding: 35px 20px;
+      border-radius: 20px;
       text-align: center;
-      border: 6px solid #8b0000;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-      animation: popIn 0.5s ease-out;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+      animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
     @keyframes popIn {
@@ -350,34 +348,69 @@
 
     .menu-grid {
       display: flex;
-      justify-content: space-around;
-      margin-top: 25px;
-      gap: 10px;
+      justify-content: center;
+      margin-top: 30px;
+      gap: 15px;
     }
 
+    /* MENU CARD CUSUB OO SAWIRRO LEH */
     .menu-card {
-      background: white;
-      border: 2px solid #ddd;
+      background: #ffffff;
+      border: 1px solid #f0f0f0;
       padding: 15px 10px;
-      border-radius: 12px;
+      border-radius: 16px;
       cursor: pointer;
       flex: 1;
-      transition: transform 0.2s, border-color 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
     }
 
     .menu-card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-8px);
+      box-shadow: 0 12px 25px rgba(139, 0, 0, 0.25);
       border-color: #8b0000;
     }
 
-    .menu-card span { font-size: 36px; }
-    .menu-card p { color: #333; margin-top: 8px; font-size: 14px; font-weight: 600; }
+    .card-img-wrap {
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid #8b0000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+
+    .card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-emoji-icon {
+      font-size: 38px;
+    }
+
+    .menu-card p {
+      color: #333;
+      margin-top: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
 
     .content-box {
       background: white;
       color: #333;
       padding: 20px;
-      border-radius: 8px;
+      border-radius: 12px;
       border: 1px solid #eee;
       margin: 20px 0;
       font-size: 15px;
@@ -388,15 +421,17 @@
       background: #8b0000;
       color: white;
       border: none;
-      padding: 10px 22px;
-      border-radius: 20px;
+      padding: 12px 28px;
+      border-radius: 25px;
       cursor: pointer;
       font-weight: 600;
-      transition: background 0.2s;
+      transition: all 0.2s;
+      box-shadow: 0 4px 12px rgba(139, 0, 0, 0.3);
     }
 
     .back-btn:hover {
       background: #600000;
+      transform: scale(1.05);
     }
   </style>
 </head>
@@ -448,21 +483,32 @@
     <button class="next-btn" onclick="showPage('page3')">Click here ✨</button>
   </section>
 
-  <!-- PAGE 3: MENU OPTIONS -->
+  <!-- PAGE 3: NEW MENU OPTIONS -->
   <section id="page3" class="page menu-page">
     <div class="menu-box">
-      <h2 style="color: #8b0000; margin-bottom: 20px; font-size: 26px;">These are for you ❤️</h2>
+      <h2 style="color: #8b0000; font-size: 28px; font-family: 'Playfair Display', serif;">These are for you ❤️</h2>
       <div class="menu-grid">
+        <!-- MESSAGE CARD WITH CUSTOM IMAGE -->
         <div class="menu-card" onclick="showPage('page-message')">
-          <span>💌</span>
+          <div class="card-img-wrap">
+            <img src="https://i.postimg.cc/P5mQW5Zq/fd28b166029642a7a92f965be93dc657.webp" alt="Message Icon" class="card-img">
+          </div>
           <p>Message</p>
         </div>
+
+        <!-- FLOWER CARD WITH CUSTOM IMAGE -->
         <div class="menu-card" onclick="showPage('page-flower')">
-          <span>💐</span>
+          <div class="card-img-wrap">
+            <img src="https://i.postimg.cc/FHmPzBnX/d0aa33d71948f9320711e04c327b048f-(1).jpg" alt="Flower Icon" class="card-img">
+          </div>
           <p>Flower</p>
         </div>
+
+        <!-- CAKE CARD -->
         <div class="menu-card" onclick="showPage('page-cake')">
-          <span>🎂</span>
+          <div class="card-img-wrap">
+            <span class="card-emoji-icon">🎂</span>
+          </div>
           <p>Cake</p>
         </div>
       </div>
@@ -561,7 +607,6 @@
       const stringEl = document.getElementById('balloon-string');
       const promptEl = document.getElementById('click-prompt');
 
-      // Ku dar animation-ka baqida (Pop Effect)
       wrapper.classList.add('pop-animation');
 
       setTimeout(() => {
@@ -569,7 +614,6 @@
         
         tapCount++;
 
-        // Isbeddelka Midabada Bogga marka la taabto
         if (tapCount > 1) {
           balloonPage.style.backgroundColor = tapCount % 2 === 0 ? '#d822bd' : '#f7f3f0';
           titleEl.style.display = tapCount > 1 ? 'none' : 'block';
@@ -581,7 +625,6 @@
           countEl.innerText = tapCount;
           isPopping = false;
         } else {
-          // Gaartay 19 ka dib u gudub Envelope Page
           showPage('page1');
         }
       }, 150);
