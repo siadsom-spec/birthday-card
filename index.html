@@ -3,135 +3,403 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create Gift Studio</title>
-  <link rel="stylesheet" href="gift-builder.css">
+  <title>Happy Party & Gift Builder</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #1a3c27;
+      background-image: radial-gradient(circle at top left, #295738, #11281a);
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      padding: 20px 10px;
+      min-height: 100vh;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 440px;
+    }
+
+    /* Page Switch Logic */
+    .page {
+      display: none;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .page.active {
+      display: flex;
+    }
+
+    /* PAGE 1: HOME STYLES */
+    .tabs-header {
+      background: rgba(0, 0, 0, 0.2);
+      padding: 5px;
+      border-radius: 30px;
+      display: flex;
+      gap: 5px;
+    }
+
+    .tab-btn {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: #a3c2ac;
+      padding: 10px 15px;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+
+    .tab-btn.active {
+      background: #ffffff;
+      color: #1a3c27;
+    }
+
+    .badge {
+      background: rgba(0, 0, 0, 0.15);
+      padding: 2px 7px;
+      border-radius: 50%;
+      font-size: 11px;
+    }
+
+    .action-top {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .primary-btn {
+      background-color: #2e7d32;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: 0.2s;
+    }
+
+    .primary-btn:hover {
+      background-color: #388e3c;
+    }
+
+    .card-box {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 25px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
+
+    .card-box p {
+      color: #c2d6c7;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .bottom-card {
+      background: #ffffff;
+      color: #222222;
+      border-radius: 20px 20px 0 0;
+      padding: 25px 20px;
+      margin-top: 20px;
+    }
+
+    .step-label {
+      font-size: 12px;
+      letter-spacing: 2px;
+      color: #777777;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    /* PAGE 2: STUDIO STYLES */
+    .back-nav {
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: white;
+      padding: 8px 15px;
+      border-radius: 15px;
+      cursor: pointer;
+      width: max-content;
+      font-weight: bold;
+    }
+
+    .main-title {
+      font-family: serif;
+      font-size: 26px;
+      text-align: center;
+      color: #f0ede6;
+    }
+
+    .draft-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #ffffff;
+      padding: 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      cursor: pointer;
+    }
+
+    .section-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .section-title {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      color: #a3c7ad;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .field-group {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field-group label {
+      font-size: 10px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      color: #a3c7ad;
+    }
+
+    input[type="text"], textarea {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      padding: 12px;
+      color: #ffffff;
+      font-size: 14px;
+      outline: none;
+      width: 100%;
+    }
+
+    .horizontal-scroll {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+    }
+
+    .theme-card {
+      min-width: 90px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      cursor: pointer;
+    }
+
+    .preview-img {
+      width: 80px;
+      height: 120px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      border: 2px solid transparent;
+    }
+
+    .theme-card.active .preview-img {
+      border-color: #ffffff;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    .action-btn {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .delete-btn {
+      background: rgba(255, 100, 100, 0.2);
+      color: #ff9999;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 12px;
+      font-size: 10px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
 
-  <div class="studio-container">
-    <h1 class="main-title">The Link lasts forever</h1>
-    
-    <button class="draft-btn">CREATE A DRAFT FROM AN OLD GIFT</button>
-    <a href="#" class="see-how">SEE HOW IT WORKS</a>
+  <div class="app-container">
 
-    <!-- Video Preview / Tutorial Box -->
-    <div class="video-preview-box">
-      <div class="yt-placeholder">
-        <span>▶ Watch on YouTube</span>
-      </div>
-    </div>
-
-    <!-- FROM & FOR SECTION -->
-    <div class="form-row">
-      <div class="field-group">
-        <label>FROM</label>
-        <input type="text" value="Sadiqq" placeholder="Magacaaga">
-      </div>
-      <div class="field-group">
-        <label>FOR</label>
-        <input type="text" value="Salmoo" placeholder="Sida la siinayo">
-      </div>
-    </div>
-
-    <!-- BACKGROUND SONG SECTION -->
-    <div class="section-card">
-      <label class="section-title">BACKGROUND SONG</label>
-      <div class="field-group">
-        <label>YOUTUBE LINK</label>
-        <input type="text" placeholder="https://youtube.com/watch?v=...">
-      </div>
-      <div class="field-group short">
-        <label>SKIP TO</label>
-        <input type="text" value="1:30" placeholder="1:30">
-      </div>
-    </div>
-
-    <!-- LOCK SCREEN & PIN SECTION -->
-    <div class="section-card">
-      <div class="flex-header">
-        <span class="section-title">LOCK</span>
-        <label class="checkbox-label">
-          <input type="checkbox" checked> Lock screen
-        </label>
-      </div>
+    <!-- ================= BOGGA 1: HOME ================= -->
+    <div id="page-home" class="page active">
       
-      <p class="sub-text">Pick a lock screen</p>
-
-      <div class="color-palette">
-        <span class="dot pink"></span>
-        <span class="dot yellow"></span>
-        <span class="dot white"></span>
-        <span class="dot red"></span>
-        <span class="dot blue"></span>
-        <span class="dot green active"></span>
+      <div class="tabs-header">
+        <button class="tab-btn">💐 BOUQUETS <span class="badge">9</span></button>
+        <button class="tab-btn active">🎁 GIFTS <span class="badge">0</span></button>
       </div>
 
-      <!-- Lock Screen Themes Carousel -->
-      <div class="horizontal-scroll">
-        <div class="theme-card active">
-          <div class="preview-img lock-preview">🔒</div>
-          <span>Original lock</span>
-        </div>
-        <div class="theme-card">
-          <div class="preview-img floral-bg">🌸</div>
-          <span>Cloudy meadow</span>
-        </div>
-        <div class="theme-card">
-          <div class="preview-img receipt-bg">🧾</div>
-          <span>Receipt Printer</span>
-        </div>
+      <div class="action-top">
+        <button class="primary-btn btn-go-builder">NEW GIFT &rarr;</button>
       </div>
 
-      <!-- PIN Code Input -->
-      <div class="pin-box">
-        <label>4-DIGIT CODE</label>
-        <input type="text" value="9128" maxlength="4">
-        <p class="pin-hint">Preview uses PIN 9128.</p>
+      <div class="card-box">
+        <h2>No gift states yet.</h2>
+        <p>Create a gift state from the studio. Sent gifts and saved drafts will show here like the Garden tab.</p>
+        <button class="primary-btn btn-go-builder">NEW GIFT &rarr;</button>
       </div>
+
+      <div class="bottom-card">
+        <span class="step-label">— ONE —</span>
+        <h3 style="color:#1a3c27;">Pick your container</h3>
+      </div>
+
     </div>
 
-    <!-- NOTE & TEXT SECTION -->
-    <div class="section-card">
-      <div class="flex-header">
-        <span class="section-title">NOTE</span>
-        <button class="delete-btn">Delete note</button>
-      </div>
-      <textarea rows="4">Dhalasho farxad leh qofkayga aan ugu jeclahay adduunka. Waxaad tahay qofka ugu wanaagsan ee aan waligay jeclaan karo...</textarea>
-    </div>
+    <!-- ================= BOGGA 2: STUDIO (GIFT BUILDER) ================= -->
+    <div id="page-builder" class="page">
+      
+      <button id="btn-back-home" class="back-nav">&larr; Back</button>
 
-    <!-- MEDIA UPLOAD SECTION -->
-    <div class="section-card">
-      <span class="section-title">MEDIA</span>
-      <div class="btn-group">
-        <button class="action-btn">Add photos</button>
-        <button class="action-btn">Add video</button>
-      </div>
-      <p class="sub-text">Up to 5 photos or 1 video • Photos: JPG, PNG • Video: 1 MP4 up to 10s</p>
+      <h1 class="main-title">The Link lasts forever</h1>
+      <button class="draft-btn">CREATE A DRAFT FROM AN OLD GIFT</button>
 
-      <div class="media-preview-list">
-        <div class="media-item">
-          <div class="img-placeholder">🖼️</div>
-          <button class="remove-btn">REMOVE</button>
+      <!-- FROM & FOR -->
+      <div class="form-row">
+        <div class="field-group">
+          <label>FROM</label>
+          <input type="text" value="Sadiqq" placeholder="Magacaaga">
+        </div>
+        <div class="field-group">
+          <label>FOR</label>
+          <input type="text" value="Salmoo" placeholder="Sida la siinayo">
         </div>
       </div>
-    </div>
 
-    <!-- VOICE NOTE SECTION -->
-    <div class="section-card">
-      <span class="section-title">VOICE NOTE</span>
-      <div class="voice-box">
-        <p class="status">VOICE NOTE RECORDED (0:04)</p>
+      <!-- BACKGROUND SONG -->
+      <div class="section-card">
+        <label class="section-title">BACKGROUND SONG</label>
+        <div class="field-group">
+          <label>YOUTUBE LINK</label>
+          <input type="text" placeholder="https://youtube.com/watch?v=...">
+        </div>
+        <div class="field-group" style="margin-top: 5px;">
+          <label>SKIP TO</label>
+          <input type="text" value="1:30" style="width: 80px;">
+        </div>
+      </div>
+
+      <!-- LOCK SCREEN -->
+      <div class="section-card">
+        <span class="section-title">LOCK SCREEN</span>
+        <div class="horizontal-scroll">
+          <div class="theme-card active">
+            <div class="preview-img">🔒</div>
+            <span>Original</span>
+          </div>
+          <div class="theme-card">
+            <div class="preview-img">🌸</div>
+            <span>Cloudy</span>
+          </div>
+          <div class="theme-card">
+            <div class="preview-img">🧾</div>
+            <span>Receipt</span>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label>4-DIGIT CODE</label>
+          <input type="text" value="9128" maxlength="4" style="text-align: center; font-weight: bold;">
+        </div>
+      </div>
+
+      <!-- NOTE -->
+      <div class="section-card">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span class="section-title">NOTE</span>
+          <button class="delete-btn">Delete note</button>
+        </div>
+        <textarea rows="3">Dhalasho farxad leh qofkayga aan ugu jeclahay adduunka...</textarea>
+      </div>
+
+      <!-- MEDIA -->
+      <div class="section-card">
+        <span class="section-title">MEDIA</span>
         <div class="btn-group">
-          <button class="action-btn">RECORD AGAIN</button>
-          <button class="delete-btn">REMOVE</button>
+          <button class="action-btn">Add photos</button>
+          <button class="action-btn">Add video</button>
         </div>
-        <audio controls class="audio-player">
-          <source src="" type="audio/mpeg">
-        </audio>
       </div>
+
     </div>
 
   </div>
+
+  <!-- JavaScript oo kala beddelaya Boggaga -->
+  <script>
+    const pageHome = document.getElementById('page-home');
+    const pageBuilder = document.getElementById('page-builder');
+    const goBuilderBtns = document.querySelectorAll('.btn-go-builder');
+    const backHomeBtn = document.getElementById('btn-back-home');
+
+    // Marka NEW GIFT la taapto -> U gudob Page 2
+    goBuilderBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        pageHome.classList.remove('active');
+        pageBuilder.classList.add('active');
+        window.scrollTo(0, 0);
+      });
+    });
+
+    // Marka Back la taapto -> Soow laab Page 1
+    backHomeBtn.addEventListener('click', () => {
+      pageBuilder.classList.remove('active');
+      pageHome.classList.add('active');
+      window.scrollTo(0, 0);
+    });
+  </script>
 
 </body>
 </html>
