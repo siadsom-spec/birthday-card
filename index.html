@@ -323,91 +323,90 @@
       }
     }
 
-    /* PAGE 3: NEW MENU DESIGN (NAQSHAD CUSUB) */
-    .menu-page, .content-page {
-      background: linear-gradient(135deg, #400000 0%, #700000 100%);
+    /* PAGE 3: MATCHING THE IMAGE EXACTLY */
+    .menu-page {
+      background-color: #a8131d; /* Deep Red Background */
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
     }
 
-    .menu-box, .card-inner {
-      background: rgba(253, 250, 246, 0.95);
-      backdrop-filter: blur(10px);
-      width: 90%;
-      max-width: 480px;
-      padding: 35px 20px;
-      border-radius: 20px;
+    .page3-title {
+      font-family: 'Great Vibes', cursive;
+      color: #ffffff;
+      font-size: 55px;
+      font-weight: normal;
+      margin-bottom: 40px;
       text-align: center;
-      border: 2px solid rgba(255, 255, 255, 0.4);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-      animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    @keyframes popIn {
-      0% { opacity: 0; transform: scale(0.8); }
-      100% { opacity: 1; transform: scale(1); }
     }
 
     .menu-grid {
       display: flex;
       justify-content: center;
-      margin-top: 30px;
-      gap: 15px;
+      align-items: flex-end;
+      gap: 25px;
+      width: 100%;
+      max-width: 650px;
     }
 
-    /* MENU CARD CUSUB OO SAWIRRO LEH */
     .menu-card {
-      background: #ffffff;
-      border: 1px solid #f0f0f0;
-      padding: 15px 10px;
-      border-radius: 16px;
+      background: transparent;
+      border: none;
       cursor: pointer;
       flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      box-shadow: 0 8px 15px rgba(0,0,0,0.08);
-      transition: all 0.3s ease;
+      justify-content: flex-end;
+      transition: transform 0.2s ease;
     }
 
     .menu-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 25px rgba(139, 0, 0, 0.25);
-      border-color: #8b0000;
+      transform: scale(1.05);
     }
 
     .card-img-wrap {
-      width: 65px;
-      height: 65px;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 3px solid #8b0000;
+      width: 100%;
+      max-width: 140px;
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #fff;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      margin-bottom: 12px;
     }
 
     .card-img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .card-emoji-icon {
-      font-size: 38px;
+      height: auto;
+      object-fit: contain;
+      border-radius: 6px;
     }
 
     .menu-card p {
-      color: #333;
-      margin-top: 12px;
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
+      color: #ffffff;
+      font-family: 'Great Vibes', cursive;
+      font-size: 28px;
+      font-weight: normal;
+      text-align: center;
+    }
+
+    /* SUB PAGES (CONTENT) */
+    .content-page {
+      background-color: #a8131d;
+    }
+
+    .card-inner {
+      background: rgba(255, 255, 255, 0.95);
+      width: 90%;
+      max-width: 450px;
+      padding: 35px 20px;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.4);
     }
 
     .content-box {
-      background: white;
+      background: #fdfaf6;
       color: #333;
       padding: 20px;
       border-radius: 12px;
@@ -418,7 +417,7 @@
     }
 
     .back-btn {
-      background: #8b0000;
+      background: #a8131d;
       color: white;
       border: none;
       padding: 12px 28px;
@@ -426,12 +425,10 @@
       cursor: pointer;
       font-weight: 600;
       transition: all 0.2s;
-      box-shadow: 0 4px 12px rgba(139, 0, 0, 0.3);
     }
 
     .back-btn:hover {
-      background: #600000;
-      transform: scale(1.05);
+      background: #7a0c13;
     }
   </style>
 </head>
@@ -483,34 +480,33 @@
     <button class="next-btn" onclick="showPage('page3')">Click here ✨</button>
   </section>
 
-  <!-- PAGE 3: NEW MENU OPTIONS -->
+  <!-- PAGE 3: EXACT LIKE IMAGE -->
   <section id="page3" class="page menu-page">
-    <div class="menu-box">
-      <h2 style="color: #8b0000; font-size: 28px; font-family: 'Playfair Display', serif;">These are for you ❤️</h2>
-      <div class="menu-grid">
-        <!-- MESSAGE CARD WITH CUSTOM IMAGE -->
-        <div class="menu-card" onclick="showPage('page-message')">
-          <div class="card-img-wrap">
-            <img src="https://i.postimg.cc/P5mQW5Zq/fd28b166029642a7a92f965be93dc657.webp" alt="Message Icon" class="card-img">
-          </div>
-          <p>Message</p>
+    <h2 class="page3-title">These are for you</h2>
+    
+    <div class="menu-grid">
+      <!-- MESSAGE CARD -->
+      <div class="menu-card" onclick="showPage('page-message')">
+        <div class="card-img-wrap">
+          <img src="https://i.postimg.cc/P5mQW5Zq/fd28b166029642a7a92f965be93dc657.webp" alt="Message" class="card-img">
         </div>
+        <p>Message</p>
+      </div>
 
-        <!-- FLOWER CARD WITH CUSTOM IMAGE -->
-        <div class="menu-card" onclick="showPage('page-flower')">
-          <div class="card-img-wrap">
-            <img src="https://i.postimg.cc/FHmPzBnX/d0aa33d71948f9320711e04c327b048f-(1).jpg" alt="Flower Icon" class="card-img">
-          </div>
-          <p>Flower</p>
+      <!-- FLOWER CARD -->
+      <div class="menu-card" onclick="showPage('page-flower')">
+        <div class="card-img-wrap">
+          <img src="https://i.postimg.cc/FHmPzBnX/d0aa33d71948f9320711e04c327b048f-(1).jpg" alt="Flower" class="card-img">
         </div>
+        <p>Flower</p>
+      </div>
 
-        <!-- CAKE CARD -->
-        <div class="menu-card" onclick="showPage('page-cake')">
-          <div class="card-img-wrap">
-            <span class="card-emoji-icon">🎂</span>
-          </div>
-          <p>Cake</p>
+      <!-- CAKE CARD -->
+      <div class="menu-card" onclick="showPage('page-cake')">
+        <div class="card-img-wrap">
+          <img src="https://i.postimg.cc/d047321q/cake.png" alt="Cake" class="card-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2682/2682411.png'">
         </div>
+        <p>Cake</p>
       </div>
     </div>
   </section>
@@ -518,7 +514,7 @@
   <!-- SUB PAGE: MESSAGE -->
   <section id="page-message" class="page content-page">
     <div class="card-inner">
-      <h2 style="color: #8b0000;">Hambalyo Dhalasho! 🎉</h2>
+      <h2 style="color: #a8131d; font-family: 'Great Vibes', cursive; font-size: 40px;">Hambalyo Dhalasho! 🎉</h2>
       <div class="content-box">
         <p>Waxaan kugu hambalyeynayaa dhalashadaada! Waxaan kuu wish-garaynayaa sannad buuxa farxad, caafimaad, iyo guul oo dhan.</p>
       </div>
@@ -529,7 +525,7 @@
   <!-- SUB PAGE: FLOWER -->
   <section id="page-flower" class="page content-page">
     <div class="card-inner">
-      <h2 style="color: #8b0000;">Sunflower 🌻</h2>
+      <h2 style="color: #a8131d; font-family: 'Great Vibes', cursive; font-size: 40px;">Sunflower 🌻</h2>
       <div class="content-box">
         <p>Waxaad tahay qof gaar ah oo had iyo jeer iftiimiya nolosha dadka ku xeeran!</p>
       </div>
@@ -540,7 +536,7 @@
   <!-- SUB PAGE: CAKE -->
   <section id="page-cake" class="page content-page">
     <div class="card-inner">
-      <h2 style="color: #8b0000;">Sweet Wishes 🎂</h2>
+      <h2 style="color: #a8131d; font-family: 'Great Vibes', cursive; font-size: 40px;">Sweet Wishes 🎂</h2>
       <div class="content-box">
         <p>Aad iyo aad uga hel sannadkan cusub wax kasta oo aad ku riyoonaysay!</p>
       </div>
@@ -553,7 +549,6 @@
     const maxBalloons = 19;
     let isPopping = false;
 
-    // AUDIO CONTEXT SI LOO SAMEEYO DHAWAAQA BAQIDA (POP SOUND)
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
     function playPopSound() {
@@ -577,7 +572,6 @@
       osc.stop(audioCtx.currentTime + 0.08);
     }
 
-    // SIMULATE LOADING BAR
     window.addEventListener('DOMContentLoaded', () => {
       let progress = 0;
       const fill = document.getElementById('progress-fill');
@@ -597,7 +591,6 @@
       if (isPopping) return;
       isPopping = true;
 
-      // Play Pop Sound
       playPopSound();
 
       const wrapper = document.getElementById('balloon-wrapper');
@@ -676,4 +669,3 @@
 
 </body>
 </html>
-
