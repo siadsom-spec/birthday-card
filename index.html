@@ -230,7 +230,8 @@
       height: 120px;
       border-radius: 12px;
       overflow: hidden;
-      border: 2px solid transparent;
+      border: 3px solid transparent;
+      transition: 0.2s;
     }
 
     .preview-img img {
@@ -239,8 +240,9 @@
       object-fit: cover;
     }
 
-    .theme-card.active .preview-img {
+    .theme-card.selected .preview-img {
       border-color: #ffffff;
+      box-shadow: 0 0 10px rgba(255,255,255,0.5);
     }
 
     .btn-group {
@@ -253,11 +255,25 @@
       background: rgba(255, 255, 255, 0.15);
       color: white;
       border: none;
-      padding: 10px;
+      padding: 12px;
       border-radius: 12px;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: bold;
       cursor: pointer;
+    }
+
+    .preview-main-btn {
+      background: #e0a96d;
+      color: #1a3c27;
+      border: none;
+      padding: 14px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      width: 100%;
+      margin-top: 10px;
     }
 
     .delete-btn {
@@ -269,13 +285,77 @@
       font-size: 10px;
       cursor: pointer;
     }
+
+    /* PREVIEW POPUP MODAL */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .preview-card {
+      background: #11281a;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 25px;
+      width: 100%;
+      max-width: 360px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      text-align: center;
+      position: relative;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: white;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .preview-lock-img {
+      width: 100%;
+      height: 200px;
+      border-radius: 15px;
+      object-fit: cover;
+    }
+
+    .preview-pin-display {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 8px 16px;
+      border-radius: 12px;
+      font-weight: bold;
+      letter-spacing: 4px;
+      color: #a3c7ad;
+    }
   </style>
 </head>
 <body>
 
   <div class="app-container">
 
-    <!-- ================= BOGGA 1: HOME ================= -->
     <div id="page-home" class="page active">
       
       <div class="tabs-header">
@@ -300,7 +380,6 @@
 
     </div>
 
-    <!-- ================= BOGGA 2: STUDIO (GIFT BUILDER) ================= -->
     <div id="page-builder" class="page">
       
       <button id="btn-back-home" class="back-nav">&larr; Back</button>
@@ -308,19 +387,17 @@
       <h1 class="main-title">The Link lasts forever</h1>
       <button class="draft-btn">CREATE A DRAFT FROM AN OLD GIFT</button>
 
-      <!-- FROM & FOR -->
       <div class="form-row">
         <div class="field-group">
           <label>FROM</label>
-          <input type="text" placeholder="Your Name">
+          <input type="text" id="inputFrom" value="Sadiqq" placeholder="Gali magacaaga...">
         </div>
         <div class="field-group">
           <label>FOR</label>
-          <input type="text" placeholder="Your Name">
+          <input type="text" id="inputFor" value="Salmoo" placeholder="Gali magaca qofka...">
         </div>
       </div>
 
-      <!-- BACKGROUND SONG -->
       <div class="section-card">
         <label class="section-title">BACKGROUND SONG</label>
         <div class="field-group">
@@ -333,17 +410,16 @@
         </div>
       </div>
 
-      <!-- LOCK SCREEN -->
       <div class="section-card">
         <span class="section-title">LOCK SCREEN</span>
         <div class="horizontal-scroll">
-          <div class="theme-card active">
+          <div class="theme-card selected" onclick="selectTheme(this, 'https://i.postimg.cc/jqkNPbJ1/da1478c736e944eb8f1ec711d8c60617.webp')">
             <div class="preview-img">
               <img src="https://i.postimg.cc/jqkNPbJ1/da1478c736e944eb8f1ec711d8c60617.webp" alt="Lock Theme 1">
             </div>
             <span>Original</span>
           </div>
-          <div class="theme-card">
+          <div class="theme-card" onclick="selectTheme(this, 'https://i.postimg.cc/jqkNPbJ1/da1478c736e944eb8f1ec711d8c60617.webp')">
             <div class="preview-img">
               <img src="https://i.postimg.cc/jqkNPbJ1/da1478c736e944eb8f1ec711d8c60617.webp" alt="Lock Theme 2">
             </div>
@@ -353,30 +429,40 @@
 
         <div class="field-group">
           <label>4-DIGIT CODE</label>
-          <input type="text" placeholder="Enter PIN" maxlength="4" style="text-align: center; font-weight: bold;">
+          <input type="text" id="inputPin" value="9128" maxlength="4" style="text-align: center; font-weight: bold;">
         </div>
       </div>
 
-      <!-- WRITE U NOTE -->
       <div class="section-card">
         <div style="display: flex; justify-content: space-between; align-items: center;">
           <span class="section-title">WRITE U NOTE</span>
           <button class="delete-btn">Delete note</button>
         </div>
-        <textarea rows="3" placeholder="Qor fariintaada halkan..."></textarea>
+        <textarea id="inputNote" rows="3" placeholder="Qor fariintaada halkan...">Dhalasho farxad leh qofkayga aan ugu jeclahay adduunka...</textarea>
       </div>
 
-      <!-- MEDIA -->
-      <div class="section-card">
-        <span class="section-title">MEDIA</span>
-        <div class="btn-group">
-          <button class="action-btn">Add photos</button>
-          <button class="action-btn">Add video</button>
-        </div>
-      </div>
+      <button class="preview-main-btn" id="openPreviewBtn">👁️ PREVIEW GIFT</button>
 
     </div>
 
+  </div>
+
+  <div class="modal-overlay" id="previewModal">
+    <div class="preview-card">
+      <button class="close-modal" id="closePreviewBtn">✕</button>
+      <h3 id="prevHeading" style="color: #a3c7ad;">From: - To: -</h3>
+      
+      <img id="prevImg" class="preview-lock-img" src="" alt="Lock Screen Selected">
+      
+      <div class="preview-pin-display">
+        PIN: <span id="prevPin">----</span>
+      </div>
+
+      <div style="background: rgba(255,255,255,0.05); padding: 12px; border-radius: 12px; width: 100%; text-align: left;">
+        <span style="font-size: 10px; color: #a3c7ad; font-weight: bold;">NOTE:</span>
+        <p id="prevNote" style="font-size: 13px; margin-top: 4px; color: #e0e0e0;"></p>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -385,20 +471,6 @@
     const goBuilderBtns = document.querySelectorAll('.btn-go-builder');
     const backHomeBtn = document.getElementById('btn-back-home');
 
-    goBuilderBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        pageHome.classList.remove('active');
-        pageBuilder.classList.add('active');
-        window.scrollTo(0, 0);
-      });
-    });
+    // Page Switching Logic
+    goBuilderBtns.forEach
 
-    backHomeBtn.addEventListener('click', () => {
-      pageBuilder.classList.remove('active');
-      pageHome.classList.add('active');
-      window.scrollTo(0, 0);
-    });
-  </script>
-
-</body>
-</html>
