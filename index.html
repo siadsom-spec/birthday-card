@@ -113,11 +113,18 @@
       flex-direction: column;
       align-items: center;
       cursor: pointer;
-      transition: transform 0.1s ease;
+      transition: transform 0.15s ease;
     }
 
-    .balloon-wrapper:active {
-      transform: scale(0.92);
+    /* POP ANIMATION MARKA LA TAABTO */
+    .pop-animation {
+      animation: popEffect 0.25s ease-out forwards;
+    }
+
+    @keyframes popEffect {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.3); opacity: 0.8; }
+      100% { transform: scale(0.2); opacity: 0; }
     }
 
     .balloon-body {
@@ -409,10 +416,10 @@
   <!-- PAGE 0.5: BALLOON TAP PAGE -->
   <section id="page-balloon" class="page">
     <div class="balloon-header">
-      <h2 id="balloon-title">Sadiqq sent<br>you a balloon</h2>
+      <h2 id="balloon-title">Sadiqq sent<br>you 19 balloons</h2>
     </div>
 
-    <div class="balloon-wrapper" onclick="tapBalloon()">
+    <div id="balloon-wrapper" class="balloon-wrapper" onclick="tapBalloon()">
       <div class="balloon-body">
         <span id="balloon-count" class="balloon-number">1</span>
       </div>
@@ -497,6 +504,32 @@
 
   <script>
     let tapCount = 1;
+    const maxBalloons = 19;
+    let isPopping = false;
+
+    // AUDIO CONTEXT SI LOO SAMEEYO DHAWAAQA BAQIDA (POP SOUND)
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    function playPopSound() {
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(300, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(40, audioCtx.currentTime + 0.08);
+
+      gain.gain.setValueAtTime(1, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.08);
+    }
 
     // SIMULATE LOADING BAR
     window.addEventListener('DOMContentLoaded', () => {
@@ -515,29 +548,43 @@
     });
 
     function tapBalloon() {
-      tapCount++;
+      if (isPopping) return;
+      isPopping = true;
+
+      // Play Pop Sound
+      playPopSound();
+
+      const wrapper = document.getElementById('balloon-wrapper');
       const countEl = document.getElementById('balloon-count');
       const balloonPage = document.getElementById('page-balloon');
       const titleEl = document.getElementById('balloon-title');
       const stringEl = document.getElementById('balloon-string');
       const promptEl = document.getElementById('click-prompt');
 
-      if (tapCount <= 3) {
-        countEl.innerText = tapCount;
-      }
+      // Ku dar animation-ka baqida (Pop Effect)
+      wrapper.classList.add('pop-animation');
 
-      if (tapCount === 2) {
-        // Beddel midabka bogga (Sida sawirka labaad - Purple Background)
-        balloonPage.style.backgroundColor = '#d822bd';
-        titleEl.style.display = 'none';
-        stringEl.style.backgroundColor = 'rgba(255, 255, 255, 0.7)';
-        promptEl.style.color = 'rgba(255, 255, 255, 0.8)';
-      } else if (tapCount >= 3) {
-        // Marka ay gaarto 3, toos u gudub Envelope Page
-        setTimeout(() => {
+      setTimeout(() => {
+        wrapper.classList.remove('pop-animation');
+        
+        tapCount++;
+
+        // Isbeddelka Midabada Bogga marka la taabto
+        if (tapCount > 1) {
+          balloonPage.style.backgroundColor = tapCount % 2 === 0 ? '#d822bd' : '#f7f3f0';
+          titleEl.style.display = tapCount > 1 ? 'none' : 'block';
+          stringEl.style.backgroundColor = tapCount % 2 === 0 ? 'rgba(255, 255, 255, 0.7)' : '#d1d1d1';
+          promptEl.style.color = tapCount % 2 === 0 ? 'rgba(255, 255, 255, 0.8)' : '#888888';
+        }
+
+        if (tapCount <= maxBalloons) {
+          countEl.innerText = tapCount;
+          isPopping = false;
+        } else {
+          // Gaartay 19 ka dib u gudub Envelope Page
           showPage('page1');
-        }, 200);
-      }
+        }
+      }, 150);
     }
 
     function showPage(pageId) {
