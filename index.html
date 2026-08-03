@@ -16,51 +16,50 @@
       font-family: 'Plus Jakarta Sans', sans-serif;
     }
 
-    body {
-      background-color: #8b0000;
-      min-height: 100vh;
-      width: 100vw;
-      overflow-x: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #000;
     }
 
     /* CONTROLLING PAGES */
     .page {
       display: none;
-      width: 100%;
-      min-height: 100vh;
+      width: 100vw;
+      height: 100vh;
       justify-content: center;
       align-items: center;
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
     }
 
     .page.active {
       display: flex;
-      animation: fadeIn 0.5s ease-in-out;
+      animation: fadeIn 0.6s ease-in-out;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.98); }
+      from { opacity: 0; transform: scale(0.97); }
       to { opacity: 1; transform: scale(1); }
     }
 
     /* ================= PAGE 1: ENVELOPE CARD ================= */
     #page-1 {
-      background-image: radial-gradient(circle, #a80000 0%, #600000 100%);
+      background-image: radial-gradient(circle, #a80000 0%, #500000 100%);
       padding: 20px;
     }
 
     .envelope-card {
       background-color: #fdfbf7;
       width: 100%;
-      max-width: 350px;
-      border-radius: 16px;
+      max-width: 360px;
+      border-radius: 18px;
       padding: 40px 20px 30px 20px;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -69,17 +68,17 @@
 
     .greeting-title {
       font-family: 'Great Vibes', cursive;
-      font-size: 42px;
+      font-size: 44px;
       color: #9e1b1b;
       margin-bottom: 25px;
     }
 
     .envelope-box {
       width: 100%;
-      max-width: 250px;
+      max-width: 260px;
       height: 180px;
       background: #ffffff;
-      border-radius: 10px;
+      border-radius: 12px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -92,18 +91,18 @@
       width: 85%;
       height: 110px;
       background-color: #9e1b1b;
-      border-radius: 6px;
+      border-radius: 8px;
       position: relative;
       cursor: pointer;
       display: flex;
       justify-content: center;
       align-items: center;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-      transition: transform 0.2s ease;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
     }
 
     .red-envelope:hover {
-      transform: scale(1.04);
+      transform: scale(1.05);
     }
 
     .red-envelope::before {
@@ -112,14 +111,14 @@
       top: 0;
       width: 0;
       height: 0;
-      border-left: 100px solid transparent;
-      border-right: 100px solid transparent;
-      border-top: 55px solid #7a1212;
+      border-left: 105px solid transparent;
+      border-right: 105px solid transparent;
+      border-top: 58px solid #7a1212;
     }
 
     .ribbon-seal {
-      width: 36px;
-      height: 28px;
+      width: 38px;
+      height: 30px;
       position: relative;
       z-index: 2;
     }
@@ -128,8 +127,8 @@
     .ribbon-seal::after {
       content: '';
       position: absolute;
-      width: 15px;
-      height: 18px;
+      width: 16px;
+      height: 20px;
       background: #ffffff;
       border-radius: 50% 50% 0 50%;
       top: 4px;
@@ -146,17 +145,22 @@
     }
 
     .instruction-text {
-      font-size: 11px;
+      font-size: 12px;
       color: #777777;
+      font-weight: 600;
     }
 
-    /* ================= PAGE 2: FULL IMAGE & CONFETTI ================= */
+    /* ================= PAGE 2: FULL IMAGE (NO RED BOX) ================= */
     #page-2 {
       background-image: url('https://i.postimg.cc/jqkNPbJ1/da1478c736e944eb8f1ec711d8c60617.webp');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
+      width: 100vw;
+      height: 100vh;
       position: fixed;
+      top: 0;
+      left: 0;
     }
 
     #confettiCanvas {
@@ -169,49 +173,122 @@
       z-index: 1;
     }
 
-    .card-box {
-      position: relative;
-      z-index: 2;
-      width: 85%;
-      max-width: 320px;
-      background: linear-gradient(135deg, #801212, #4a0808);
-      border-radius: 16px;
-      padding: 24px 16px;
-      text-align: center;
-      color: #ffffff;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .card-title {
-      font-family: 'Great Vibes', cursive;
-      font-size: 38px;
-      color: #ffffff;
-    }
-
+    /* BACK BUTTON */
     .btn-back {
       position: absolute;
       top: 20px;
       left: 20px;
       z-index: 10;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, 0.4);
       color: #fff;
       border: 1px solid rgba(255, 255, 255, 0.3);
-      padding: 8px 14px;
+      padding: 8px 16px;
       border-radius: 20px;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
       cursor: pointer;
-      backdrop-filter: blur(5px);
+      backdrop-filter: blur(8px);
+      transition: background 0.2s;
+    }
+
+    .btn-back:hover {
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    /* OVERLAY TEXT CONTAINER (NO RED BOX / TRANSPARENT) */
+    .text-overlay-container {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: #ffffff;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      text-shadow: 0 4px 15px rgba(0, 0, 0, 0.8), 0 0 25px rgba(255, 255, 255, 0.4);
+      animation: floatPulse 3s infinite ease-in-out;
+    }
+
+    /* ANIMATED TEXT EFFECT */
+    @keyframes floatPulse {
+      0%, 100% {
+        transform: translateY(0) scale(1);
+      }
+      50% {
+        transform: translateY(-8px) scale(1.03);
+      }
+    }
+
+    .big-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 62px;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.1;
+      letter-spacing: 1px;
+    }
+
+    .popper-icon {
+      font-size: 36px;
+      animation: rotateBounce 2s infinite ease-in-out;
+    }
+
+    @keyframes rotateBounce {
+      0%, 100% { transform: rotate(-10deg) scale(1); }
+      50% { transform: rotate(10deg) scale(1.2); }
+    }
+
+    .big-subtitle {
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+      max-width: 320px;
+      line-height: 1.4;
+      background: rgba(0, 0, 0, 0.25);
+      padding: 8px 16px;
+      border-radius: 20px;
+      backdrop-filter: blur(4px);
+    }
+
+    .btn-click-here {
+      background: #ffffff;
+      color: #000000;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 25px;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+      transition: all 0.3s ease;
+      margin-top: 5px;
+    }
+
+    .btn-click-here:hover {
+      transform: scale(1.1);
+      background: #ffeb3b;
+    }
+
+    /* LAPTOP / DESKTOP RESPONSIVE ADJUSTMENTS */
+    @media (min-width: 768px) {
+      .big-title {
+        font-size: 80px;
+      }
+      .big-subtitle {
+        font-size: 20px;
+        max-width: 450px;
+      }
+      .btn-click-here {
+        font-size: 15px;
+        padding: 12px 30px;
+      }
     }
   </style>
 </head>
 <body>
 
+  <!-- ================= BOGGA 1-AAD ================= -->
   <div id="page-1" class="page active">
     <div class="envelope-card">
       <h1 class="greeting-title">Happy Birthday!</h1>
@@ -226,20 +303,22 @@
     </div>
   </div>
 
+  <!-- ================= BOGGA 2-AAD ================= -->
   <div id="page-2" class="page">
     <button class="btn-back" onclick="openPage1()">&larr; Back</button>
     <canvas id="confettiCanvas"></canvas>
 
-    <div class="card-box">
-      <h1 class="card-title">Happy Birthday!</h1>
-      <div style="font-size: 26px;">🎉</div>
-      <p style="font-size: 11px; opacity: 0.9;">I hope this little gift will make you happy ❤️</p>
-      <button style="background: #fff; color: #000; border: none; padding: 8px 18px; border-radius: 20px; font-weight: 700; font-size: 11px; cursor: pointer;">Click here ✨</button>
+    <!-- NO RED BOX - DIRECT TEXT ON FULL IMAGE -->
+    <div class="text-overlay-container">
+      <h1 class="big-title">Happy Birthday!</h1>
+      <div class="popper-icon">🎉</div>
+      <p class="big-subtitle">I hope this little gift will make you happy ❤️</p>
+      <button class="btn-click-here">Click here ✨</button>
     </div>
   </div>
 
   <script>
-    // PAGE SWITCHING
+    // PAGE SWITCHING FUNCTIONS
     function openPage2() {
       document.getElementById('page-1').classList.remove('active');
       document.getElementById('page-2').classList.add('active');
@@ -251,21 +330,26 @@
       document.getElementById('page-1').classList.add('active');
     }
 
-    // CONFETTI ANIMATION
+    // CONFETTI ANIMATION SCRIPT
     function startConfetti() {
       const canvas = document.getElementById('confettiCanvas');
       const ctx = canvas.getContext('2d');
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
 
-      const particles = [];
-      const colors = ['#f44336', '#e91e63', '#9c27b0', '#2196f3', '#ffeb3b', '#4caf50'];
+      window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      });
 
-      for (let i = 0; i < 80; i++) {
+      const particles = [];
+      const colors = ['#f44336', '#e91e63', '#9c27b0', '#2196f3', '#ffeb3b', '#4caf50', '#ff9800'];
+
+      for (let i = 0; i < 90; i++) {
         particles.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          r: Math.random() * 3 + 1,
+          r: Math.random() * 3.5 + 1,
           color: colors[Math.floor(Math.random() * colors.length)],
           vx: Math.random() * 2 - 1,
           vy: Math.random() * 1.5 + 0.5
@@ -284,6 +368,8 @@
           p.y += p.vy;
 
           if (p.y > canvas.height) p.y = 0;
+          if (p.x > canvas.width) p.x = 0;
+          if (p.x < 0) p.x = canvas.width;
         });
         requestAnimationFrame(draw);
       }
@@ -293,3 +379,4 @@
 
 </body>
 </html>
+
