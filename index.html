@@ -16,7 +16,7 @@
       <h1 class="script-title">Happy Birthday!</h1>
       
       <div class="envelope-wrapper" onclick="showPage('page2')">
-        <img src="https://i.postimg.cc/jdHxK6KL/ab4ad499ea014e3bbfd3074703568aa0.webp" alt="Red Envelope" class="envelope-image animated-envelope">
+        <img src="https://i.postimg.cc/jdHxK6KL/ab4ad499ea014e3bbfd3074703568aa0.webp" alt="Red Envelope" class="envelope-image">
       </div>
       
       <p class="click-text">Click the seal to open</p>
@@ -33,4 +33,46 @@
     <section id="page3" class="page">
       <h2 style="color: #8b0000; margin-bottom: 20px;">These are for you ❤️</h2>
       <div class="menu-grid">
-        <div class="menu-card" onclick="
+        <div class="menu-card" onclick="showPage('page-message')">
+          <span>💌</span>
+          <p>Message</p>
+        </div>
+        <div class="menu-card" onclick="showPage('page-flower')">
+          <span>💐</span>
+          <p>Flower</p>
+        </div>
+        <div class="menu-card" onclick="showPage('page-cake')">
+          <span>🎂</span>
+          <p>Cake</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="page-message" class="page">
+      <h2>Hambalyo Dhalasho! 🎉</h2>
+      <div class="content-box">
+        <p>Waxaan kugu hambalyeynayaa dhalashadaada! Waxaan kuu wish-garaynayaa sannad buuxa farxad, caafimaad, iyo guul.</p>
+      </div>
+      <button class="back-btn" onclick="showPage('page3')">Back to Menu</button>
+    </section>
+
+    <section id="page-flower" class="page">
+      <h2>Sunflower 🌻</h2>
+      <div class="content-box">
+        <p>Waxaad tahay qof gaar ah oo had iyo jeer iftiimiya nolosha dadka ku xeeran!</p>
+      </div>
+      <button class="back-btn" onclick="showPage('page3')">Back to Menu</button>
+    </section>
+
+    <section id="page-cake" class="page">
+      <h2>Music & Memories 🎵</h2>
+      <div class="content-box">
+        <p>Kani waa heesta aan ku xasuusto iyo xusuusahaagii ugu wanaagsanaa!</p>
+      </div>
+      <button class="back-btn" onclick="showPage('page3')">Back to Menu</button>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
