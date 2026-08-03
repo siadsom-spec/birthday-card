@@ -22,49 +22,15 @@
       <p class="click-text">Click the seal to open</p>
     </section>
 
-    <section id="page2" class="page">
-      <h2>These are for you ❤️</h2>
+    <section id="page2" class="page photo-page">
+      <div class="photo-overlay">
+        <h1 class="script-title-white">Happy Birthday [Name]! 🎉</h1>
+        <p class="sub-text">I hope this little gift will make you happy ❤️</p>
+        <button class="next-btn" onclick="showPage('page3')">Click here ✨</button>
+      </div>
+    </section>
+
+    <section id="page3" class="page">
+      <h2 style="color: #8b0000; margin-bottom: 20px;">These are for you ❤️</h2>
       <div class="menu-grid">
-        <div class="menu-card" onclick="showPage('page-message')">
-          <span>💌</span>
-          <p>Message</p>
-        </div>
-        <div class="menu-card" onclick="showPage('page-flower')">
-          <span>💐</span>
-          <p>Flower</p>
-        </div>
-        <div class="menu-card" onclick="showPage('page-cake')">
-          <span>🎂</span>
-          <p>Cake</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="page-message" class="page">
-      <h2>Hambalyo Dhalasho! 🎉</h2>
-      <div class="content-box">
-        <p>Waxaan kugu hambalyeynayaa dhalashadaada! Waxaan kuu wish-garaynayaa sannad buuxa farxad, caafimaad, iyo guul.</p>
-      </div>
-      <button class="back-btn" onclick="showPage('page2')">Back to Menu</button>
-    </section>
-
-    <section id="page-flower" class="page">
-      <h2>Sunflower 🌻</h2>
-      <div class="content-box">
-        <p>Waxaad tahay qof gaar ah oo had iyo jeer iftiimiya nolosha dadka ku xeeran!</p>
-      </div>
-      <button class="back-btn" onclick="showPage('page2')">Back to Menu</button>
-    </section>
-
-    <section id="page-cake" class="page">
-      <h2>Music & Memories 🎵</h2>
-      <div class="content-box">
-        <p>Kani waa heesta aan ku xasuusto iyo xusuusahaagii ugu wanaagsanaa!</p>
-      </div>
-      <button class="back-btn" onclick="showPage('page2')">Back to Menu</button>
-    </section>
-  </div>
-
-  <script src="script.js"></script>
-</body>
-</html>
+        <div class="menu-card" onclick="
