@@ -1,72 +1,196 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="so">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Birthday Creator</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlowerIsBlooming - Gift Builder</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
 
-    <!-- Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    body {
+      background-color: #0d2818;
+      background-image: 
+        radial-gradient(circle at 50% 0%, #1a4228 0%, #0d2818 70%),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="20" cy="20" r="15" fill="rgba(255,255,255,0.02)"/><circle cx="80" cy="70" r="25" fill="rgba(255,255,255,0.02)"/></svg>');
+      color: #e2ebe4;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      padding-bottom: 60px;
+    }
 
-    <!-- Confetti Library -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    .app-viewport {
+      width: 100%;
+      max-width: 430px;
+      padding: 12px 14px;
+      position: relative;
+    }
+
+    /* TOP NAVIGATION HEADER */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0 16px 0;
+    }
+
+    .brand-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .brand-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      background: #e27d60;
+      display: inline-block;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .lang-selector {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .avatar-circle {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #333;
+      border: 1.5px solid rgba(255, 255, 255, 0.3);
+      overflow: hidden;
+    }
+
+    .avatar-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* MAIN TITLE */
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-weight: 400;
+      text-align: center;
+      margin: 10px 0 20px 0;
+      color: #f3f7f4;
+      letter-spacing: -0.5px;
+    }
+
+    /* GLASS CARD FOR FROM & FOR */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group label {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      color: #b3c9b8;
+      text-transform: uppercase;
+    }
+
+    .custom-input {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 14px;
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 600;
+      outline: none;
+      width: 100%;
+    }
+
+    .custom-input::placeholder {
+      color: rgba(255, 255, 255, 0.35);
+    }
+
+    .custom-input:focus {
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+  </style>
 </head>
-
 <body>
 
-<div class="container">
+  <div class="app-viewport">
 
-    <h1>🎂 Birthday Website Creator 🎂</h1>
-
-    <div class="form">
-
-        <input type="text" id="name" placeholder="Birthday Person Name">
-
-        <input type="text" id="from" placeholder="Your Name">
-
-        <textarea id="message"
-            placeholder="Write your birthday message..."></textarea>
-
-        <input type="file"
-               id="photo"
-               accept="image/*">
-
-        <button onclick="createCard()">
-            🎉 Create Birthday Page
-        </button>
-
+    <div class="top-bar">
+      <div class="brand-pill">
+        <span class="brand-icon"></span>
+        <span>STUDIO</span>
+      </div>
+      <div class="header-actions">
+        <div class="lang-selector">🌐 EN ▾</div>
+        <div class="avatar-circle">
+          <img src="https://i.postimg.cc/jqkNPbJ1/da1478c736e944eb8f1ec711d8c60617.webp" alt="Profile">
+        </div>
+      </div>
     </div>
 
-</div>
+    <h1 class="hero-title">The Link lasts forever</h1>
 
-<!-- Birthday Page -->
-<div id="birthdayPage" class="hidden">
-
-    <div class="card">
-
-        <img id="profileImage">
-
-        <h1 id="personName"></h1>
-
-        <p id="birthdayMessage"></p>
-
-        <h3 id="senderName"></h3>
-
-        <button onclick="playMusic()">
-            ▶ Play Music
-        </button>
-
+    <div class="glass-card grid-2">
+      <div class="form-group">
+        <label>FROM</label>
+        <input type="text" class="custom-input" placeholder="Sadiqq">
+      </div>
+      <div class="form-group">
+        <label>FOR (TO)</label>
+        <input type="text" class="custom-input" placeholder="Salmoo">
+      </div>
     </div>
 
-</div>
-
-<audio id="music" loop>
-    <source src="happybirthday.mp3" type="audio/mpeg">
-</audio>
-
-<script src="script.js"></script>
+  </div>
 
 </body>
 </html>
