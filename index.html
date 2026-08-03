@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gift Builder</title>
+  <title>Gift Studio - Message Preview</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@600&display=swap" rel="stylesheet">
 
   <style>
     * {
@@ -28,107 +28,17 @@
 
     .app-viewport {
       width: 100%;
-      max-width: 430px;
-    }
-
-    /* BOGGA CONTROL-KA (PAGE SWITCHING) */
-    .page {
-      display: none;
+      max-width: 440px;
+      display: flex;
       flex-direction: column;
       gap: 16px;
     }
 
-    .page.active {
-      display: flex;
-    }
-
-    /* TOP BAR */
+    /* TOP HEADER */
     .top-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-bottom: 10px;
-    }
-
-    .tabs-header {
-      background: rgba(0, 0, 0, 0.3);
-      padding: 4px;
-      border-radius: 30px;
-      display: flex;
-      gap: 5px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      width: 100%;
-    }
-
-    .tab-btn {
-      flex: 1;
-      background: transparent;
-      border: none;
-      color: #a3c2ac;
-      padding: 10px 14px;
-      border-radius: 25px;
-      font-weight: 800;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      font-size: 11px;
-      letter-spacing: 1px;
-    }
-
-    .tab-btn.active {
-      background: #ffffff;
-      color: #0d2818;
-    }
-
-    .badge {
-      background: rgba(0, 0, 0, 0.15);
-      padding: 2px 7px;
-      border-radius: 50%;
-      font-size: 10px;
-    }
-
-    /* BATOONKA NEW GIFT EE BOGGA 1-AAD */
-    .new-gift-hero-btn {
-      background-color: #2e7d32;
-      color: #ffffff;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      padding: 16px 24px;
-      border-radius: 25px;
-      font-weight: 800;
-      font-size: 14px;
-      letter-spacing: 1px;
-      cursor: pointer;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      width: 100%;
-      transition: background 0.2s;
-    }
-
-    .new-gift-hero-btn:hover {
-      background-color: #388e3c;
-    }
-
-    /* CARDS */
-    .glass-card {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(12px);
-      border-radius: 20px;
-      padding: 20px;
-    }
-
-    .hero-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 28px;
-      font-weight: 400;
-      text-align: center;
-      color: #f3f7f4;
-      margin-bottom: 10px;
     }
 
     .back-btn {
@@ -140,9 +50,28 @@
       cursor: pointer;
       font-size: 11px;
       font-weight: 800;
-      width: max-content;
     }
 
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      text-align: center;
+      color: #f3f7f4;
+    }
+
+    /* GLASS CARD CONTAINER */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* FROM & TO ROW */
     .grid-2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -152,25 +81,109 @@
     .form-group {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 6px;
     }
 
     .form-group label {
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 800;
       letter-spacing: 1.2px;
       color: #b3c9b8;
+      text-transform: uppercase;
     }
 
     .custom-input {
       background: rgba(0, 0, 0, 0.25);
       border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 12px;
-      padding: 14px;
+      padding: 12px;
       color: #ffffff;
-      font-size: 14px;
+      font-size: 13px;
       outline: none;
       width: 100%;
+    }
+
+    /* AFAR-GEESKA MAIN-KA AH (SPLIT BOX) */
+    .split-box-container {
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 12px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      align-items: center;
+    }
+
+    /* DHINACA BIDIX: TEXTAREA */
+    .message-input-side {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      height: 100%;
+    }
+
+    .custom-textarea {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      padding: 10px;
+      color: #ffffff;
+      font-size: 12px;
+      outline: none;
+      width: 100%;
+      height: 100%;
+      min-height: 160px;
+      resize: none;
+    }
+
+    /* DHINACA HANTI: WARQADA PREVIEW-KA AH */
+    .paper-preview-side {
+      position: relative;
+      width: 100%;
+      height: 180px;
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    .paper-bg-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+
+    .paper-text-overlay {
+      position: relative;
+      z-index: 2;
+      width: 80%;
+      height: 75%;
+      padding: 10px;
+      color: #2b1e10;
+      font-family: 'Caveat', cursive; /* Handwritten font style */
+      font-size: 15px;
+      line-height: 1.2;
+      overflow-y: auto;
+      word-break: break-word;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* SCROLLBAR STYLE FOR PAPER TEXT */
+    .paper-text-overlay::-webkit-scrollbar {
+      width: 3px;
+    }
+    .paper-text-overlay::-webkit-scrollbar-thumb {
+      background: rgba(0,0,0,0.2);
     }
   </style>
 </head>
@@ -178,38 +191,42 @@
 
   <div class="app-viewport">
 
-    <div id="page-home" class="page active">
-      
-      <div class="tabs-header">
-        <button class="tab-btn">💐 BOUQUETS <span class="badge">9</span></button>
-        <button class="tab-btn active">🎁 GIFTS <span class="badge">0</span></button>
-      </div>
-
-      <button class="new-gift-hero-btn" onclick="goToStudio()">
-        🎁 NEW GIFT &rarr;
-      </button>
-
-      <div class="glass-card" style="text-align: center; padding: 30px 20px;">
-        <h3 style="font-size: 16px; margin-bottom: 8px;">No gift states yet</h3>
-        <p style="font-size: 12px; color: #a2baa7;">Taabo batoonka "NEW GIFT" ee ka sarreeya si aad fariin iyo xdiyad cusub u samayso.</p>
-      </div>
-
+    <div class="top-bar">
+      <button class="back-btn">&larr; BACK</button>
+      <span style="font-size: 12px; font-weight: 800; color: #a3c2ac;">PAGE 2</span>
     </div>
 
-    <div id="page-studio" class="page">
+    <h1 class="hero-title">The Link lasts forever</h1>
+
+    <div class="glass-card">
       
-      <button class="back-btn" onclick="goHome()">&larr; BACK HOME</button>
-
-      <h1 class="hero-title">The Link lasts forever</h1>
-
-      <div class="glass-card grid-2">
+      <div class="grid-2">
         <div class="form-group">
           <label>FROM</label>
-          <input type="text" class="custom-input" placeholder="Sadiqq">
+          <input type="text" class="custom-input" value="Sadiqq" placeholder="Magacaaga...">
         </div>
         <div class="form-group">
-          <label>FOR (TO)</label>
-          <input type="text" class="custom-input" placeholder="Salmoo">
+          <label>TO</label>
+          <input type="text" class="custom-input" value="Salmoo" placeholder="Magaca qofka...">
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-top: 4px;">
+        <label>WRITE YOUR MESSAGE & LIVE PREVIEW</label>
+        
+        <div class="split-box-container">
+          
+          <div class="message-input-side">
+            <textarea id="msgInput" class="custom-textarea" placeholder="Qor fariintaada halkan..." oninput="updatePaperText()">Dhalasho farxad leh qofkayga aan ugu jeclahay adduunka! ❤️</textarea>
+          </div>
+
+          <div class="paper-preview-side">
+            <img src="https://i.postimg.cc/wBk2mPkQ/file-000000006c808211abc4a25a9e15a08a.png" class="paper-bg-img" alt="Paper background">
+            <div id="paperText" class="paper-text-overlay">
+              Dhalasho farxad leh qofkayga aan ugu jeclahay adduunka! ❤️
+            </div>
+          </div>
+
         </div>
       </div>
 
@@ -218,19 +235,20 @@
   </div>
 
   <script>
-    function goToStudio() {
-      document.getElementById('page-home').classList.remove('active');
-      document.getElementById('page-studio').classList.add('active');
-      window.scrollTo(0, 0);
-    }
-
-    function goHome() {
-      document.getElementById('page-studio').classList.remove('active');
-      document.getElementById('page-home').classList.add('active');
-      window.scrollTo(0, 0);
+    // Fariinta qoraalka looga beddelayo warqadda tooska ah
+    function updatePaperText() {
+      const inputVal = document.getElementById('msgInput').value;
+      const paperDisplay = document.getElementById('paperText');
+      
+      if (inputVal.trim() === "") {
+        paperDisplay.innerText = "Qoraalkaagu halkan ayuu ka muuqan doonaa...";
+        paperDisplay.style.opacity = "0.5";
+      } else {
+        paperDisplay.innerText = inputVal;
+        paperDisplay.style.opacity = "1";
+      }
     }
   </script>
 
 </body>
 </html>
-
