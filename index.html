@@ -6,7 +6,7 @@
   <title>Surprise Gift Service</title>
   
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600;700&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600;700&family=Playfair+Display:ital@1&family=Caveat:wght@600&display=swap" rel="stylesheet">
   
   <style>
     * {
@@ -323,9 +323,9 @@
       }
     }
 
-    /* PAGE 3: MATCHING THE IMAGE EXACTLY */
+    /* PAGE 3: MENU */
     .menu-page {
-      background-color: #a8131d; /* Deep Red Background */
+      background-color: #a8131d;
       flex-direction: column;
       justify-content: center;
       align-items: center;
@@ -393,6 +393,225 @@
     /* SUB PAGES (CONTENT) */
     .content-page {
       background-color: #a8131d;
+      overflow-y: auto;
+    }
+
+    /* SCRAPBOOK MESSAGE PAGE STYLES (MATCHING THE VIDEO) */
+    #page-message {
+      background: #dfd7cc; /* Vintage paper color */
+      background-image: radial-gradient(#d0c6b8 10%, transparent 11%);
+      background-size: 20px 20px;
+      padding: 30px 15px;
+      height: 100vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .scrapbook-container {
+      width: 100%;
+      max-width: 420px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+      padding-bottom: 40px;
+    }
+
+    .tape-sticker {
+      width: 110px;
+      height: 28px;
+      background: rgba(255, 255, 255, 0.65);
+      border-left: 3px dashed #bbb;
+      border-right: 3px dashed #bbb;
+      transform: rotate(-4deg);
+      margin-bottom: -15px;
+      z-index: 5;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .scrap-card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 18px;
+      width: 100%;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      position: relative;
+      border: 1px solid #eae0d5;
+    }
+
+    .scrap-header-card {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      background: #fdfaf6;
+    }
+
+    .scrap-header-card h3 {
+      font-size: 22px;
+      color: #333;
+      margin-bottom: 6px;
+    }
+
+    .scrap-header-card p {
+      font-size: 13px;
+      color: #888;
+    }
+
+    /* CASSETTE TAPE WIDGET */
+    .cassette-box {
+      background: #2a2a2a;
+      border-radius: 10px;
+      padding: 15px;
+      width: 100%;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.5), 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .cassette-window {
+      width: 80%;
+      height: 45px;
+      background: #111;
+      border-radius: 6px;
+      border: 2px solid #444;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin: 10px 0;
+    }
+
+    .cassette-wheel {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 4px dashed #fff;
+      animation: spinCassette 4s linear infinite;
+    }
+
+    @keyframes spinCassette {
+      100% { transform: rotate(360deg); }
+    }
+
+    .cassette-label {
+      font-family: 'Caveat', cursive;
+      color: #ff3366;
+      font-size: 20px;
+      letter-spacing: 1px;
+    }
+
+    /* LETTER GRID CARDS (A B C D E) */
+    .letters-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      color: #444;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .letters-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .letter-btn {
+      background: #fefefe;
+      border: 2px dashed #d4a359;
+      border-radius: 10px;
+      aspect-ratio: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      transition: all 0.2s ease;
+    }
+
+    .letter-btn:hover {
+      transform: translateY(-3px) rotate(2deg);
+      background: #fff8f0;
+      border-color: #c8812c;
+    }
+
+    .letter-btn span {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-weight: bold;
+      color: #8b0000;
+    }
+
+    .letter-btn small {
+      font-size: 11px;
+      color: #777;
+    }
+
+    /* POPUP MODAL FOR LETTER MESSAGES */
+    .letter-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.6);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .letter-modal.active {
+      display: flex;
+    }
+
+    .modal-card {
+      background: #fefcf8;
+      width: 100%;
+      max-width: 380px;
+      padding: 30px 20px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      text-align: center;
+      position: relative;
+      border: 1px solid #e2d8c9;
+      animation: popIn 0.3s ease-out;
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.7); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-card h4 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 38px;
+      color: #a8131d;
+      margin-bottom: 12px;
+    }
+
+    .modal-card p {
+      font-size: 15px;
+      color: #444;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      font-family: 'Caveat', cursive;
+      font-size: 22px;
+    }
+
+    .close-modal-btn {
+      background: #a8131d;
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
     }
 
     .card-inner {
@@ -480,7 +699,7 @@
     <button class="next-btn" onclick="showPage('page3')">Click here ✨</button>
   </section>
 
-  <!-- PAGE 3: EXACT LIKE IMAGE -->
+  <!-- PAGE 3: MENU -->
   <section id="page3" class="page menu-page">
     <h2 class="page3-title">These are for you</h2>
     
@@ -493,7 +712,7 @@
         <p>Message</p>
       </div>
 
-      <!-- FLOWER CARD (NEW IMAGE UPDATED) -->
+      <!-- FLOWER CARD -->
       <div class="menu-card" onclick="showPage('page-flower')">
         <div class="card-img-wrap">
           <img src="https://i.postimg.cc/xdVbnwsh/221693915545497b49634065bc732e4d.jpg" alt="Flower" class="card-img">
@@ -511,16 +730,67 @@
     </div>
   </section>
 
-  <!-- SUB PAGE: MESSAGE -->
+  <!-- SUB PAGE: MESSAGE (SCRAPBOOK / COLLAGE STYLE LIKE THE VIDEO) -->
   <section id="page-message" class="page content-page">
-    <div class="card-inner">
-      <h2 style="color: #a8131d; font-family: 'Great Vibes', cursive; font-size: 40px;">Hambalyo Dhalasho! 🎉</h2>
-      <div class="content-box">
-        <p>Waxaan kugu hambalyeynayaa dhalashadaada! Waxaan kuu wish-garaynayaa sannad buuxa farxad, caafimaad, iyo guul oo dhan.</p>
+    <div class="scrapbook-container">
+      
+      <div class="tape-sticker"></div>
+
+      <!-- TOP HEADER CARD -->
+      <div class="scrap-card scrap-header-card">
+        <h3>Birthday Memory Book 💌</h3>
+        <p>Tap the cards below to read secret notes ✨</p>
       </div>
-      <button class="back-btn" onclick="showPage('page3')">Back to Menu</button>
+
+      <!-- CASSETTE PLAYER DECORATION -->
+      <div class="cassette-box">
+        <div class="cassette-label">🎵 Birthday Playlist Tape</div>
+        <div class="cassette-window">
+          <div class="cassette-wheel"></div>
+          <div class="cassette-wheel"></div>
+        </div>
+        <span style="font-size: 11px; opacity: 0.8;">Side A - Happy Birthday Special</span>
+      </div>
+
+      <!-- LETTERS GRID (A B C D E) -->
+      <div class="scrap-card">
+        <h4 class="letters-title">Open Secret Letters ✉️</h4>
+        <div class="letters-grid">
+          <div class="letter-btn" onclick="openLetter('A', 'Waxaan kugu rabnaa caafimaad taam ah iyo cimri dheer oo barako leh! 🌟')">
+            <span>A</span>
+            <small>Tap to open</small>
+          </div>
+          <div class="letter-btn" onclick="openLetter('B', 'Waxaad tahay qof aad u qaali ah oo had iyo jeer qalbiga ku weyn! ❤️')">
+            <span>B</span>
+            <small>Tap to open</small>
+          </div>
+          <div class="letter-btn" onclick="openLetter('C', 'Sannadkan cusub ha kaaga dhigo mid aad ku gaarto riyooyinkaaga oo dhan! ✨')">
+            <span>C</span>
+            <small>Tap to open</small>
+          </div>
+          <div class="letter-btn" onclick="openLetter('D', 'Marnaba ha iloobin in aad tahay qof gaar ah oo dunida iftiimiya! 🌸')">
+            <span>D</span>
+            <small>Tap to open</small>
+          </div>
+          <div class="letter-btn" onclick="openLetter('E', 'Hambalyo! Farxad iyo badhaadhe joogto ah ayaan kuu wish-garaynayaa! 🎉')">
+            <span>E</span>
+            <small>Tap to open</small>
+          </div>
+        </div>
+      </div>
+
+      <button class="back-btn" onclick="showPage('page3')" style="margin-top: 10px;">Back to Menu</button>
     </div>
   </section>
+
+  <!-- LETTER POPUP MODAL -->
+  <div id="letterModal" class="letter-modal">
+    <div class="modal-card">
+      <h4 id="letterTitle">Letter A</h4>
+      <p id="letterContent">Letter message text goes here...</p>
+      <button class="close-modal-btn" onclick="closeLetter()">Close Letter</button>
+    </div>
+  </div>
 
   <!-- SUB PAGE: FLOWER -->
   <section id="page-flower" class="page content-page">
@@ -664,6 +934,17 @@
           }, duration * 1000);
         }, i * 90);
       }
+    }
+
+    /* SCRAPBOOK MODAL FUNCTIONS */
+    function openLetter(letterName, messageText) {
+      document.getElementById('letterTitle').innerText = "Letter " + letterName;
+      document.getElementById('letterContent').innerText = messageText;
+      document.getElementById('letterModal').classList.add('active');
+    }
+
+    function closeLetter() {
+      document.getElementById('letterModal').classList.remove('active');
     }
   </script>
 
