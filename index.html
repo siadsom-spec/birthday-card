@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy Birthday!</title>
+  <title>Surprise Gift Service</title>
   
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   
   <style>
     * {
@@ -33,6 +33,83 @@
       display: flex;
       justify-content: center;
       align-items: center;
+    }
+
+    /* PAGE 0: LOADING SCREEN */
+    #page-loading {
+      background-color: #fdfaf6;
+      flex-direction: column;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .loading-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: #222;
+      margin-bottom: 40px;
+      font-family: 'Georgia', serif;
+    }
+
+    .truck-container {
+      width: 180px;
+      height: 180px;
+      background: #eef2f5;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      margin-bottom: 40px;
+      font-size: 75px;
+      box-shadow: inset 0 0 15px rgba(0,0,0,0.05);
+    }
+
+    .progress-bar-bg {
+      width: 80%;
+      max-width: 300px;
+      height: 6px;
+      background-color: #e0e0e0;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      width: 0%;
+      height: 100%;
+      background-color: #333333;
+      border-radius: 10px;
+      transition: width 0.1s linear;
+    }
+
+    /* PAGE 0.5: GREEN BOLO (STAMP) SCREEN */
+    #page-stamp {
+      background-color: #fdfaf6;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .green-stamp {
+      width: 120px;
+      height: 120px;
+      background-color: #58cc02;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 10px 25px rgba(88, 204, 2, 0.4);
+      animation: pulseStamp 1.5s infinite ease-in-out;
+    }
+
+    .stamp-star {
+      color: white;
+      font-size: 55px;
+      user-select: none;
+    }
+
+    @keyframes pulseStamp {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
     }
 
     /* PAGE 1: ENVELOPE */
@@ -84,7 +161,7 @@
       margin-top: 10px;
     }
 
-    /* PAGE 2: SAWIRKA IYO QORAALKA BILAASH SANDUUQ */
+    /* PAGE 2: SAWIRKA IYO QORAALKA */
     #page2 {
       position: fixed;
       top: 0;
@@ -177,7 +254,7 @@
       }
     }
 
-    /* PAGE 3 & OTHER SUB-PAGES */
+    /* PAGE 3: MENU OPTIONS */
     .menu-page, .content-page {
       background-color: #500000;
     }
@@ -253,8 +330,26 @@
 </head>
 <body>
 
+  <!-- PAGE 0: LOADING SCREEN -->
+  <section id="page-loading" class="page active">
+    <h1 class="loading-title">Surprise Gift Service</h1>
+    <div class="truck-container">
+      🚚🎁
+    </div>
+    <div class="progress-bar-bg">
+      <div id="progress-fill" class="progress-bar-fill"></div>
+    </div>
+  </section>
+
+  <!-- PAGE 0.5: GREEN BOLO (STAMP) -->
+  <section id="page-stamp" class="page" onclick="showPage('page1')">
+    <div class="green-stamp">
+      <span class="stamp-star">💥</span>
+    </div>
+  </section>
+
   <!-- PAGE 1: ENVELOPE -->
-  <section id="page1" class="page active">
+  <section id="page1" class="page">
     <div class="envelope-box">
       <h1 class="script-title">Happy Birthday!</h1>
       <div class="envelope-wrapper" onclick="openEnvelope()">
@@ -326,6 +421,22 @@
   </section>
 
   <script>
+    // SIMULATE LOADING BAR
+    window.addEventListener('DOMContentLoaded', () => {
+      let progress = 0;
+      const fill = document.getElementById('progress-fill');
+      const interval = setInterval(() => {
+        progress += 3;
+        fill.style.width = progress + '%';
+        if (progress >= 100) {
+          clearInterval(interval);
+          setTimeout(() => {
+            showPage('page-stamp');
+          }, 300);
+        }
+      }, 50);
+    });
+
     function showPage(pageId) {
       const pages = document.querySelectorAll('.page');
       pages.forEach(page => {
