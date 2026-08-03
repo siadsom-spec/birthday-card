@@ -6,7 +6,7 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: #500000;
+  background-color: #000000;
   min-height: 100vh;
   width: 100vw;
   overflow-x: hidden;
@@ -39,13 +39,13 @@ body {
   padding: 30px 20px;
   border-radius: 12px;
   text-align: center;
-  border: 8px solid #8b0000;
+  border: 6px solid #8b0000;
   box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
 .script-title {
   font-family: 'Great Vibes', cursive;
-  font-size: 48px;
+  font-size: 52px;
   color: #8b0000;
   margin-bottom: 15px;
 }
@@ -76,14 +76,13 @@ body {
   margin-top: 10px;
 }
 
-/* PAGE 2: FULL SCREEN BACKGROUND PHOTO */
+/* PAGE 2: FULL SCREEN BACKGROUND PHOTO (BIXIN BORDER-KA GADUUDKA AH) */
 .photo-page {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw !important;
   height: 100vh !important;
-  /* Halkan geli link-ga sawirkaaga buuxinaya shaashadda */
   background-image: url('https://i.postimg.cc/jqkNPbJ1/da1478c736e944eb8f1ec711d8c60617.webp');
   background-size: cover;
   background-position: center;
@@ -93,60 +92,83 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 99;
+  border: none !important; /* Border-kii gaduudka ahaa waa la bixiyay */
 }
 
 .photo-page.active {
   display: flex !important;
-  animation: fadeIn 0.8s ease-out forwards;
+  animation: fadeInBg 1s ease-out forwards;
 }
 
-@keyframes fadeIn {
-  0% { opacity: 0; transform: scale(0.95); }
-  100% { opacity: 1; transform: scale(1); }
+@keyframes fadeInBg {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
 
+/* SANDUUQA QORAALKA LEH ANIMATION CUSUB IYO QORAAL WEYN */
 .photo-overlay {
-  background: rgba(139, 0, 0, 0.45);
-  padding: 30px 20px;
-  border-radius: 16px;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  width: 85%;
-  max-width: 400px;
+  background: rgba(139, 0, 0, 0.55);
+  padding: 35px 25px;
+  border-radius: 18px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  width: 88%;
+  max-width: 420px;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+  animation: slideUpText 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideUpText {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .script-title-white {
   font-family: 'Great Vibes', cursive;
-  font-size: 44px;
+  font-size: 54px; /* Qoraalka waa la weyneeyay */
   color: #ffffff;
-  margin-bottom: 10px;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+  margin-bottom: 12px;
+  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.9);
+  line-height: 1.1;
 }
 
 .sub-text {
   color: #ffffff;
-  font-size: 14px;
-  margin-bottom: 20px;
-  text-shadow: 1px 1px 4px rgba(0,0,0,0.9);
+  font-size: 16px; /* Qoraalka yar waa la weyneeyay */
+  margin-bottom: 25px;
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.9);
+  font-weight: 400;
 }
 
 .next-btn {
   background-color: #ffffff;
   color: #8b0000;
   border: none;
-  padding: 10px 24px;
-  border-radius: 20px;
+  padding: 12px 28px;
+  border-radius: 25px;
+  font-size: 15px;
   font-weight: bold;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  transition: transform 0.2s;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  transition: transform 0.2s, background-color 0.2s;
+  animation: pulseBtn 2s infinite ease-in-out;
+}
+
+@keyframes pulseBtn {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
 }
 
 .next-btn:hover {
-  transform: scale(1.08);
+  background-color: #ffe6e6;
 }
 
 /* OTHER PAGES & MENU */
@@ -161,7 +183,7 @@ body {
   padding: 30px 20px;
   border-radius: 12px;
   text-align: center;
-  border: 8px solid #8b0000;
+  border: 6px solid #8b0000;
 }
 
 .menu-grid {
@@ -201,4 +223,3 @@ body {
   cursor: pointer;
   font-weight: 600;
 }
-
