@@ -12,6 +12,8 @@
 <body>
 
   <div class="card-container">
+    
+    <!-- PAGE 1: Landing Envelope Page -->
     <section id="page1" class="page active">
       <h1 class="script-title">Happy Birthday!</h1>
       
@@ -22,14 +24,31 @@
       <p class="click-text">Click the seal to open</p>
     </section>
 
+    <!-- PAGE 2: Full Photo Background with Confetti / Buululeer Effect -->
     <section id="page2" class="page photo-page">
+      
+      <!-- Confetti / Buululeer Party Falling Effects -->
+      <div class="confetti-wrapper">
+        <div class="confetti c1"></div>
+        <div class="confetti c2"></div>
+        <div class="confetti c3"></div>
+        <div class="confetti c4"></div>
+        <div class="confetti c5"></div>
+        <div class="confetti c6"></div>
+        <div class="confetti c7"></div>
+        <div class="confetti c8"></div>
+        <div class="confetti c9"></div>
+        <div class="confetti c10"></div>
+      </div>
+
       <div class="photo-overlay">
-        <h1 class="script-title-white">Happy Birthday [Name]! 🎉</h1>
+        <h1 class="script-title-white">Happy Birthday! 🎉</h1>
         <p class="sub-text">I hope this little gift will make you happy ❤️</p>
         <button class="next-btn" onclick="showPage('page3')">Click here ✨</button>
       </div>
     </section>
 
+    <!-- PAGE 3: Menu Options -->
     <section id="page3" class="page">
       <h2 style="color: #8b0000; margin-bottom: 20px;">These are for you ❤️</h2>
       <div class="menu-grid">
@@ -48,6 +67,7 @@
       </div>
     </section>
 
+    <!-- PAGE: Message -->
     <section id="page-message" class="page">
       <h2>Hambalyo Dhalasho! 🎉</h2>
       <div class="content-box">
@@ -56,6 +76,7 @@
       <button class="back-btn" onclick="showPage('page3')">Back to Menu</button>
     </section>
 
+    <!-- PAGE: Flower -->
     <section id="page-flower" class="page">
       <h2>Sunflower 🌻</h2>
       <div class="content-box">
@@ -64,6 +85,7 @@
       <button class="back-btn" onclick="showPage('page3')">Back to Menu</button>
     </section>
 
+    <!-- PAGE: Cake -->
     <section id="page-cake" class="page">
       <h2>Music & Memories 🎵</h2>
       <div class="content-box">
@@ -71,6 +93,7 @@
       </div>
       <button class="back-btn" onclick="showPage('page3')">Back to Menu</button>
     </section>
+
   </div>
 
   <script src="script.js"></script>
