@@ -40,7 +40,6 @@ body {
   display: block;
 }
 
-/* Page 1 Envelope */
 #page1 {
   background-color: #fdfaf6;
   padding: 30px 15px;
@@ -80,7 +79,7 @@ body {
   margin-top: 10px;
 }
 
-/* --- PAGE 2 PHOTO & BUULULEER CONFETTI EFFECT --- */
+/* Page 2 Photo Page */
 .photo-page {
   position: absolute;
   top: 0;
@@ -96,63 +95,18 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
 }
 
 .photo-page.active {
   display: flex !important;
-  animation: openPop 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  animation: openPop 0.8s ease-out forwards;
 }
 
 @keyframes openPop {
-  0% { opacity: 0; transform: scale(0.6); }
+  0% { opacity: 0; transform: scale(0.7); }
   100% { opacity: 1; transform: scale(1); }
 }
 
-/* --- BUULULEER / CONFETTI FALLING ANIMATION --- */
-.confetti-wrapper {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.confetti {
-  position: absolute;
-  top: -20px;
-  width: 10px;
-  height: 16px;
-  opacity: 0.8;
-  animation: confettiFall 4s linear infinite;
-}
-
-/* Midabbada Buululeer-ka */
-.c1 { left: 10%; background: #ff4b5c; animation-delay: 0s; }
-.c2 { left: 20%; background: #ffcd3c; animation-delay: 1s; width: 12px; height: 12px; border-radius: 50%; }
-.c3 { left: 35%; background: #ffffff; animation-delay: 0.5s; }
-.c4 { left: 50%; background: #ff4b5c; animation-delay: 2s; }
-.c5 { left: 65%; background: #ffcd3c; animation-delay: 1.5s; }
-.c6 { left: 75%; background: #ffffff; animation-delay: 0.8s; width: 14px; height: 14px; border-radius: 50%; }
-.c7 { left: 85%; background: #ff4b5c; animation-delay: 2.5s; }
-.c8 { left: 95%; background: #ffcd3c; animation-delay: 1.2s; }
-
-@keyframes confettiFall {
-  0% {
-    top: -20px;
-    transform: rotate(0deg) translateX(0);
-    opacity: 1;
-  }
-  100% {
-    top: 110%;
-    transform: rotate(720deg) translateX(40px);
-    opacity: 0.2;
-  }
-}
-
-/* Photo Overlay Glassmorphism */
 .photo-overlay {
   background: rgba(139, 0, 0, 0.45);
   padding: 30px 20px;
@@ -254,3 +208,4 @@ body {
   cursor: pointer;
   font-weight: 600;
 }
+
