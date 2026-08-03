@@ -9,35 +9,34 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   
-  <!-- Buululeer Library (Canvas Confetti) -->
+  <!-- Canvas Confetti Library (Buululeer) -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
 
-  <div class="card-container">
-    
-    <!-- PAGE 1: Landing Envelope Page -->
-    <section id="page1" class="page active">
+  <!-- PAGE 1: Landing Envelope Page -->
+  <section id="page1" class="page active">
+    <div class="envelope-box">
       <h1 class="script-title">Happy Birthday!</h1>
-      
       <div class="envelope-wrapper" onclick="openEnvelope()">
         <img src="https://i.postimg.cc/jdHxK6KL/ab4ad499ea014e3bbfd3074703568aa0.webp" alt="Red Envelope" class="envelope-image">
       </div>
-      
       <p class="click-text">Click the seal to open</p>
-    </section>
+    </div>
+  </section>
 
-    <!-- PAGE 2: Full Photo Background Page -->
-    <section id="page2" class="page photo-page">
-      <div class="photo-overlay">
-        <h1 class="script-title-white">Happy Birthday! 🎉</h1>
-        <p class="sub-text">I hope this little gift will make you happy ❤️</p>
-        <button class="next-btn" onclick="showPage('page3')">Click here ✨</button>
-      </div>
-    </section>
+  <!-- PAGE 2: Full Screen Background Photo Page -->
+  <section id="page2" class="page photo-page">
+    <div class="photo-overlay">
+      <h1 class="script-title-white">Happy Birthday! 🎉</h1>
+      <p class="sub-text">I hope this little gift will make you happy ❤️</p>
+      <button class="next-btn" onclick="showPage('page3')">Click here ✨</button>
+    </div>
+  </section>
 
-    <!-- PAGE 3: Menu Options -->
-    <section id="page3" class="page">
+  <!-- PAGE 3: Menu Options -->
+  <section id="page3" class="page menu-page">
+    <div class="menu-box">
       <h2 style="color: #8b0000; margin-bottom: 20px;">These are for you ❤️</h2>
       <div class="menu-grid">
         <div class="menu-card" onclick="showPage('page-message')">
@@ -53,36 +52,41 @@
           <p>Cake</p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- PAGE: Message -->
-    <section id="page-message" class="page">
+  <!-- PAGE: Message -->
+  <section id="page-message" class="page content-page">
+    <div class="card-inner">
       <h2>Hambalyo Dhalasho! 🎉</h2>
       <div class="content-box">
         <p>Waxaan kugu hambalyeynayaa dhalashadaada! Waxaan kuu wish-garaynayaa sannad buuxa farxad, caafimaad, iyo guul.</p>
       </div>
       <button class="back-btn" onclick="showPage('page3')">Back to Menu</button>
-    </section>
+    </div>
+  </section>
 
-    <!-- PAGE: Flower -->
-    <section id="page-flower" class="page">
+  <!-- PAGE: Flower -->
+  <section id="page-flower" class="page content-page">
+    <div class="card-inner">
       <h2>Sunflower 🌻</h2>
       <div class="content-box">
         <p>Waxaad tahay qof gaar ah oo had iyo jeer iftiimiya nolosha dadka ku xeeran!</p>
       </div>
       <button class="back-btn" onclick="showPage('page3')">Back to Menu</button>
-    </section>
+    </div>
+  </section>
 
-    <!-- PAGE: Cake -->
-    <section id="page-cake" class="page">
+  <!-- PAGE: Cake -->
+  <section id="page-cake" class="page content-page">
+    <div class="card-inner">
       <h2>Music & Memories 🎵</h2>
       <div class="content-box">
         <p>Kani waa heesta aan ku xasuusto iyo xusuusahaagii ugu wanaagsanaa!</p>
       </div>
       <button class="back-btn" onclick="showPage('page3')">Back to Menu</button>
-    </section>
-
-  </div>
+    </div>
+  </section>
 
   <script src="script.js"></script>
 </body>
