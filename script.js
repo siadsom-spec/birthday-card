@@ -1,51 +1,75 @@
-function showPage(pageId) {
-  const pages = document.querySelectorAll('.page');
-  pages.forEach(page => {
-    page.classList.remove('active');
-  });
+function createCard() {
 
-  const selectedPage = document.getElementById(pageId);
-  if (selectedPage) {
-    selectedPage.classList.add('active');
-  }
+    const name = document.getElementById("name").value;
+    const from = document.getElementById("from").value;
+    const message = document.getElementById("message").value;
+    const photo = document.getElementById("photo").files[0];
+
+    if (!name || !from || !message) {
+        alert("Please fill in all fields.");
+        return;
+    }
+
+    document.querySelector(".container").style.display = "none";
+    document.getElementById("birthdayPage").classList.remove("hidden");
+
+    document.getElementById("personName").innerHTML =
+        "🎉 Happy Birthday " + name + "!";
+
+    document.getElementById("birthdayMessage").innerHTML =
+        message;
+
+    document.getElementById("senderName").innerHTML =
+        "❤️ From: " + from;
+
+    if (photo) {
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            document.getElementById("profileImage").src = e.target.result;
+        };
+
+        reader.readAsDataURL(photo);
+    }
+
+    startConfetti();
+    createBalloons();
 }
 
-function openEnvelope() {
-  showPage('page2');
-  
-  // Abuur Love / Hearts Rain (Buululeer Wadnayaal ah)
-  createHeartRain();
+function playMusic() {
+    document.getElementById("music").play();
 }
 
-function createHeartRain() {
-  const heartContainer = document.getElementById('page2');
-  const hearts = ['❤️', '💖', '💕', '💗', '💓', '✨'];
+function startConfetti() {
 
-  for (let i = 0; i < 40; i++) {
-    setTimeout(() => {
-      const heart = document.createElement('div');
-      heart.classList.add('heart-particle');
-      
-      // Kala dooro wadnayaal kala duwan
-      heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
-      
-      // Booska bidix/midig ee wadnuhu ka soo dhacayo
-      heart.style.left = Math.random() * 100 + 'vw';
-      
-      // Baaxadda wadnaha (Random size)
-      const size = Math.random() * 20 + 18;
-      heart.style.fontSize = size + 'px';
-      
-      // Xawaaraha dhacista (Random speed)
-      const duration = Math.random() * 2 + 2.5;
-      heart.style.animationDuration = duration + 's';
+    if (typeof confetti === "undefined") return;
 
-      heartContainer.appendChild(heart);
+    confetti({
+        particleCount: 250,
+        spread: 180,
+        origin: { y: 0.6 }
+    });
+}
 
-      // Bixi wadnaha marka uu dhameysto animation-ka
-      setTimeout(() => {
-        heart.remove();
-      }, duration * 1000);
-    }, i * 100);
-  }
+function createBalloons() {
+
+    for (let i = 0; i < 20; i++) {
+
+        const balloon = document.createElement("img");
+
+        balloon.src =
+        "https://cdn-icons-png.flaticon.com/512/3468/3468377.png";
+
+        balloon.className = "balloon";
+
+        balloon.style.left = Math.random() * 100 + "%";
+
+        balloon.style.animationDuration =
+        (8 + Math.random() * 8) + "s";
+
+        balloon.style.width =
+        (40 + Math.random() * 50) + "px";
+
+        document.body.appendChild(balloon);
+    }
 }
