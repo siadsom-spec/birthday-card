@@ -21,6 +21,34 @@
       width: 100vw;
       overflow-x: hidden;
       color: #fff;
+      position: relative;
+    }
+
+    /* BADHANKA PREVIEW-KA EE GEESKA SARE */
+    .preview-floating-btn {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      z-index: 10000;
+      background: #ffffff;
+      color: #800020;
+      border: 2px solid #800020;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .preview-floating-btn:hover {
+      transform: scale(1.05);
+      background: #800020;
+      color: #ffffff;
     }
 
     .page {
@@ -258,7 +286,6 @@
       align-items: center;
     }
 
-    /* TOP ROW WITH STICKER NOTE */
     .top-layout-row {
       display: flex;
       width: 100%;
@@ -279,7 +306,6 @@
       font-weight: bold;
     }
 
-    /* GEESKA WARADDA (POST-IT NOTE) */
     .corner-note {
       background: #fef08a;
       color: #1c1917;
@@ -326,7 +352,6 @@
       color: #334155;
     }
 
-    /* ALPHABET CARDS (A, B, C, D, E) */
     .cards-wrapper {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -393,7 +418,6 @@
       margin-top: 10px;
     }
 
-    /* MODAL FOR ANIMATED TEXT MESSAGE */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -453,7 +477,6 @@
       border-radius: 12px;
     }
 
-    /* EDIT TEXTAREA MODAL */
     .edit-box textarea {
       width: 100%;
       height: 120px;
@@ -471,6 +494,8 @@
   </style>
 </head>
 <body>
+
+  <button class="preview-floating-btn" onclick="startPreview()">👁️ Preview Website</button>
 
   <section id="page-pos" class="page active">
     <div class="pos-container">
@@ -614,6 +639,13 @@
     let enteredPin = "";
     const correctPin = "912";
 
+    function startPreview() {
+      clearKey();
+      balloonCount = 1;
+      document.getElementById('balloon-count').innerText = "1";
+      showPage('page-pos');
+    }
+
     function pressKey(num) {
       if (enteredPin.length < 4) {
         enteredPin += num;
@@ -635,7 +667,6 @@
       }
     }
 
-    /* BALLOON LOGIC */
     let balloonCount = 1;
     function popBalloon() {
       balloonCount++;
@@ -646,7 +677,6 @@
       }
     }
 
-    /* PAGE SWITCHER WITH ANIMATION */
     function showPage(pageId) {
       document.querySelectorAll('.page').forEach(p => {
         p.classList.remove('active');
@@ -657,7 +687,6 @@
       }
     }
 
-    /* NOTE EDIT & TYPEWRITER ANIMATION LOGIC */
     let fullNoteMessage = "Waxaan kugu hambalyeynayaa dhalashadaada! Waxaan kuu wish-garaynayaa sannad buuxa farxad, caafimaad, iyo guul oo dhan. Waxaad tahay qof gaar ah oo nolosha iftiimiya! ❤️✨";
 
     function openAnimatedMessage() {
@@ -666,7 +695,6 @@
       textContainer.innerText = "";
       modal.classList.add('active');
 
-      // Typewriter Effect
       let index = 0;
       clearInterval(window.typeWriterInterval);
       window.typeWriterInterval = setInterval(() => {
@@ -677,7 +705,7 @@
         } else {
           clearInterval(window.typeWriterInterval);
         }
-      }, 40); // speed of typing
+      }, 40);
     }
 
     function closeTextModal() {
@@ -703,7 +731,6 @@
       closeEditModal();
     }
 
-    /* IMAGE UPLOAD & PREVIEW LOGIC FOR CARDS */
     const imageStore = {};
 
     function triggerUpload(event, letter) {
@@ -744,4 +771,3 @@
   </script>
 </body>
 </html>
-
