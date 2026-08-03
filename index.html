@@ -1,93 +1,248 @@
 <!DOCTYPE html>
-<html lang="so">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Happy Birthday!</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   
-  <!-- Canvas Confetti Library (Buululeer) -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #000000;
+      min-height: 100vh;
+      width: 100vw;
+      overflow-x: hidden;
+    }
+
+    .page {
+      display: none;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .page.active {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* PAGE 1: ENVELOPE */
+    #page1 {
+      background-color: #500000;
+    }
+
+    .envelope-box {
+      background-color: #fdfaf6;
+      width: 90%;
+      max-width: 450px;
+      padding: 30px 20px;
+      border-radius: 12px;
+      text-align: center;
+      border: 6px solid #8b0000;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .script-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 52px;
+      color: #8b0000;
+      margin-bottom: 15px;
+    }
+
+    .envelope-wrapper {
+      display: flex;
+      justify-content: center;
+      margin: 15px 0;
+      cursor: pointer;
+    }
+
+    .envelope-image {
+      width: 100%;
+      max-width: 280px;
+      height: auto;
+      border-radius: 8px;
+      animation: bounceEnvelope 2s infinite ease-in-out;
+    }
+
+    @keyframes bounceEnvelope {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .click-text {
+      color: #666;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    /* PAGE 2: SAWIRKA IYO QORAALKA BILAASH SANDUUQ GADUUD AH */
+    #page2 {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw !important;
+      height: 100vh !important;
+      background-image: url('https://i.postimg.cc/jqkNPbJ1/da1478c736e944eb8f1ec711d8c60617.webp');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 99;
+      border: none !important;
+      background-color: transparent !important;
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    /* QORAALKA WEYN LEH ANIMATION IYO SHADOW MADOW */
+    .title-animated {
+      font-family: 'Great Vibes', cursive;
+      font-size: 65px !important; /* Qoraal aad u weyn */
+      color: #ffffff !important;
+      margin-bottom: 15px;
+      text-shadow: 3px 3px 12px #000000, 0 0 25px rgba(0, 0, 0, 0.9);
+      text-align: center;
+      line-height: 1.1;
+      animation: textSlideUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .sub-animated {
+      color: #ffffff !important;
+      font-size: 22px !important; /* Qoraalka yar oo weyn */
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 8px #000000, 0 0 15px rgba(0, 0, 0, 0.9);
+      text-align: center;
+      font-weight: 600;
+      animation: textSlideUp 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes textSlideUp {
+      0% {
+        opacity: 0;
+        transform: translateY(40px) scale(0.9);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .next-btn {
+      background-color: #ffffff;
+      color: #8b0000;
+      border: none;
+      padding: 14px 35px;
+      border-radius: 30px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.6);
+      transition: transform 0.2s;
+      animation: textSlideUp 1.8s ease-out forwards, pulseBtn 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseBtn {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+
+    /* ANIMATION-KA LOVE/WADNAYAAL DAADANAYA */
+    .heart-particle {
+      position: absolute;
+      color: #ff3366;
+      user-select: none;
+      pointer-events: none;
+      animation: heartFall 3.5s linear forwards;
+      z-index: 100;
+    }
+
+    @keyframes heartFall {
+      0% {
+        transform: translateY(-10vh) rotate(0deg) scale(0.5);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(105vh) rotate(360deg) scale(1.3);
+        opacity: 0;
+      }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- PAGE 1: Landing Envelope Page -->
+  <!-- PAGE 1: ENVELOPE -->
   <section id="page1" class="page active">
     <div class="envelope-box">
       <h1 class="script-title">Happy Birthday!</h1>
       <div class="envelope-wrapper" onclick="openEnvelope()">
-        <img src="https://i.postimg.cc/jdHxK6KL/ab4ad499ea014e3bbfd3074703568aa0.webp" alt="Red Envelope" class="envelope-image">
+        <img src="https://i.postimg.cc/qBGV4p7B/envelope.png" alt="Envelope" class="envelope-image">
       </div>
-      <p class="click-text">Click the seal to open</p>
+      <p class="click-text">Taabo baqshadda si aad u furto ✨</p>
     </div>
   </section>
 
-  <!-- PAGE 2: Full Screen Background Photo Page -->
-  <section id="page2" class="page photo-page">
-    <div class="photo-overlay">
-      <h1 class="script-title-white">Happy Birthday! 🎉</h1>
-      <p class="sub-text">I hope this little gift will make you happy ❤️</p>
-      <button class="next-btn" onclick="showPage('page3')">Click here ✨</button>
-    </div>
+  <!-- PAGE 2: SAWIRKA IYO QORAALKA (BILAASH SANDUUQ GADUUD AH) -->
+  <section id="page2" class="page">
+    <h1 class="title-animated">Happy Birthday! 🎉</h1>
+    <p class="sub-animated">I hope this little gift will make you happy ❤️</p>
+    <button class="next-btn" onclick="alert('Ku soo dhawoow bogga xigta!')">Click here ✨</button>
   </section>
 
-  <!-- PAGE 3: Menu Options -->
-  <section id="page3" class="page menu-page">
-    <div class="menu-box">
-      <h2 style="color: #8b0000; margin-bottom: 20px;">These are for you ❤️</h2>
-      <div class="menu-grid">
-        <div class="menu-card" onclick="showPage('page-message')">
-          <span>💌</span>
-          <p>Message</p>
-        </div>
-        <div class="menu-card" onclick="showPage('page-flower')">
-          <span>💐</span>
-          <p>Flower</p>
-        </div>
-        <div class="menu-card" onclick="showPage('page-cake')">
-          <span>🎂</span>
-          <p>Cake</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <script>
+    function showPage(pageId) {
+      const pages = document.querySelectorAll('.page');
+      pages.forEach(page => {
+        page.classList.remove('active');
+      });
 
-  <!-- PAGE: Message -->
-  <section id="page-message" class="page content-page">
-    <div class="card-inner">
-      <h2>Hambalyo Dhalasho! 🎉</h2>
-      <div class="content-box">
-        <p>Waxaan kugu hambalyeynayaa dhalashadaada! Waxaan kuu wish-garaynayaa sannad buuxa farxad, caafimaad, iyo guul.</p>
-      </div>
-      <button class="back-btn" onclick="showPage('page3')">Back to Menu</button>
-    </div>
-  </section>
+      const selectedPage = document.getElementById(pageId);
+      if (selectedPage) {
+        selectedPage.classList.add('active');
+      }
+    }
 
-  <!-- PAGE: Flower -->
-  <section id="page-flower" class="page content-page">
-    <div class="card-inner">
-      <h2>Sunflower 🌻</h2>
-      <div class="content-box">
-        <p>Waxaad tahay qof gaar ah oo had iyo jeer iftiimiya nolosha dadka ku xeeran!</p>
-      </div>
-      <button class="back-btn" onclick="showPage('page3')">Back to Menu</button>
-    </div>
-  </section>
+    function openEnvelope() {
+      showPage('page2');
+      createHeartRain();
+    }
 
-  <!-- PAGE: Cake -->
-  <section id="page-cake" class="page content-page">
-    <div class="card-inner">
-      <h2>Music & Memories 🎵</h2>
-      <div class="content-box">
-        <p>Kani waa heesta aan ku xasuusto iyo xusuusahaagii ugu wanaagsanaa!</p>
-      </div>
-      <button class="back-btn" onclick="showPage('page3')">Back to Menu</button>
-    </div>
-  </section>
+    function createHeartRain() {
+      const heartContainer = document.getElementById('page2');
+      const hearts = ['❤️', '💖', '💕', '💗', '💓', '✨'];
 
-  <script src="script.js"></script>
+      for (let i = 0; i < 45; i++) {
+        setTimeout(() => {
+          const heart = document.createElement('div');
+          heart.classList.add('heart-particle');
+          heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+          heart.style.left = Math.random() * 100 + 'vw';
+          
+          const size = Math.random() * 22 + 18;
+          heart.style.fontSize = size + 'px';
+          
+          const duration = Math.random() * 2 + 2.5;
+          heart.style.animationDuration = duration + 's';
+
+          heartContainer.appendChild(heart);
+
+          setTimeout(() => {
+            heart.remove();
+          }, duration * 1000);
+        }, i * 90);
+      }
+    }
+  </script>
+
 </body>
 </html>
