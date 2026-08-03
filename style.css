@@ -80,59 +80,72 @@ body {
   margin-top: 10px;
 }
 
-/* --- PAGE 2 PHOTO BACKGROUND STYLES --- */
+/* --- FULL SCREEN PHOTO PAGE (PAGE 2) --- */
 .photo-page {
-  /* Sawirkaaga cusub oo background ah */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
   background-image: url('https://i.postimg.cc/jqkNPbJ1/da1478c736e944eb8f1ec711d8c60617.webp');
   background-size: cover;
   background-position: center;
-  border-radius: 8px;
-  padding: 60px 20px;
-  position: relative;
-  animation: zoomBg 10s infinite alternate ease-in-out;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  animation: zoomBackground 8s infinite alternate ease-in-out;
+}
+
+.photo-page.active {
+  display: flex !important;
 }
 
 /* Background Zoom Animation */
-@keyframes zoomBg {
-  0% { background-size: 100%; }
-  100% { background-size: 115%; }
+@keyframes zoomBackground {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.08); }
 }
 
-/* Dark transparent overlay to make white text readable */
+/* Transparent Overlay for Text */
 .photo-overlay {
-  background: rgba(0, 0, 0, 0.45);
-  padding: 30px 15px;
-  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 25px 20px;
+  border-radius: 12px;
   backdrop-filter: blur(2px);
+  max-width: 90%;
+  z-index: 5;
 }
 
 .script-title-white {
   font-family: 'Great Vibes', cursive;
-  font-size: 45px;
+  font-size: 46px;
   color: #ffffff;
   margin-bottom: 10px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
 }
 
 .sub-text {
-  color: #f0f0f0;
+  color: #f5f5f5;
   font-size: 15px;
   margin-bottom: 20px;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
 }
 
 .next-btn {
   background-color: #ffffff;
   color: #8b0000;
   border: none;
-  padding: 10px 22px;
+  padding: 10px 24px;
   border-radius: 20px;
   font-weight: bold;
   cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
   transition: transform 0.2s, background 0.2s;
 }
 
 .next-btn:hover {
-  transform: scale(1.05);
+  transform: scale(1.06);
   background-color: #ffe6e6;
 }
 
