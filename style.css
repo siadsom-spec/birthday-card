@@ -14,7 +14,7 @@ body {
   padding: 20px;
 }
 
-/* Container matching the tablet frame */
+/* Container matching tablet style */
 .card-container {
   background-color: #fdfaf6;
   width: 100%;
@@ -39,7 +39,6 @@ body {
   display: block;
 }
 
-/* Title Font Style */
 .script-title {
   font-family: 'Great Vibes', cursive;
   font-size: 52px;
@@ -48,7 +47,6 @@ body {
   font-weight: normal;
 }
 
-/* Image Wrapper */
 .envelope-wrapper {
   display: flex;
   justify-content: center;
@@ -56,17 +54,34 @@ body {
   cursor: pointer;
 }
 
+/* Base style for Envelope Image */
 .envelope-image {
   width: 100%;
   max-width: 320px;
   height: auto;
   border-radius: 8px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* Animation kaga dhigaya inuu hoos iyo kor si yar u sabbeeyo (Floating Animation) */
+  animation: floatEnvelope 3s ease-in-out infinite;
+  transition: transform 0.3s ease, filter 0.3s ease;
 }
 
+/* Hover Animation: Marka la taabto ama cursor-ka la saaro */
 .envelope-wrapper:hover .envelope-image {
-  transform: scale(1.04);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  transform: scale(1.08) rotate(-2deg);
+  filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.25));
+}
+
+/* Smooth Floating Animation Frame */
+@keyframes floatEnvelope {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
 }
 
 .click-text {
@@ -75,7 +90,7 @@ body {
   margin-top: 10px;
 }
 
-/* Menu Grid Styles */
+/* Menu Grid */
 .menu-grid {
   display: flex;
   justify-content: space-around;
@@ -94,7 +109,7 @@ body {
 }
 
 .menu-card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-5px);
   border-color: #8b0000;
 }
 
@@ -126,4 +141,3 @@ body {
   cursor: pointer;
   font-weight: 600;
 }
-
