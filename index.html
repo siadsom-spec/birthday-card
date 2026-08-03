@@ -24,31 +24,48 @@
       justify-content: center;
       align-items: center;
       padding: 16px;
+      overflow-x: hidden;
     }
 
     .app-viewport {
       width: 100%;
-      max-width: 380px;
+      max-width: 390px;
       position: relative;
+      perspective: 1000px;
     }
 
-    /* CONTROL PAGE SWITCHING */
+    /* CONTROL PAGE SWITCHING WITH ANIMATION */
     .page {
       display: none;
       width: 100%;
+      opacity: 0;
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .page.active {
       display: flex;
       flex-direction: column;
       align-items: center;
+      opacity: 1;
+      animation: zoomFadeIn 0.6s forwards ease-out;
+    }
+
+    @keyframes zoomFadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
     }
 
     /* ================= BOGGA 1: RED HAPPY BIRTHDAY CARD ================= */
     .card-container {
       background-color: #fdfbf7;
       width: 100%;
-      border-radius: 16px;
+      border-radius: 18px;
       padding: 35px 20px 25px 20px;
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
       display: flex;
@@ -78,21 +95,22 @@
     }
 
     .red-envelope {
-      width: 80%;
-      height: 110px;
+      width: 85%;
+      height: 115px;
       background-color: #9e1b1b;
-      border-radius: 6px;
+      border-radius: 8px;
       position: relative;
       cursor: pointer;
       display: flex;
       justify-content: center;
       align-items: center;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-      transition: transform 0.2s ease;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
     }
 
     .red-envelope:hover {
-      transform: scale(1.04);
+      transform: scale(1.05);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
     }
 
     .red-envelope::before {
@@ -103,7 +121,7 @@
       height: 0;
       border-left: 100px solid transparent;
       border-right: 100px solid transparent;
-      border-top: 55px solid #7a1212;
+      border-top: 58px solid #7a1212;
     }
 
     .ribbon-seal {
@@ -135,19 +153,20 @@
     }
 
     .instruction-text {
-      font-size: 11px;
+      font-size: 12px;
       color: #777777;
+      font-weight: 600;
     }
 
-    /* ================= BOGGA 2: STUDIO / GIFT DISPLAY ================= */
+    /* ================= BOGGA 2: BLUR & ANIMATED STUDIO ================= */
     .studio-card {
       width: 100%;
       background-image: url('https://i.postimg.cc/jqkNPbJ1/da1478c736e944eb8f1ec711d8c60617.webp');
       background-size: cover;
       background-position: center;
-      border-radius: 20px;
+      border-radius: 22px;
       padding: 20px 16px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
       display: flex;
       flex-direction: column;
       gap: 14px;
@@ -155,13 +174,14 @@
       overflow: hidden;
     }
 
-    /* OVERLAY FOR BETTER READABILITY */
+    /* BLUR OVERLAY EFFECT */
     .studio-card::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
       background: rgba(0, 0, 0, 0.35);
-      backdrop-filter: blur(2px);
+      backdrop-filter: blur(8px); /* BLUR EFFECT-KA CUSUB */
+      -webkit-backdrop-filter: blur(8px);
       z-index: 1;
     }
 
@@ -173,56 +193,62 @@
       gap: 12px;
     }
 
-    /* BACK BUTTON */
     .btn-back-nav {
       background: rgba(255, 255, 255, 0.2);
       border: 1px solid rgba(255, 255, 255, 0.3);
       color: white;
-      padding: 6px 12px;
+      padding: 8px 14px;
       border-radius: 12px;
       font-size: 11px;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
       width: max-content;
+      backdrop-filter: blur(5px);
+      transition: background 0.2s;
     }
 
-    /* NAMES HEADER */
+    .btn-back-nav:hover {
+      background: rgba(255, 255, 255, 0.35);
+    }
+
     .names-header {
-      background: rgba(0, 0, 0, 0.4);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 12px;
-      padding: 10px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 14px;
+      padding: 12px;
       text-align: center;
       color: #ffffff;
       font-size: 13px;
       font-weight: 800;
       letter-spacing: 1px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
 
-    /* LOCK PIN BOX */
     .lock-box {
       background: rgba(255, 255, 255, 0.15);
       border: 1px solid rgba(255, 255, 255, 0.25);
-      border-radius: 12px;
-      padding: 8px 12px;
+      border-radius: 14px;
+      padding: 10px 14px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       color: #ffffff;
       font-size: 12px;
       font-weight: 700;
+      backdrop-filter: blur(10px);
     }
 
     .pin-code {
       background: #ffffff;
       color: #000;
-      padding: 4px 10px;
+      padding: 4px 12px;
       border-radius: 8px;
       font-weight: 800;
       letter-spacing: 2px;
     }
 
-    /* 4 SQUARE ICONS GRID */
+    /* 4 ICONS GRID WITH ANIMATION */
     .grid-4-icons {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -230,31 +256,39 @@
     }
 
     .icon-square {
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.18);
       border: 1px solid rgba(255, 255, 255, 0.3);
-      border-radius: 12px;
-      padding: 10px 4px;
+      border-radius: 14px;
+      padding: 12px 4px;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 4px;
       color: #ffffff;
       font-size: 10px;
-      font-weight: 700;
+      font-weight: 800;
+      backdrop-filter: blur(10px);
+      transition: transform 0.2s ease;
+      cursor: pointer;
+    }
+
+    .icon-square:hover {
+      transform: translateY(-3px);
+      background: rgba(255, 255, 255, 0.28);
     }
 
     .icon-square span.emoji {
-      font-size: 18px;
+      font-size: 20px;
     }
 
-    /* PAPER MESSAGE BOX */
+    /* PAPER MESSAGE PREVIEW */
     .paper-wrapper {
       position: relative;
       width: 100%;
-      height: 160px;
-      border-radius: 12px;
+      height: 165px;
+      border-radius: 14px;
       overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -270,10 +304,10 @@
     .paper-text {
       position: relative;
       z-index: 2;
-      width: 80%;
+      width: 82%;
       color: #2b1e10;
       font-family: 'Caveat', cursive;
-      font-size: 16px;
+      font-size: 17px;
       line-height: 1.3;
       text-align: center;
     }
@@ -288,7 +322,7 @@
         <h1 class="greeting-title">Happy Birthday!</h1>
         
         <div class="envelope-box">
-          <div class="red-envelope" onclick="openStudioPage()">
+          <div class="red-envelope" id="envelopeBtn">
             <div class="ribbon-seal"></div>
           </div>
         </div>
@@ -301,7 +335,7 @@
       <div class="studio-card">
         <div class="studio-content">
           
-          <button class="btn-back-nav" onclick="closeStudioPage()">&larr; Back</button>
+          <button class="btn-back-nav" id="backBtn">&larr; Back</button>
 
           <div class="names-header">
             FROM: Sadiqq ➔ FOR: Salmoo
@@ -345,17 +379,28 @@
   </div>
 
   <script>
-    function openStudioPage() {
-      document.getElementById('page-1').classList.remove('active');
-      document.getElementById('page-2').classList.add('active');
-    }
+    // EVENT LISTENERS FOR RELIABLE CLICKING
+    document.addEventListener('DOMContentLoaded', function() {
+      const page1 = document.getElementById('page-1');
+      const page2 = document.getElementById('page-2');
+      const envelopeBtn = document.getElementById('envelopeBtn');
+      const backBtn = document.getElementById('backBtn');
 
-    function closeStudioPage() {
-      document.getElementById('page-2').classList.remove('active');
-      document.getElementById('page-1').classList.add('active');
-    }
+      envelopeBtn.addEventListener('click', function() {
+        page1.classList.remove('active');
+        setTimeout(() => {
+          page2.classList.add('active');
+        }, 100);
+      });
+
+      backBtn.addEventListener('click', function() {
+        page2.classList.remove('active');
+        setTimeout(() => {
+          page1.classList.add('active');
+        }, 100);
+      });
+    });
   </script>
 
 </body>
 </html>
-
