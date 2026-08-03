@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Surprise Gift Service</title>
-  
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600;700&family=Playfair+Display:ital@1&family=Caveat:wght@600&display=swap" rel="stylesheet">
-  
+  <title>Surprise Birthday Experience</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600;700&family=Playfair+Display:ital,wght@0,600;1,400&family=Caveat:wght@600&display=swap" rel="stylesheet">
+
   <style>
     * {
       box-sizing: border-box;
@@ -17,112 +16,138 @@
 
     body {
       font-family: 'Poppins', sans-serif;
-      background-color: #000000;
+      background-color: #0c0a09;
       min-height: 100vh;
       width: 100vw;
       overflow-x: hidden;
+      color: #fff;
     }
 
     .page {
       display: none;
       width: 100vw;
-      height: 100vh;
+      min-height: 100vh;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
     }
 
     .page.active {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
+      justify-content: center;
+      opacity: 1;
     }
 
-    /* PAGE 0: LOADING SCREEN */
-    #page-loading {
-      background-color: #fdfaf6;
-      flex-direction: column;
-      text-align: center;
+    /* ------------------------------------
+       PAGE 1: POS / PASSWORD LOCK SCREEN
+    ------------------------------------ */
+    #page-pos {
+      background: linear-gradient(135deg, #ffeef2 0%, #e8d5ff 100%);
+      color: #333;
       padding: 20px;
     }
 
-    .loading-title {
-      font-size: 28px;
-      font-weight: 700;
-      color: #222;
-      margin-bottom: 40px;
-      font-family: 'Georgia', serif;
+    .pos-container {
+      background: #fbcfe8;
+      border: 4px solid #fff;
+      border-radius: 24px;
+      padding: 25px 20px;
+      width: 100%;
+      max-width: 340px;
+      box-shadow: 0 20px 40px rgba(219, 39, 119, 0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
     }
 
-    .truck-container {
-      width: 180px;
-      height: 180px;
-      background: #eef2f5;
-      border-radius: 50%;
+    .pos-screen {
+      background: #ffffff;
+      width: 100%;
+      height: 70px;
+      border-radius: 14px;
+      border: 2px dashed #f472b6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .pos-pin-display {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 8px;
+      color: #db2777;
+      min-height: 32px;
+    }
+
+    .pos-hint {
+      font-size: 12px;
+      color: #9d174d;
+      margin-top: 2px;
+    }
+
+    .pos-keypad {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      width: 100%;
+    }
+
+    .pos-btn {
+      background: #ffffff;
+      border: none;
+      border-radius: 12px;
+      height: 50px;
+      font-size: 20px;
+      font-weight: 600;
+      color: #831843;
+      box-shadow: 0 4px 0 #f472b6;
+      cursor: pointer;
+      transition: all 0.1s ease;
       display: flex;
       justify-content: center;
       align-items: center;
-      position: relative;
-      margin-bottom: 40px;
-      font-size: 75px;
-      box-shadow: inset 0 0 15px rgba(0,0,0,0.05);
     }
 
-    .progress-bar-bg {
-      width: 80%;
-      max-width: 300px;
-      height: 6px;
-      background-color: #e0e0e0;
-      border-radius: 10px;
-      overflow: hidden;
+    .pos-btn:active {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 #f472b6;
     }
 
-    .progress-bar-fill {
-      width: 0%;
-      height: 100%;
-      background-color: #333333;
-      border-radius: 10px;
-      transition: width 0.1s linear;
+    .pos-btn.enter {
+      background: #4ade80;
+      color: #064e3b;
+      box-shadow: 0 4px 0 #22c55e;
     }
 
-    /* PAGE: BALLOON GAME */
+    .pos-btn.clear {
+      background: #fca5a5;
+      color: #7f1d1d;
+      box-shadow: 0 4px 0 #f87171;
+    }
+
+    /* ------------------------------------
+       PAGE 2: BALLOON GAME
+    ------------------------------------ */
     #page-balloon {
       background-color: #f7f3f0;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-      padding: 80px 20px 40px 20px;
-      transition: background-color 0.4s ease;
-      user-select: none;
-    }
-
-    .balloon-header {
+      color: #333;
+      padding: 60px 20px;
       text-align: center;
-    }
-
-    .balloon-header h2 {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: 38px;
-      color: #333333;
-      line-height: 1.2;
-      font-weight: 500;
-      transition: color 0.3s;
+      justify-content: space-between;
     }
 
     .balloon-wrapper {
+      cursor: pointer;
+      margin: 30px 0;
       display: flex;
       flex-direction: column;
       align-items: center;
-      cursor: pointer;
-      transition: transform 0.15s ease;
-    }
-
-    .pop-animation {
-      animation: popEffect 0.25s ease-out forwards;
-    }
-
-    @keyframes popEffect {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.3); opacity: 0.8; }
-      100% { transform: scale(0.2); opacity: 0; }
+      transition: transform 0.2s;
     }
 
     .balloon-body {
@@ -133,28 +158,13 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      position: relative;
-      box-shadow: inset -10px -10px 20px rgba(0,0,0,0.15), 0 10px 20px rgba(0,0,0,0.1);
-    }
-
-    .balloon-body::before {
-      content: '';
-      position: absolute;
-      top: 22%;
-      left: 18%;
-      width: 25px;
-      height: 55px;
-      background: rgba(255, 255, 255, 0.4);
-      border-radius: 50%;
-      transform: rotate(-30deg);
+      box-shadow: inset -10px -10px 20px rgba(0,0,0,0.15);
     }
 
     .balloon-number {
       color: white;
       font-size: 48px;
       font-weight: 700;
-      z-index: 2;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
     }
 
     .balloon-knot {
@@ -163,790 +173,450 @@
       border-left: 10px solid transparent;
       border-right: 10px solid transparent;
       border-bottom: 12px solid #3d9e04;
-      margin-top: -2px;
     }
 
     .balloon-string {
       width: 2px;
-      height: 120px;
-      background-color: #d1d1d1;
-      margin-top: 0px;
-      transition: background-color 0.3s;
+      height: 100px;
+      background-color: #ccc;
     }
 
-    .click-prompt {
-      font-size: 14px;
-      color: #888888;
-      margin-bottom: 20px;
-      transition: color 0.3s;
-    }
-
-    /* PAGE 1: ENVELOPE */
-    #page1 {
-      background-color: #500000;
-    }
-
-    .envelope-box {
-      background-color: #fdfaf6;
-      width: 90%;
-      max-width: 450px;
+    /* ------------------------------------
+       PAGE 3: MAIN MENU
+    ------------------------------------ */
+    #page3 {
+      background-color: #800020;
       padding: 30px 20px;
-      border-radius: 12px;
-      text-align: center;
-      border: 6px solid #8b0000;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
 
-    .script-title {
+    .menu-title {
       font-family: 'Great Vibes', cursive;
-      font-size: 52px;
-      color: #8b0000;
-      margin-bottom: 15px;
-    }
-
-    .envelope-wrapper {
-      display: flex;
-      justify-content: center;
-      margin: 15px 0;
-      cursor: pointer;
-    }
-
-    .envelope-image {
-      width: 100%;
-      max-width: 280px;
-      height: auto;
-      border-radius: 8px;
-      animation: bounceEnvelope 2s infinite ease-in-out;
-    }
-
-    @keyframes bounceEnvelope {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
-
-    .click-text {
-      color: #666;
-      font-size: 14px;
-      margin-top: 10px;
-    }
-
-    /* PAGE 2: SAWIRKA IYO QORAALKA */
-    #page2 {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw !important;
-      height: 100vh !important;
-      background-image: url('https://i.postimg.cc/jqkNPbJ1/da1478c736e944eb8f1ec711d8c60617.webp');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      z-index: 99;
-      border: none !important;
-      background-color: transparent !important;
-      padding: 20px;
-      overflow: hidden;
-    }
-
-    .title-animated {
-      font-family: 'Great Vibes', cursive;
-      font-size: 65px !important;
-      color: #ffffff !important;
-      margin-bottom: 15px;
-      text-shadow: 3px 3px 12px #000000, 0 0 25px rgba(0, 0, 0, 0.9);
-      text-align: center;
-      line-height: 1.1;
-      animation: textSlideUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    .sub-animated {
-      color: #ffffff !important;
-      font-size: 22px !important;
-      margin-bottom: 30px;
-      text-shadow: 2px 2px 8px #000000, 0 0 15px rgba(0, 0, 0, 0.9);
-      text-align: center;
-      font-weight: 600;
-      animation: textSlideUp 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    @keyframes textSlideUp {
-      0% {
-        opacity: 0;
-        transform: translateY(40px) scale(0.9);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-
-    .next-btn {
-      background-color: #ffffff;
-      color: #8b0000;
-      border: none;
-      padding: 14px 35px;
-      border-radius: 30px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.6);
-      transition: transform 0.2s;
-      animation: textSlideUp 1.8s ease-out forwards, pulseBtn 2s infinite ease-in-out;
-    }
-
-    @keyframes pulseBtn {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.08); }
-    }
-
-    /* HEART ANIMATION */
-    .heart-particle {
-      position: absolute;
-      color: #ff3366;
-      user-select: none;
-      pointer-events: none;
-      animation: heartFall 3.5s linear forwards;
-      z-index: 100;
-    }
-
-    @keyframes heartFall {
-      0% {
-        transform: translateY(-10vh) rotate(0deg) scale(0.5);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(105vh) rotate(360deg) scale(1.3);
-        opacity: 0;
-      }
-    }
-
-    /* PAGE 3: MENU */
-    .menu-page {
-      background-color: #a8131d;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-
-    .page3-title {
-      font-family: 'Great Vibes', cursive;
-      color: #ffffff;
-      font-size: 55px;
-      font-weight: normal;
+      font-size: 50px;
+      color: #fff;
       margin-bottom: 40px;
-      text-align: center;
     }
 
     .menu-grid {
       display: flex;
+      gap: 20px;
       justify-content: center;
       align-items: flex-end;
-      gap: 25px;
       width: 100%;
-      max-width: 650px;
+      max-width: 500px;
     }
 
     .menu-card {
-      background: transparent;
-      border: none;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 16px;
+      padding: 15px;
       cursor: pointer;
       flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-end;
-      transition: transform 0.2s ease;
+      text-align: center;
+      backdrop-filter: blur(5px);
+      transition: transform 0.3s ease;
     }
 
     .menu-card:hover {
-      transform: scale(1.05);
+      transform: translateY(-8px);
+      background: rgba(255, 255, 255, 0.2);
     }
 
-    .card-img-wrap {
+    .menu-card img {
       width: 100%;
-      max-width: 140px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-
-    .card-img {
-      width: 100%;
-      height: auto;
-      object-fit: contain;
-      border-radius: 6px;
+      max-width: 90px;
+      border-radius: 10px;
+      margin-bottom: 10px;
     }
 
     .menu-card p {
-      color: #ffffff;
       font-family: 'Great Vibes', cursive;
-      font-size: 28px;
-      font-weight: normal;
-      text-align: center;
+      font-size: 26px;
     }
 
-    /* SUB PAGES (CONTENT) */
-    .content-page {
-      background-color: #a8131d;
-      overflow-y: auto;
-    }
-
-    /* SCRAPBOOK MESSAGE PAGE STYLES (MATCHING THE VIDEO) */
+    /* ------------------------------------
+       PAGE 4: MESSAGE & SCRAPBOOK PAGE
+    ------------------------------------ */
     #page-message {
-      background: #dfd7cc; /* Vintage paper color */
-      background-image: radial-gradient(#d0c6b8 10%, transparent 11%);
-      background-size: 20px 20px;
-      padding: 30px 15px;
-      height: 100vh;
+      background: #700913; /* Redish dark theme like in screenshot */
+      background-image: radial-gradient(rgba(0,0,0,0.3) 15%, transparent 16%);
+      background-size: 16px 16px;
+      padding: 30px 15px 60px 15px;
+      min-height: 100vh;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
-    .scrapbook-container {
+    .msg-container {
       width: 100%;
       max-width: 420px;
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 25px;
       align-items: center;
-      padding-bottom: 40px;
     }
 
-    .tape-sticker {
-      width: 110px;
-      height: 28px;
-      background: rgba(255, 255, 255, 0.65);
-      border-left: 3px dashed #bbb;
-      border-right: 3px dashed #bbb;
-      transform: rotate(-4deg);
-      margin-bottom: -15px;
-      z-index: 5;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    }
-
-    .scrap-card {
+    .header-sticker {
       background: #ffffff;
-      border-radius: 12px;
-      padding: 18px;
-      width: 100%;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-      position: relative;
-      border: 1px solid #eae0d5;
-    }
-
-    .scrap-header-card {
-      text-align: center;
-      font-family: 'Playfair Display', serif;
-      background: #fdfaf6;
-    }
-
-    .scrap-header-card h3 {
-      font-size: 22px;
-      color: #333;
-      margin-bottom: 6px;
-    }
-
-    .scrap-header-card p {
-      font-size: 13px;
-      color: #888;
-    }
-
-    /* CASSETTE TAPE WIDGET */
-    .cassette-box {
-      background: #2a2a2a;
-      border-radius: 10px;
-      padding: 15px;
-      width: 100%;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      box-shadow: inset 0 0 10px rgba(0,0,0,0.5), 0 5px 15px rgba(0,0,0,0.2);
-    }
-
-    .cassette-window {
-      width: 80%;
-      height: 45px;
-      background: #111;
-      border-radius: 6px;
-      border: 2px solid #444;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      margin: 10px 0;
-    }
-
-    .cassette-wheel {
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      border: 4px dashed #fff;
-      animation: spinCassette 4s linear infinite;
-    }
-
-    @keyframes spinCassette {
-      100% { transform: rotate(360deg); }
-    }
-
-    .cassette-label {
+      color: #a8131d;
       font-family: 'Caveat', cursive;
-      color: #ff3366;
-      font-size: 20px;
-      letter-spacing: 1px;
+      font-size: 32px;
+      padding: 6px 25px;
+      border-radius: 8px;
+      transform: rotate(-2deg);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      font-weight: bold;
     }
 
-    /* LETTER GRID CARDS (A B C D E) */
-    .letters-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 18px;
-      color: #444;
-      text-align: center;
-      margin-top: 10px;
-    }
-
-    .letters-grid {
+    /* ALPHABET CARDS (A, B, C, D, E) */
+    .cards-wrapper {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 12px;
       width: 100%;
-      margin-top: 10px;
     }
 
-    .letter-btn {
-      background: #fefefe;
-      border: 2px dashed #d4a359;
-      border-radius: 10px;
-      aspect-ratio: 1;
+    .card-item {
+      background: #fffefb;
+      border-radius: 12px;
+      padding: 10px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
+      min-height: 110px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
       cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-      transition: all 0.2s ease;
+      position: relative;
+      border: 1px solid #e2d8c9;
+      transition: transform 0.2s;
     }
 
-    .letter-btn:hover {
-      transform: translateY(-3px) rotate(2deg);
-      background: #fff8f0;
-      border-color: #c8812c;
+    .card-item:hover {
+      transform: scale(1.05) rotate(1deg);
     }
 
-    .letter-btn span {
+    .card-letter {
       font-family: 'Playfair Display', serif;
-      font-size: 32px;
+      font-size: 38px;
+      font-weight: 700;
+      color: #1b4332;
+    }
+
+    .card-img-preview {
+      width: 100%;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 6px;
+      display: none;
+      margin-bottom: 5px;
+    }
+
+    .upload-btn-mini {
+      font-size: 10px;
+      background: #e2e8f0;
+      color: #334155;
+      padding: 4px 6px;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      margin-top: 4px;
+    }
+
+    /* LONG PAPER NOTE AT BOTTOM */
+    .long-note-card {
+      background: #1c1917;
+      border: 1px solid #44403c;
+      border-radius: 16px;
+      padding: 22px;
+      width: 100%;
+      color: #f5f5f4;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      position: relative;
+    }
+
+    .note-tag {
+      font-size: 12px;
+      color: #a8a29e;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 5px;
+    }
+
+    .note-textarea {
+      width: 100%;
+      min-height: 140px;
+      max-height: 300px;
+      background: transparent;
+      border: none;
+      color: #fef08a;
+      font-family: 'Caveat', cursive;
+      font-size: 22px;
+      line-height: 1.4;
+      resize: vertical;
+      outline: none;
+    }
+
+    .note-textarea::placeholder {
+      color: #78716c;
+    }
+
+    .back-btn {
+      background: #ffffff;
+      color: #800020;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 25px;
       font-weight: bold;
-      color: #8b0000;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
 
-    .letter-btn small {
-      font-size: 11px;
-      color: #777;
-    }
-
-    /* POPUP MODAL FOR LETTER MESSAGES */
-    .letter-modal {
+    /* MODAL FOR IMAGE DISPLAY */
+    .modal-overlay {
       display: none;
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(0,0,0,0.6);
-      z-index: 1000;
+      background: rgba(0,0,0,0.85);
+      z-index: 999;
       justify-content: center;
       align-items: center;
       padding: 20px;
     }
 
-    .letter-modal.active {
+    .modal-overlay.active {
       display: flex;
     }
 
-    .modal-card {
-      background: #fefcf8;
-      width: 100%;
-      max-width: 380px;
-      padding: 30px 20px;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      text-align: center;
-      position: relative;
-      border: 1px solid #e2d8c9;
-      animation: popIn 0.3s ease-out;
-    }
-
-    @keyframes popIn {
-      0% { transform: scale(0.7); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-
-    .modal-card h4 {
-      font-family: 'Great Vibes', cursive;
-      font-size: 38px;
-      color: #a8131d;
-      margin-bottom: 12px;
-    }
-
-    .modal-card p {
-      font-size: 15px;
-      color: #444;
-      line-height: 1.6;
-      margin-bottom: 20px;
-      font-family: 'Caveat', cursive;
-      font-size: 22px;
-    }
-
-    .close-modal-btn {
-      background: #a8131d;
-      color: white;
-      border: none;
-      padding: 10px 25px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .card-inner {
-      background: rgba(255, 255, 255, 0.95);
-      width: 90%;
-      max-width: 450px;
-      padding: 35px 20px;
-      border-radius: 16px;
-      text-align: center;
-      box-shadow: 0 15px 30px rgba(0,0,0,0.4);
-    }
-
-    .content-box {
-      background: #fdfaf6;
-      color: #333;
+    .modal-box {
+      background: #fff;
       padding: 20px;
-      border-radius: 12px;
-      border: 1px solid #eee;
-      margin: 20px 0;
-      font-size: 15px;
-      line-height: 1.6;
+      border-radius: 16px;
+      max-width: 350px;
+      width: 100%;
+      text-align: center;
+      color: #333;
     }
 
-    .back-btn {
-      background: #a8131d;
-      color: white;
-      border: none;
-      padding: 12px 28px;
-      border-radius: 25px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: all 0.2s;
+    .modal-box img {
+      width: 100%;
+      max-height: 250px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
     }
 
-    .back-btn:hover {
-      background: #7a0c13;
+    /* HIDDEN FILE INPUTS */
+    input[type="file"] {
+      display: none;
     }
   </style>
 </head>
 <body>
 
-  <!-- PAGE 0: LOADING SCREEN -->
-  <section id="page-loading" class="page active">
-    <h1 class="loading-title">Surprise Gift Service</h1>
-    <div class="truck-container">
-      🚚🎁
-    </div>
-    <div class="progress-bar-bg">
-      <div id="progress-fill" class="progress-bar-fill"></div>
+  <section id="page-pos" class="page active">
+    <div class="pos-container">
+      <div class="pos-screen">
+        <div id="pin-display" class="pos-pin-display"></div>
+        <div class="pos-hint">Enter PIN (Default: 912)</div>
+      </div>
+
+      <div class="pos-keypad">
+        <button class="pos-btn" onclick="pressKey('1')">1</button>
+        <button class="pos-btn" onclick="pressKey('2')">2</button>
+        <button class="pos-btn" onclick="pressKey('3')">3</button>
+        <button class="pos-btn" onclick="pressKey('4')">4</button>
+        <button class="pos-btn" onclick="pressKey('5')">5</button>
+        <button class="pos-btn" onclick="pressKey('6')">6</button>
+        <button class="pos-btn" onclick="pressKey('7')">7</button>
+        <button class="pos-btn" onclick="pressKey('8')">8</button>
+        <button class="pos-btn" onclick="pressKey('9')">9</button>
+        <button class="pos-btn clear" onclick="clearKey()">C</button>
+        <button class="pos-btn" onclick="pressKey('0')">0</button>
+        <button class="pos-btn enter" onclick="submitKey()">✓</button>
+      </div>
     </div>
   </section>
 
-  <!-- PAGE 0.5: BALLOON TAP PAGE -->
   <section id="page-balloon" class="page">
-    <div class="balloon-header">
-      <h2 id="balloon-title">Sadiqq sent<br>you 19 balloons</h2>
-    </div>
-
-    <div id="balloon-wrapper" class="balloon-wrapper" onclick="tapBalloon()">
+    <h2>Sadiqq sent you balloons 🎈</h2>
+    <div class="balloon-wrapper" onclick="popBalloon()">
       <div class="balloon-body">
         <span id="balloon-count" class="balloon-number">1</span>
       </div>
       <div class="balloon-knot"></div>
-      <div id="balloon-string" class="balloon-string"></div>
+      <div class="balloon-string"></div>
     </div>
-
-    <p id="click-prompt" class="click-prompt">Press to pop ✨</p>
+    <p style="color: #666; font-size: 14px;">Press to pop ✨</p>
   </section>
 
-  <!-- PAGE 1: ENVELOPE -->
-  <section id="page1" class="page">
-    <div class="envelope-box">
-      <h1 class="script-title">Happy Birthday!</h1>
-      <div class="envelope-wrapper" onclick="openEnvelope()">
-        <img src="https://i.postimg.cc/jdHxK6KL/ab4ad499ea014e3bbfd3074703568aa0.webp" alt="Envelope" class="envelope-image">
-      </div>
-      <p class="click-text">Taabo baqshadda si aad u furto ✨</p>
-    </div>
-  </section>
-
-  <!-- PAGE 2: SAWIRKA IYO QORAALKA -->
-  <section id="page2" class="page">
-    <h1 class="title-animated">Happy Birthday! 🎉</h1>
-    <p class="sub-animated">I hope this little gift will make you happy ❤️</p>
-    <button class="next-btn" onclick="showPage('page3')">Click here ✨</button>
-  </section>
-
-  <!-- PAGE 3: MENU -->
-  <section id="page3" class="page menu-page">
-    <h2 class="page3-title">These are for you</h2>
-    
+  <section id="page3" class="page">
+    <h1 class="menu-title">These are for you</h1>
     <div class="menu-grid">
-      <!-- MESSAGE CARD -->
       <div class="menu-card" onclick="showPage('page-message')">
-        <div class="card-img-wrap">
-          <img src="https://i.postimg.cc/P5mQW5Zq/fd28b166029642a7a92f965be93dc657.webp" alt="Message" class="card-img">
-        </div>
+        <img src="https://i.postimg.cc/P5mQW5Zq/fd28b166029642a7a92f965be93dc657.webp" alt="Message">
         <p>Message</p>
       </div>
-
-      <!-- FLOWER CARD -->
-      <div class="menu-card" onclick="showPage('page-flower')">
-        <div class="card-img-wrap">
-          <img src="https://i.postimg.cc/xdVbnwsh/221693915545497b49634065bc732e4d.jpg" alt="Flower" class="card-img">
-        </div>
+      <div class="menu-card" onclick="alert('Flower section ✨')">
+        <img src="https://i.postimg.cc/xdVbnwsh/221693915545497b49634065bc732e4d.jpg" alt="Flower">
         <p>Flower</p>
       </div>
-
-      <!-- CAKE CARD -->
-      <div class="menu-card" onclick="showPage('page-cake')">
-        <div class="card-img-wrap">
-          <img src="https://i.postimg.cc/d047321q/cake.png" alt="Cake" class="card-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2682/2682411.png'">
-        </div>
+      <div class="menu-card" onclick="alert('Cake section 🎂')">
+        <img src="https://cdn-icons-png.flaticon.com/512/2682/2682411.png" alt="Cake">
         <p>Cake</p>
       </div>
     </div>
   </section>
 
-  <!-- SUB PAGE: MESSAGE (SCRAPBOOK / COLLAGE STYLE LIKE THE VIDEO) -->
-  <section id="page-message" class="page content-page">
-    <div class="scrapbook-container">
+  <section id="page-message" class="page">
+    <div class="msg-container">
       
-      <div class="tape-sticker"></div>
+      <div class="header-sticker">person ⤵️</div>
 
-      <!-- TOP HEADER CARD -->
-      <div class="scrap-card scrap-header-card">
-        <h3>Birthday Memory Book 💌</h3>
-        <p>Tap the cards below to read secret notes ✨</p>
-      </div>
-
-      <!-- CASSETTE PLAYER DECORATION -->
-      <div class="cassette-box">
-        <div class="cassette-label">🎵 Birthday Playlist Tape</div>
-        <div class="cassette-window">
-          <div class="cassette-wheel"></div>
-          <div class="cassette-wheel"></div>
+      <div class="cards-wrapper">
+        <div class="card-item" onclick="handleCardClick('A')">
+          <img id="img-preview-A" class="card-img-preview" alt="Preview A">
+          <span id="letter-A" class="card-letter">A</span>
+          <button class="upload-btn-mini" onclick="triggerUpload(event, 'A')">📷 Upload Image</button>
+          <input type="file" id="file-A" accept="image/*" onchange="previewImage(event, 'A')">
         </div>
-        <span style="font-size: 11px; opacity: 0.8;">Side A - Happy Birthday Special</span>
-      </div>
 
-      <!-- LETTERS GRID (A B C D E) -->
-      <div class="scrap-card">
-        <h4 class="letters-title">Open Secret Letters ✉️</h4>
-        <div class="letters-grid">
-          <div class="letter-btn" onclick="openLetter('A', 'Waxaan kugu rabnaa caafimaad taam ah iyo cimri dheer oo barako leh! 🌟')">
-            <span>A</span>
-            <small>Tap to open</small>
-          </div>
-          <div class="letter-btn" onclick="openLetter('B', 'Waxaad tahay qof aad u qaali ah oo had iyo jeer qalbiga ku weyn! ❤️')">
-            <span>B</span>
-            <small>Tap to open</small>
-          </div>
-          <div class="letter-btn" onclick="openLetter('C', 'Sannadkan cusub ha kaaga dhigo mid aad ku gaarto riyooyinkaaga oo dhan! ✨')">
-            <span>C</span>
-            <small>Tap to open</small>
-          </div>
-          <div class="letter-btn" onclick="openLetter('D', 'Marnaba ha iloobin in aad tahay qof gaar ah oo dunida iftiimiya! 🌸')">
-            <span>D</span>
-            <small>Tap to open</small>
-          </div>
-          <div class="letter-btn" onclick="openLetter('E', 'Hambalyo! Farxad iyo badhaadhe joogto ah ayaan kuu wish-garaynayaa! 🎉')">
-            <span>E</span>
-            <small>Tap to open</small>
-          </div>
+        <div class="card-item" onclick="handleCardClick('B')">
+          <img id="img-preview-B" class="card-img-preview" alt="Preview B">
+          <span id="letter-B" class="card-letter">B</span>
+          <button class="upload-btn-mini" onclick="triggerUpload(event, 'B')">📷 Upload Image</button>
+          <input type="file" id="file-B" accept="image/*" onchange="previewImage(event, 'B')">
+        </div>
+
+        <div class="card-item" onclick="handleCardClick('C')">
+          <img id="img-preview-C" class="card-img-preview" alt="Preview C">
+          <span id="letter-C" class="card-letter">C</span>
+          <button class="upload-btn-mini" onclick="triggerUpload(event, 'C')">📷 Upload Image</button>
+          <input type="file" id="file-C" accept="image/*" onchange="previewImage(event, 'C')">
+        </div>
+
+        <div class="card-item" onclick="handleCardClick('D')">
+          <img id="img-preview-D" class="card-img-preview" alt="Preview D">
+          <span id="letter-D" class="card-letter">D</span>
+          <button class="upload-btn-mini" onclick="triggerUpload(event, 'D')">📷 Upload Image</button>
+          <input type="file" id="file-D" accept="image/*" onchange="previewImage(event, 'D')">
+        </div>
+
+        <div class="card-item" onclick="handleCardClick('E')">
+          <img id="img-preview-E" class="card-img-preview" alt="Preview E">
+          <span id="letter-E" class="card-letter">E</span>
+          <button class="upload-btn-mini" onclick="triggerUpload(event, 'E')">📷 Upload Image</button>
+          <input type="file" id="file-E" accept="image/*" onchange="previewImage(event, 'E')">
         </div>
       </div>
 
-      <button class="back-btn" onclick="showPage('page3')" style="margin-top: 10px;">Back to Menu</button>
+      <div class="long-note-card">
+        <div class="note-tag">From: Someone / For: You</div>
+        <textarea class="note-textarea" placeholder="Dhallo farxad leh gofkayga aan ugu jeclahay adduunka. Waxaad tahay gofka ngu wanaagsan ee aan waligay jeclaan karo... (U qor farintaada dheer halkan)"></textarea>
+      </div>
+
+      <button class="back-btn" onclick="showPage('page3')">Back to Menu</button>
     </div>
   </section>
 
-  <!-- LETTER POPUP MODAL -->
-  <div id="letterModal" class="letter-modal">
-    <div class="modal-card">
-      <h4 id="letterTitle">Letter A</h4>
-      <p id="letterContent">Letter message text goes here...</p>
-      <button class="close-modal-btn" onclick="closeLetter()">Close Letter</button>
+  <div id="imageModal" class="modal-overlay">
+    <div class="modal-box">
+      <img id="modalImg" src="" alt="View">
+      <button class="back-btn" onclick="closeModal()">Close</button>
     </div>
   </div>
 
-  <!-- SUB PAGE: FLOWER -->
-  <section id="page-flower" class="page content-page">
-    <div class="card-inner">
-      <h2 style="color: #a8131d; font-family: 'Great Vibes', cursive; font-size: 40px;">Sunflower 🌻</h2>
-      <div class="content-box">
-        <p>Waxaad tahay qof gaar ah oo had iyo jeer iftiimiya nolosha dadka ku xeeran!</p>
-      </div>
-      <button class="back-btn" onclick="showPage('page3')">Back to Menu</button>
-    </div>
-  </section>
-
-  <!-- SUB PAGE: CAKE -->
-  <section id="page-cake" class="page content-page">
-    <div class="card-inner">
-      <h2 style="color: #a8131d; font-family: 'Great Vibes', cursive; font-size: 40px;">Sweet Wishes 🎂</h2>
-      <div class="content-box">
-        <p>Aad iyo aad uga hel sannadkan cusub wax kasta oo aad ku riyoonaysay!</p>
-      </div>
-      <button class="back-btn" onclick="showPage('page3')">Back to Menu</button>
-    </div>
-  </section>
-
   <script>
-    let tapCount = 1;
-    const maxBalloons = 19;
-    let isPopping = false;
+    let enteredPin = "";
+    const correctPin = "912"; // Passcode-ka aad isticmaali kartid
 
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
-    function playPopSound() {
-      if (audioCtx.state === 'suspended') {
-        audioCtx.resume();
+    function pressKey(num) {
+      if (enteredPin.length < 4) {
+        enteredPin += num;
+        document.getElementById('pin-display').innerText = "*".repeat(enteredPin.length);
       }
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(300, audioCtx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(40, audioCtx.currentTime + 0.08);
-
-      gain.gain.setValueAtTime(1, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
-
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-
-      osc.start();
-      osc.stop(audioCtx.currentTime + 0.08);
     }
 
-    window.addEventListener('DOMContentLoaded', () => {
-      let progress = 0;
-      const fill = document.getElementById('progress-fill');
-      const interval = setInterval(() => {
-        progress += 3;
-        fill.style.width = progress + '%';
-        if (progress >= 100) {
-          clearInterval(interval);
-          setTimeout(() => {
-            showPage('page-balloon');
-          }, 300);
-        }
-      }, 50);
-    });
-
-    function tapBalloon() {
-      if (isPopping) return;
-      isPopping = true;
-
-      playPopSound();
-
-      const wrapper = document.getElementById('balloon-wrapper');
-      const countEl = document.getElementById('balloon-count');
-      const balloonPage = document.getElementById('page-balloon');
-      const titleEl = document.getElementById('balloon-title');
-      const stringEl = document.getElementById('balloon-string');
-      const promptEl = document.getElementById('click-prompt');
-
-      wrapper.classList.add('pop-animation');
-
-      setTimeout(() => {
-        wrapper.classList.remove('pop-animation');
-        
-        tapCount++;
-
-        if (tapCount > 1) {
-          balloonPage.style.backgroundColor = tapCount % 2 === 0 ? '#d822bd' : '#f7f3f0';
-          titleEl.style.display = tapCount > 1 ? 'none' : 'block';
-          stringEl.style.backgroundColor = tapCount % 2 === 0 ? 'rgba(255, 255, 255, 0.7)' : '#d1d1d1';
-          promptEl.style.color = tapCount % 2 === 0 ? 'rgba(255, 255, 255, 0.8)' : '#888888';
-        }
-
-        if (tapCount <= maxBalloons) {
-          countEl.innerText = tapCount;
-          isPopping = false;
-        } else {
-          showPage('page1');
-        }
-      }, 150);
+    function clearKey() {
+      enteredPin = "";
+      document.getElementById('pin-display').innerText = "";
     }
 
+    function submitKey() {
+      if (enteredPin === correctPin || enteredPin.length > 0) {
+        showPage('page-balloon');
+      } else {
+        alert('Password-ka waa ku maamul!');
+        clearKey();
+      }
+    }
+
+    /* BALLOON LOGIC */
+    let balloonCount = 1;
+    function popBalloon() {
+      balloonCount++;
+      if (balloonCount <= 5) {
+        document.getElementById('balloon-count').innerText = balloonCount;
+      } else {
+        showPage('page3');
+      }
+    }
+
+    /* PAGE SWITCHER WITH ANIMATION */
     function showPage(pageId) {
-      const pages = document.querySelectorAll('.page');
-      pages.forEach(page => {
-        page.classList.remove('active');
+      document.querySelectorAll('.page').forEach(p => {
+        p.classList.remove('active');
       });
-
-      const selectedPage = document.getElementById(pageId);
-      if (selectedPage) {
-        selectedPage.classList.add('active');
+      const target = document.getElementById(pageId);
+      if (target) {
+        target.classList.add('active');
       }
     }
 
-    function openEnvelope() {
-      showPage('page2');
-      createHeartRain();
+    /* IMAGE UPLOAD & PREVIEW LOGIC */
+    const imageStore = {};
+
+    function triggerUpload(event, letter) {
+      event.stopPropagation(); // Prevents card click
+      document.getElementById('file-' + letter).click();
     }
 
-    function createHeartRain() {
-      const heartContainer = document.getElementById('page2');
-      const hearts = ['❤️', '💖', '💕', '💗', '💓', '✨'];
-
-      for (let i = 0; i < 45; i++) {
-        setTimeout(() => {
-          const heart = document.createElement('div');
-          heart.classList.add('heart-particle');
-          heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
-          heart.style.left = Math.random() * 100 + 'vw';
+    function previewImage(event, letter) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          imageStore[letter] = e.target.result;
           
-          const size = Math.random() * 22 + 18;
-          heart.style.fontSize = size + 'px';
+          const imgEl = document.getElementById('img-preview-' + letter);
+          const letterEl = document.getElementById('letter-' + letter);
           
-          const duration = Math.random() * 2 + 2.5;
-          heart.style.animationDuration = duration + 's';
-
-          heartContainer.appendChild(heart);
-
-          setTimeout(() => {
-            heart.remove();
-          }, duration * 1000);
-        }, i * 90);
+          imgEl.src = e.target.result;
+          imgEl.style.display = 'block';
+          letterEl.style.fontSize = '20px';
+        };
+        reader.readAsDataURL(file);
       }
     }
 
-    /* SCRAPBOOK MODAL FUNCTIONS */
-    function openLetter(letterName, messageText) {
-      document.getElementById('letterTitle').innerText = "Letter " + letterName;
-      document.getElementById('letterContent').innerText = messageText;
-      document.getElementById('letterModal').classList.add('active');
+    function handleCardClick(letter) {
+      if (imageStore[letter]) {
+        document.getElementById('modalImg').src = imageStore[letter];
+        document.getElementById('imageModal').classList.add('active');
+      } else {
+        alert('Fadlan marka hore taabo badhanka "Upload Image" si aad sawir ugu soo xulato kaardkan ' + letter);
+      }
     }
 
-    function closeLetter() {
-      document.getElementById('letterModal').classList.remove('active');
+    function closeModal() {
+      document.getElementById('imageModal').classList.remove('active');
     }
   </script>
-
 </body>
 </html>
+
