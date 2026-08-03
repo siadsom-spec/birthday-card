@@ -3,40 +3,135 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy Party & Gifts</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Create Gift Studio</title>
+  <link rel="stylesheet" href="gift-builder.css">
 </head>
 <body>
 
-  <div class="container">
+  <div class="studio-container">
+    <h1 class="main-title">The Link lasts forever</h1>
     
-    <!-- Top Tabs Header -->
-    <div class="tabs-header">
-      <button class="tab-btn">💐 BOUQUETS <span class="badge">9</span></button>
-      <button class="tab-btn active">🎁 GIFTS <span class="badge">0</span></button>
+    <button class="draft-btn">CREATE A DRAFT FROM AN OLD GIFT</button>
+    <a href="#" class="see-how">SEE HOW IT WORKS</a>
+
+    <!-- Video Preview / Tutorial Box -->
+    <div class="video-preview-box">
+      <div class="yt-placeholder">
+        <span>▶ Watch on YouTube</span>
+      </div>
     </div>
 
-    <!-- Top Action Button -->
-    <div class="action-top">
-      <button class="primary-btn">NEW GIFT &rarr;</button>
+    <!-- FROM & FOR SECTION -->
+    <div class="form-row">
+      <div class="field-group">
+        <label>FROM</label>
+        <input type="text" value="Sadiqq" placeholder="Magacaaga">
+      </div>
+      <div class="field-group">
+        <label>FOR</label>
+        <input type="text" value="Salmoo" placeholder="Sida la siinayo">
+      </div>
     </div>
 
-    <!-- Main Card Box -->
-    <div class="card-box">
-      <h2>No gift states yet.</h2>
-      <p>Create a gift state from the studio. Sent gifts and saved drafts will show here like the Garden tab.</p>
+    <!-- BACKGROUND SONG SECTION -->
+    <div class="section-card">
+      <label class="section-title">BACKGROUND SONG</label>
+      <div class="field-group">
+        <label>YOUTUBE LINK</label>
+        <input type="text" placeholder="https://youtube.com/watch?v=...">
+      </div>
+      <div class="field-group short">
+        <label>SKIP TO</label>
+        <input type="text" value="1:30" placeholder="1:30">
+      </div>
+    </div>
+
+    <!-- LOCK SCREEN & PIN SECTION -->
+    <div class="section-card">
+      <div class="flex-header">
+        <span class="section-title">LOCK</span>
+        <label class="checkbox-label">
+          <input type="checkbox" checked> Lock screen
+        </label>
+      </div>
       
-      <button class="primary-btn">NEW GIFT &rarr;</button>
+      <p class="sub-text">Pick a lock screen</p>
+
+      <div class="color-palette">
+        <span class="dot pink"></span>
+        <span class="dot yellow"></span>
+        <span class="dot white"></span>
+        <span class="dot red"></span>
+        <span class="dot blue"></span>
+        <span class="dot green active"></span>
+      </div>
+
+      <!-- Lock Screen Themes Carousel -->
+      <div class="horizontal-scroll">
+        <div class="theme-card active">
+          <div class="preview-img lock-preview">🔒</div>
+          <span>Original lock</span>
+        </div>
+        <div class="theme-card">
+          <div class="preview-img floral-bg">🌸</div>
+          <span>Cloudy meadow</span>
+        </div>
+        <div class="theme-card">
+          <div class="preview-img receipt-bg">🧾</div>
+          <span>Receipt Printer</span>
+        </div>
+      </div>
+
+      <!-- PIN Code Input -->
+      <div class="pin-box">
+        <label>4-DIGIT CODE</label>
+        <input type="text" value="9128" maxlength="4">
+        <p class="pin-hint">Preview uses PIN 9128.</p>
+      </div>
     </div>
 
-    <!-- Bottom Section -->
-    <div class="bottom-card">
-      <span class="step-label">— ONE —</span>
-      <h3>Pick your container</h3>
+    <!-- NOTE & TEXT SECTION -->
+    <div class="section-card">
+      <div class="flex-header">
+        <span class="section-title">NOTE</span>
+        <button class="delete-btn">Delete note</button>
+      </div>
+      <textarea rows="4">Dhalasho farxad leh qofkayga aan ugu jeclahay adduunka. Waxaad tahay qofka ugu wanaagsan ee aan waligay jeclaan karo...</textarea>
+    </div>
+
+    <!-- MEDIA UPLOAD SECTION -->
+    <div class="section-card">
+      <span class="section-title">MEDIA</span>
+      <div class="btn-group">
+        <button class="action-btn">Add photos</button>
+        <button class="action-btn">Add video</button>
+      </div>
+      <p class="sub-text">Up to 5 photos or 1 video • Photos: JPG, PNG • Video: 1 MP4 up to 10s</p>
+
+      <div class="media-preview-list">
+        <div class="media-item">
+          <div class="img-placeholder">🖼️</div>
+          <button class="remove-btn">REMOVE</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- VOICE NOTE SECTION -->
+    <div class="section-card">
+      <span class="section-title">VOICE NOTE</span>
+      <div class="voice-box">
+        <p class="status">VOICE NOTE RECORDED (0:04)</p>
+        <div class="btn-group">
+          <button class="action-btn">RECORD AGAIN</button>
+          <button class="delete-btn">REMOVE</button>
+        </div>
+        <audio controls class="audio-player">
+          <source src="" type="audio/mpeg">
+        </audio>
+      </div>
     </div>
 
   </div>
 
 </body>
 </html>
-
