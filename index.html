@@ -3,584 +3,391 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy Party & Gift Builder</title>
+  <title>FlowerIsBlooming - Gift Builder</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
+    /* ==========================================================
+       GLOBAL STYLES & BACKGROUND
+       ========================================================== */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
     body {
-      background-color: #1a3c27;
-      background-image: radial-gradient(circle at top left, #295738, #11281a);
-      color: #ffffff;
+      background-color: #0d2818;
+      background-image: 
+        radial-gradient(circle at 50% 0%, #1a4228 0%, #0d2818 70%),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="20" cy="20" r="15" fill="rgba(255,255,255,0.02)"/><circle cx="80" cy="70" r="25" fill="rgba(255,255,255,0.02)"/></svg>');
+      color: #e2ebe4;
       display: flex;
       justify-content: center;
-      padding: 20px 10px;
       min-height: 100vh;
+      padding-bottom: 60px;
     }
 
-    .app-container {
+    .app-viewport {
       width: 100%;
-      max-width: 440px;
+      max-width: 430px;
+      padding: 12px 14px;
+      position: relative;
     }
 
-    /* Page Switch Logic */
-    .page {
-      display: none;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    .page.active {
-      display: flex !important;
-    }
-
-    /* PAGE 1: HOME STYLES */
-    .tabs-header {
-      background: rgba(0, 0, 0, 0.2);
-      padding: 5px;
-      border-radius: 30px;
+    /* TOP NAVIGATION HEADER */
+    .top-bar {
       display: flex;
-      gap: 5px;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0 16px 0;
     }
 
-    .tab-btn {
-      flex: 1;
-      background: transparent;
-      border: none;
-      color: #a3c2ac;
-      padding: 10px 15px;
-      border-radius: 25px;
-      font-weight: bold;
-      cursor: pointer;
+    .brand-pill {
       display: flex;
       align-items: center;
-      justify-content: center;
       gap: 8px;
-      font-size: 13px;
-    }
-
-    .tab-btn.active {
-      background: #ffffff;
-      color: #1a3c27;
-    }
-
-    .badge {
-      background: rgba(0, 0, 0, 0.15);
-      padding: 2px 7px;
-      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 6px 14px;
+      border-radius: 20px;
       font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
     }
 
-    .action-top {
+    .brand-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      background: #e27d60;
+      display: inline-block;
+    }
+
+    .header-actions {
       display: flex;
-      justify-content: flex-end;
-    }
-
-    .primary-btn {
-      background-color: #2e7d32;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 20px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      transition: 0.2s;
-    }
-
-    .primary-btn:hover {
-      background-color: #388e3c;
-    }
-
-    .card-box {
-      background: rgba(255, 255, 255, 0.07);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(10px);
-      border-radius: 20px;
-      padding: 25px 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 15px;
-    }
-
-    .card-box p {
-      color: #c2d6c7;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    .bottom-card {
-      background: #ffffff;
-      color: #222222;
-      border-radius: 20px 20px 0 0;
-      padding: 25px 20px;
-      margin-top: 20px;
-    }
-
-    .step-label {
-      font-size: 12px;
-      letter-spacing: 2px;
-      color: #777777;
-      display: block;
-      margin-bottom: 5px;
-    }
-
-    /* PAGE 2: STUDIO STYLES */
-    .back-nav {
-      background: rgba(255, 255, 255, 0.1);
-      border: none;
-      color: white;
-      padding: 8px 15px;
-      border-radius: 15px;
-      cursor: pointer;
-      width: max-content;
-      font-weight: bold;
-    }
-
-    .main-title {
-      font-family: serif;
-      font-size: 26px;
-      text-align: center;
-      color: #f0ede6;
-    }
-
-    .section-card {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 20px;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .section-title {
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 1.5px;
-      color: #a3c7ad;
-    }
-
-    .form-row {
-      display: flex;
+      align-items: center;
       gap: 10px;
     }
 
-    .field-group {
-      flex: 1;
+    .lang-selector {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
       display: flex;
-      flex-direction: column;
-      gap: 6px;
+      align-items: center;
+      gap: 4px;
     }
 
-    .field-group label {
-      font-size: 10px;
-      font-weight: bold;
-      letter-spacing: 1px;
-      color: #a3c7ad;
+    .avatar-circle {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #333;
+      border: 1.5px solid rgba(255, 255, 255, 0.3);
+      overflow: hidden;
     }
 
-    input[type="text"], textarea, select {
+    .avatar-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* MAIN TITLE & HEADER BUTTONS */
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-weight: 400;
+      text-align: center;
+      margin: 10px 0 16px 0;
+      color: #f3f7f4;
+      letter-spacing: -0.5px;
+    }
+
+    .btn-action-outline {
+      width: 100%;
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 12px;
-      padding: 12px;
       color: #ffffff;
-      font-size: 14px;
-      outline: none;
-      width: 100%;
+      padding: 12px;
+      border-radius: 25px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      cursor: pointer;
+      text-align: center;
+      text-transform: uppercase;
+      margin-bottom: 12px;
     }
 
-    /* 4 SQUARE BUTTONS (AFAR GEES) */
-    .four-cards-grid {
+    .link-subtext {
+      text-align: center;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      color: #d1e0d5;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    /* YOUTUBE EMBED CONTAINER */
+    .video-card-wrapper {
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      margin-bottom: 20px;
+    }
+
+    .video-card-wrapper iframe {
+      width: 100%;
+      height: 200px;
+      border: none;
+      display: block;
+    }
+
+    /* ==========================================================
+       FORM SECTIONS & CARDS
+       ========================================================== */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .grid-2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
     }
 
-    .square-card {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 16px;
-      padding: 15px;
+    .form-group {
       display: flex;
       flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group label {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      color: #b3c9b8;
+      text-transform: uppercase;
+    }
+
+    .custom-input {
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 12px 14px;
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 500;
+      outline: none;
+      width: 100%;
+    }
+
+    .custom-input::placeholder {
+      color: rgba(255, 255, 255, 0.35);
+    }
+
+    /* TOGGLE SWITCHES (SIMPLE / ADVANCED) */
+    .segmented-control {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 4px;
+      border-radius: 30px;
+      display: flex;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      margin-bottom: 16px;
+    }
+
+    .segmented-btn {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 25px;
+      background: transparent;
+      color: #a2baa7;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: all 0.2s ease;
+    }
+
+    .segmented-btn.active {
+      background: #ffffff;
+      color: #0d2818;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    /* SECTION TITLE WITH NUMBERS */
+    .section-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .section-title-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .num-circle {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 800;
+      display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      cursor: pointer;
-      transition: 0.2s;
     }
 
-    .square-card:hover {
-      background: rgba(255, 255, 255, 0.15);
+    .section-title-text {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      color: #ffffff;
+      text-transform: uppercase;
     }
 
-    .square-card span.icon {
-      font-size: 24px;
-    }
-
-    .square-card span.label {
-      font-size: 12px;
-      font-weight: bold;
-      color: #d1dfd5;
-    }
-
-    /* MEDIA UPLOAD BUTTONS */
-    .upload-btn-wrapper {
+    .checkbox-label {
       display: flex;
-      gap: 10px;
-    }
-
-    .file-btn {
-      flex: 1;
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px dashed rgba(255, 255, 255, 0.3);
-      padding: 12px;
-      border-radius: 12px;
-      text-align: center;
-      cursor: pointer;
+      align-items: center;
+      gap: 6px;
       font-size: 12px;
-      font-weight: bold;
+      font-weight: 700;
+      color: #ffffff;
+      cursor: pointer;
     }
 
-    .horizontal-scroll {
+    .checkbox-label input {
+      accent-color: #2e7d32;
+      width: 16px;
+      height: 16px;
+    }
+
+    .sub-instruction {
+      font-size: 11px;
+      color: #a3c2ab;
+      margin-bottom: 12px;
+    }
+
+    /* COLOR PALETTE DOTS */
+    .palette-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .palette-label {
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      color: #8dae95;
+    }
+
+    .color-dot {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: transform 0.1s;
+    }
+
+    .color-dot.active {
+      border-color: #ffffff;
+      transform: scale(1.15);
+      box-shadow: 0 0 8px rgba(255,255,255,0.4);
+    }
+
+    /* HORIZONTAL SCROLL CARDS (LOCKS, OPENERS, SCRAPBOOKS) */
+    .horizontal-scroll-container {
       display: flex;
       gap: 12px;
       overflow-x: auto;
-      padding-bottom: 8px;
+      padding-bottom: 10px;
+      scrollbar-width: none; /* Firefox */
     }
 
-    .theme-card {
-      min-width: 90px;
+    .horizontal-scroll-container::-webkit-scrollbar {
+      display: none; /* Chrome/Safari */
+    }
+
+    .preview-card-item {
+      min-width: 105px;
+      max-width: 105px;
       display: flex;
       flex-direction: column;
-      align-items: center;
       gap: 6px;
-      font-size: 11px;
       cursor: pointer;
     }
 
-    .preview-img {
-      width: 80px;
-      height: 120px;
-      border-radius: 12px;
+    .card-thumb {
+      width: 105px;
+      height: 155px;
+      border-radius: 14px;
+      background: #1e3d27;
+      border: 2px solid rgba(255, 255, 255, 0.1);
       overflow: hidden;
-      border: 3px solid transparent;
-      transition: 0.2s;
-    }
-
-    .preview-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .theme-card.selected .preview-img {
-      border-color: #ffffff;
-      box-shadow: 0 0 10px rgba(255,255,255,0.5);
-    }
-
-    .preview-main-btn {
-      background: #e0a96d;
-      color: #1a3c27;
-      border: none;
-      padding: 14px;
-      border-radius: 20px;
-      font-size: 14px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      width: 100%;
-      margin-top: 10px;
-    }
-
-    /* PREVIEW POPUP MODAL */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(8px);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-      padding: 20px;
-    }
-
-    .modal-overlay.active {
-      display: flex;
-    }
-
-    .preview-card {
-      background: #11281a;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 25px;
-      width: 100%;
-      max-width: 360px;
-      padding: 20px;
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 15px;
-      text-align: center;
-      position: relative;
+      justify-content: center;
+      transition: all 0.2s ease;
     }
 
-    .close-modal {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      background: rgba(255, 255, 255, 0.2);
-      border: none;
-      color: white;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-weight: bold;
+    .preview-card-item.selected .card-thumb {
+      border-color: #ffffff;
+      box-shadow: 0 0 12px rgba(255,255,255,0.3);
     }
 
-    .preview-lock-img {
+    .card-thumb img {
       width: 100%;
-      height: 180px;
-      border-radius: 15px;
+      height: 100%;
       object-fit: cover;
     }
 
-    .preview-pin-display {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 8px 16px;
-      border-radius: 12px;
-      font-weight: bold;
-      letter-spacing: 4px;
-      color: #a3c7ad;
-    }
-  </style>
-</head>
-<body>
-
-  <div class="app-container">
-
-    <div id="page-home" class="page active">
-      
-      <div class="tabs-header">
-        <button class="tab-btn">💐 BOUQUETS <span class="badge">9</span></button>
-        <button class="tab-btn active">🎁 GIFTS <span class="badge">0</span></button>
-      </div>
-
-      <div class="action-top">
-        <button class="primary-btn btn-go-builder">NEW GIFT &rarr;</button>
-      </div>
-
-      <div class="card-box">
-        <h2>No gift states yet.</h2>
-        <p>Create a gift state from the studio. Sent gifts and saved drafts will show here like the Garden tab.</p>
-        <button class="primary-btn btn-go-builder">NEW GIFT &rarr;</button>
-      </div>
-
-      <div class="bottom-card">
-        <span class="step-label">— ONE —</span>
-        <h3 style="color:#1a3c27;">Pick your container</h3>
-      </div>
-
-    </div>
-
-    <div id="page-builder" class="page">
-      
-      <button id="btn-back-home" class="back-nav">&larr; Back</button>
-
-      <h1 class="main-title">The Link lasts forever</h1>
-
-      <div class="form-row">
-        <div class="field-group">
-          <label>FROM</label>
-          <input type="text" id="inputFrom" value="Sadiqq" placeholder="Gali magacaaga...">
-        </div>
-        <div class="field-group">
-          <label>FOR</label>
-          <input type="text" id="inputFor" value="Salmoo" placeholder="Gali magaca qofka...">
-        </div>
-      </div>
-
-      <div class="four-cards-grid">
-        <div class="square-card">
-          <span class="icon">📝</span>
-          <span class="label">Note</span>
-        </div>
-        <div class="square-card">
-          <span class="icon">🖼️</span>
-          <span class="label">Media</span>
-        </div>
-        <div class="square-card">
-          <span class="icon">🎵</span>
-          <span class="label">Music</span>
-        </div>
-        <div class="square-card">
-          <span class="icon">🎙️</span>
-          <span class="label">Voice Note</span>
-        </div>
-      </div>
-
-      <div class="section-card">
-        <label class="section-title">BACKGROUND MUSIC LINK</label>
-        <div class="field-group">
-          <label>SELECT PLATFORM</label>
-          <select id="musicPlatform" style="color: #ffffff; background: #264a32;">
-            <option value="YouTube">YouTube Link</option>
-            <option value="Spotify">Spotify Link</option>
-          </select>
-        </div>
-        <div class="field-group" style="margin-top: 5px;">
-          <label>MUSIC LINK</label>
-          <input type="text" id="musicUrl" placeholder="Paste YouTube or Spotify link here...">
-        </div>
-      </div>
-
-      <div class="section-card">
-        <span class="section-title">LOCK SCREEN</span>
-        <div class="horizontal-scroll">
-          <div class="theme-card selected" onclick="selectTheme(this, 'https://i.postimg.cc/jqkNPbJ1/da1478c736e944eb8f1ec711d8c60617.webp')">
-            <div class="preview-img">
-              <img src="https://i.postimg.cc/jqkNPbJ1/da1478c736e944eb8f1ec711d8c60617.webp" alt="Lock Theme 1">
-            </div>
-            <span>Original</span>
-          </div>
-          <div class="theme-card" onclick="selectTheme(this, 'https://i.postimg.cc/jqkNPbJ1/da1478c736e944eb8f1ec711d8c60617.webp')">
-            <div class="preview-img">
-              <img src="https://i.postimg.cc/jqkNPbJ1/da1478c736e944eb8f1ec711d8c60617.webp" alt="Lock Theme 2">
-            </div>
-            <span>Cloudy</span>
-          </div>
-        </div>
-
-        <div class="field-group">
-          <label>4-DIGIT CODE</label>
-          <input type="text" id="inputPin" value="9128" maxlength="4" style="text-align: center; font-weight: bold;">
-        </div>
-      </div>
-
-      <div class="section-card">
-        <span class="section-title">WRITE U NOTE</span>
-        <textarea id="inputNote" rows="3" placeholder="Qor fariintaada halkan...">Dhalasho farxad leh qofkayga aan ugu jeclahay adduunka...</textarea>
-      </div>
-
-      <div class="section-card">
-        <span class="section-title">ADD PHOTO OR VIDEO</span>
-        <div class="upload-btn-wrapper">
-          <label class="file-btn">
-            📷 Add Photo
-            <input type="file" id="photoInput" accept="image/*" style="display:none;" onchange="handleFileSelect(this, 'Photo')">
-          </label>
-          <label class="file-btn">
-            🎥 Add Video
-            <input type="file" id="videoInput" accept="video/*" style="display:none;" onchange="handleFileSelect(this, 'Video')">
-          </label>
-        </div>
-        <p id="fileStatus" style="font-size: 11px; color: #a3c7ad; text-align: center; margin-top: 5px;"></p>
-      </div>
-
-      <button class="preview-main-btn" id="openPreviewBtn">👁️ PREVIEW GIFT</button>
-
-    </div>
-
-  </div>
-
-  <div class="modal-overlay" id="previewModal">
-    <div class="preview-card">
-      <button class="close-modal" id="closePreviewBtn">✕</button>
-      <h3 id="prevHeading" style="color: #a3c7ad;">From: - To: -</h3>
-      
-      <img id="prevImg" class="preview-lock-img" src="" alt="Lock Screen Selected">
-      
-      <div class="preview-pin-display">
-        PIN: <span id="prevPin">----</span>
-      </div>
-
-      <div style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 12px; width: 100%; text-align: left;">
-        <span style="font-size: 10px; color: #a3c7ad; font-weight: bold;">MUSIC LINK:</span>
-        <p id="prevMusic" style="font-size: 12px; color: #ffffff; word-break: break-all;"></p>
-      </div>
-
-      <div style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 12px; width: 100%; text-align: left;">
-        <span style="font-size: 10px; color: #a3c7ad; font-weight: bold;">NOTE:</span>
-        <p id="prevNote" style="font-size: 12px; margin-top: 4px; color: #e0e0e0;"></p>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    // PAGE SWITCHING (Toos ah)
-    const pageHome = document.getElementById('page-home');
-    const pageBuilder = document.getElementById('page-builder');
-    const goBuilderBtns = document.querySelectorAll('.btn-go-builder');
-    const backHomeBtn = document.getElementById('btn-back-home');
-
-    goBuilderBtns.forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        pageHome.classList.remove('active');
-        pageBuilder.classList.add('active');
-        window.scrollTo(0, 0);
-      });
-    });
-
-    backHomeBtn.addEventListener('click', () => {
-      pageBuilder.classList.remove('active');
-      pageHome.classList.add('active');
-      window.scrollTo(0, 0);
-    });
-
-    // Theme Selection
-    let selectedImageSrc = 'https://i.postimg.cc/jqkNPbJ1/da1478c736e944eb8f1ec711d8c60617.webp';
-    function selectTheme(element, imgSrc) {
-      document.querySelectorAll('.theme-card').forEach(card => card.classList.remove('selected'));
-      element.classList.add('selected');
-      selectedImageSrc = imgSrc;
+    .card-caption {
+      font-size: 10px;
+      font-weight: 700;
+      text-align: center;
+      color: #cde0d2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    // File Upload Handler
-    function handleFileSelect(input, type) {
-      if (input.files && input.files[0]) {
-        document.getElementById('fileStatus').innerText = `✓ ${type} uploaded: ${input.files[0].name}`;
-      }
+    /* BUTTONS INSIDE CARDS */
+    .media-buttons-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
     }
 
-    // Modal Preview Logic
-    const previewModal = document.getElementById('previewModal');
-    const openPreviewBtn = document.getElementById('openPreviewBtn');
-    const closePreviewBtn = document.getElementById('closePreviewBtn');
-
-    openPreviewBtn.addEventListener('click', () => {
-      const fromVal = document.getElementById('inputFrom').value || '...';
-      const forVal = document.getElementById('inputFor').value || '...';
-      const pinVal = document.getElementById('inputPin').value || '----';
-      const noteVal = document.getElementById('inputNote').value || '(Fariin ma lagu qorin)';
-      const musicPlatform = document.getElementById('musicPlatform').value;
-      const musicUrl = document.getElementById('musicUrl').value || 'Link ma la gelin';
-
-      document.getElementById('prevHeading').innerText = `${fromVal} ➔ ${forVal}`;
-      document.getElementById('prevImg').src = selectedImageSrc;
-      document.getElementById('prevPin').innerText = pinVal;
-      document.getElementById('prevNote').innerText = noteVal;
-      document.getElementById('prevMusic').innerText = `[${musicPlatform}] ${musicUrl}`;
-
-      previewModal.classList.add('active');
-    });
-
-    closePreviewBtn.addEventListener('click', () => {
-      previewModal.classList.remove('active');
-    });
-  </script>
-
-</body>
-</html>
+    .media-upload-btn {
+      flex: 1;
+      background: rgba(255, 255
 
