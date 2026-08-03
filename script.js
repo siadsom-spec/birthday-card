@@ -13,38 +13,39 @@ function showPage(pageId) {
 function openEnvelope() {
   showPage('page2');
   
-  // BUULULEER BADAN OO MIDABBO KALA DUWAN LEH (CONFETTI BLAST)
-  if (typeof confetti === "function") {
-    // Blast-ka koowaad (Salka Dhexe)
-    confetti({
-      particleCount: 180,
-      spread: 100,
-      origin: { y: 0.6 }
-    });
+  // Abuur Love / Hearts Rain (Buululeer Wadnayaal ah)
+  createHeartRain();
+}
 
-    // Blast-ka labaad (Midig iyo Bidix)
-    setTimeout(() => {
-      confetti({
-        particleCount: 100,
-        angle: 60,
-        spread: 70,
-        origin: { x: 0 }
-      });
-      confetti({
-        particleCount: 100,
-        angle: 120,
-        spread: 70,
-        origin: { x: 1 }
-      });
-    }, 350);
+function createHeartRain() {
+  const heartContainer = document.getElementById('page2');
+  const hearts = ['❤️', '💖', '💕', '💗', '💓', '✨'];
 
-    // Blast-ka saddexaad (Ugu dambeeya oo kor ka soo dhacaya)
+  for (let i = 0; i < 40; i++) {
     setTimeout(() => {
-      confetti({
-        particleCount: 120,
-        spread: 120,
-        origin: { y: 0.2 }
-      });
-    }, 700);
+      const heart = document.createElement('div');
+      heart.classList.add('heart-particle');
+      
+      // Kala dooro wadnayaal kala duwan
+      heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+      
+      // Booska bidix/midig ee wadnuhu ka soo dhacayo
+      heart.style.left = Math.random() * 100 + 'vw';
+      
+      // Baaxadda wadnaha (Random size)
+      const size = Math.random() * 20 + 18;
+      heart.style.fontSize = size + 'px';
+      
+      // Xawaaraha dhacista (Random speed)
+      const duration = Math.random() * 2 + 2.5;
+      heart.style.animationDuration = duration + 's';
+
+      heartContainer.appendChild(heart);
+
+      // Bixi wadnaha marka uu dhameysto animation-ka
+      setTimeout(() => {
+        heart.remove();
+      }, duration * 1000);
+    }, i * 100);
   }
 }
