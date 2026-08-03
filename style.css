@@ -1,106 +1,155 @@
-body {
+* {
+  box-sizing: border-border-box;
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f7f7f7; /* Lighter background like the TikTok app */
-  color: #333; /* Darker text */
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #8b0000; /* Dark red background border */
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  padding: 20px;
+}
+
+/* White Card Screen like the tablet image */
+.card-container {
+  background-color: #fdfaf6;
+  width: 100%;
+  max-width: 600px;
+  min-height: 450px;
+  border: 12px solid #8b0000; /* Red outer border */
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  text-align: center;
 }
 
 .page {
   display: none;
-  text-align: center;
-  width: 90%;
-  max-width: 500px;
+  width: 100%;
 }
 
 .page.active {
   display: block;
 }
 
-h1 {
-  font-family: 'Georgia', serif; /* A more elegant font like in image_40.png */
-  font-style: italic;
+/* Script Font for "Happy Birthday!" */
+.script-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 48px;
   color: #8b0000;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
+  font-weight: normal;
 }
 
-.card-btn {
+/* Red Envelope CSS Design */
+.envelope-wrapper {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
   cursor: pointer;
 }
 
-/* Designing the red envelope image based on image_40.png */
-.envelope-img {
-  width: 100%;
-  max-width: 300px; /* Adjust size to match */
-  height: auto;
-  border-radius: 8px; /* Slightly rounded corners */
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Soft shadow */
-  transition: transform 0.3s;
+.envelope {
+  position: relative;
+  width: 260px;
+  height: 160px;
+  background-color: #b30000;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease;
 }
 
-.card-btn:hover .envelope-img {
-  transform: translateY(-5px) rotate(-2deg); /* Added a slight hover tilt */
+/* Envelope Flap Triangles */
+.envelope::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  border-left: 130px solid transparent;
+  border-right: 130px solid transparent;
+  border-top: 90px solid #800000;
+}
+
+.envelope-wrapper:hover .envelope {
+  transform: scale(1.04);
+}
+
+/* Gold Wax Seal in the Center */
+.wax-seal {
+  position: absolute;
+  width: 42px;
+  height: 42px;
+  background: radial-gradient(circle, #ffd700, #c59b27);
+  border-radius: 50%;
+  border: 2px solid #997a15;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  z-index: 2;
 }
 
 .click-text {
-  font-size: 14px;
   color: #666;
-  margin-top: 10px;
+  font-size: 13px;
+  margin-top: 15px;
 }
 
+/* Menu Grid */
 .menu-grid {
   display: flex;
   justify-content: space-around;
-  margin-top: 30px;
+  margin-top: 25px;
+  gap: 10px;
 }
 
 .menu-card {
-  background: white; /* Card background is now white */
-  color: #333;
-  padding: 15px;
-  border-radius: 12px;
+  background: white;
   border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 10px;
   cursor: pointer;
-  width: 100px;
-  transition: all 0.3s;
+  flex: 1;
+  transition: transform 0.2s, border-color 0.2s;
 }
 
 .menu-card:hover {
-  background: #fffafa; /* Light red/white on hover */
+  transform: translateY(-3px);
   border-color: #8b0000;
 }
 
 .menu-card span {
-  font-size: 40px;
+  font-size: 32px;
+}
+
+.menu-card p {
+  color: #333;
+  margin-top: 5px;
+  font-size: 14px;
 }
 
 .content-box {
   background: white;
   color: #333;
   padding: 20px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
+  border-radius: 8px;
+  border: 1px solid #eee;
   margin: 20px 0;
 }
 
 .back-btn {
-  background: #8b0000; /* Dark red background for back button */
+  background: #8b0000;
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 8px 18px;
   border-radius: 20px;
-  font-weight: bold;
   cursor: pointer;
-  transition: background 0.3s;
+  font-weight: 600;
 }
 
-.back-btn:hover {
-  background: #a52a2a;
-}
