@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy Birthday Gift Studio</title>
+  <title>Happy Birthday Gift Experience</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Caveat:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     * {
@@ -18,55 +18,48 @@
 
     body {
       background-color: #8b0000;
-      background-image: radial-gradient(circle, #a80000 0%, #600000 100%);
       min-height: 100vh;
+      width: 100vw;
+      overflow-x: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 16px;
-      overflow-x: hidden;
     }
 
-    .app-viewport {
-      width: 100%;
-      max-width: 390px;
-      position: relative;
-      perspective: 1000px;
-    }
-
-    /* CONTROL PAGE SWITCHING WITH ANIMATION */
+    /* CONTROLLING PAGES */
     .page {
       display: none;
       width: 100%;
-      opacity: 0;
-      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      min-height: 100vh;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 0;
+      left: 0;
     }
 
     .page.active {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      opacity: 1;
-      animation: zoomFadeIn 0.6s forwards ease-out;
+      animation: fadeIn 0.5s ease-in-out;
     }
 
-    @keyframes zoomFadeIn {
-      from {
-        opacity: 0;
-        transform: scale(0.9) translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-      }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.98); }
+      to { opacity: 1; transform: scale(1); }
     }
 
-    /* ================= BOGGA 1: RED HAPPY BIRTHDAY CARD ================= */
-    .card-container {
+    /* ================= PAGE 1: ENVELOPE CARD ================= */
+    #page-1 {
+      background-image: radial-gradient(circle, #a80000 0%, #600000 100%);
+      padding: 20px;
+    }
+
+    .envelope-card {
       background-color: #fdfbf7;
       width: 100%;
-      border-radius: 18px;
-      padding: 35px 20px 25px 20px;
+      max-width: 350px;
+      border-radius: 16px;
+      padding: 40px 20px 30px 20px;
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
       display: flex;
       flex-direction: column;
@@ -78,39 +71,39 @@
       font-family: 'Great Vibes', cursive;
       font-size: 42px;
       color: #9e1b1b;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
     }
 
     .envelope-box {
       width: 100%;
-      height: 200px;
+      max-width: 250px;
+      height: 180px;
       background: #ffffff;
-      border-radius: 12px;
-      box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+      border-radius: 10px;
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
       border: 1px solid #f0f0f0;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.03);
     }
 
     .red-envelope {
       width: 85%;
-      height: 115px;
+      height: 110px;
       background-color: #9e1b1b;
-      border-radius: 8px;
+      border-radius: 6px;
       position: relative;
       cursor: pointer;
       display: flex;
       justify-content: center;
       align-items: center;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-      transition: all 0.3s ease;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+      transition: transform 0.2s ease;
     }
 
     .red-envelope:hover {
-      transform: scale(1.05);
-      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+      transform: scale(1.04);
     }
 
     .red-envelope::before {
@@ -121,12 +114,12 @@
       height: 0;
       border-left: 100px solid transparent;
       border-right: 100px solid transparent;
-      border-top: 58px solid #7a1212;
+      border-top: 55px solid #7a1212;
     }
 
     .ribbon-seal {
-      width: 40px;
-      height: 30px;
+      width: 36px;
+      height: 28px;
       position: relative;
       z-index: 2;
     }
@@ -135,271 +128,167 @@
     .ribbon-seal::after {
       content: '';
       position: absolute;
-      width: 16px;
-      height: 20px;
+      width: 15px;
+      height: 18px;
       background: #ffffff;
       border-radius: 50% 50% 0 50%;
       top: 4px;
     }
 
     .ribbon-seal::before {
-      left: 2px;
+      left: 1px;
       transform: rotate(-25deg);
     }
 
     .ribbon-seal::after {
-      right: 2px;
+      right: 1px;
       transform: rotate(25deg) scaleX(-1);
     }
 
     .instruction-text {
-      font-size: 12px;
+      font-size: 11px;
       color: #777777;
-      font-weight: 600;
     }
 
-    /* ================= BOGGA 2: BLUR & ANIMATED STUDIO ================= */
-    .studio-card {
-      width: 100%;
+    /* ================= PAGE 2: FULL IMAGE & CONFETTI ================= */
+    #page-2 {
       background-image: url('https://i.postimg.cc/jqkNPbJ1/da1478c736e944eb8f1ec711d8c60617.webp');
       background-size: cover;
       background-position: center;
-      border-radius: 22px;
-      padding: 20px 16px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      position: relative;
-      overflow: hidden;
+      background-repeat: no-repeat;
+      position: fixed;
     }
 
-    /* BLUR OVERLAY EFFECT */
-    .studio-card::before {
-      content: '';
+    #confettiCanvas {
       position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.35);
-      backdrop-filter: blur(8px); /* BLUR EFFECT-KA CUSUB */
-      -webkit-backdrop-filter: blur(8px);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
       z-index: 1;
     }
 
-    .studio-content {
+    .card-box {
       position: relative;
       z-index: 2;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .btn-back-nav {
-      background: rgba(255, 255, 255, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      color: white;
-      padding: 8px 14px;
-      border-radius: 12px;
-      font-size: 11px;
-      font-weight: 800;
-      cursor: pointer;
-      width: max-content;
-      backdrop-filter: blur(5px);
-      transition: background 0.2s;
-    }
-
-    .btn-back-nav:hover {
-      background: rgba(255, 255, 255, 0.35);
-    }
-
-    .names-header {
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      border-radius: 14px;
-      padding: 12px;
+      width: 85%;
+      max-width: 320px;
+      background: linear-gradient(135deg, #801212, #4a0808);
+      border-radius: 16px;
+      padding: 24px 16px;
       text-align: center;
       color: #ffffff;
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
-
-    .lock-box {
-      background: rgba(255, 255, 255, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      border-radius: 14px;
-      padding: 10px 14px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: #ffffff;
-      font-size: 12px;
-      font-weight: 700;
-      backdrop-filter: blur(10px);
-    }
-
-    .pin-code {
-      background: #ffffff;
-      color: #000;
-      padding: 4px 12px;
-      border-radius: 8px;
-      font-weight: 800;
-      letter-spacing: 2px;
-    }
-
-    /* 4 ICONS GRID WITH ANIMATION */
-    .grid-4-icons {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-    }
-
-    .icon-square {
-      background: rgba(255, 255, 255, 0.18);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      border-radius: 14px;
-      padding: 12px 4px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 4px;
+      gap: 10px;
+    }
+
+    .card-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 38px;
       color: #ffffff;
-      font-size: 10px;
-      font-weight: 800;
-      backdrop-filter: blur(10px);
-      transition: transform 0.2s ease;
-      cursor: pointer;
     }
 
-    .icon-square:hover {
-      transform: translateY(-3px);
-      background: rgba(255, 255, 255, 0.28);
-    }
-
-    .icon-square span.emoji {
-      font-size: 20px;
-    }
-
-    /* PAPER MESSAGE PREVIEW */
-    .paper-wrapper {
-      position: relative;
-      width: 100%;
-      height: 165px;
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .paper-bg {
+    .btn-back {
       position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-    }
-
-    .paper-text {
-      position: relative;
-      z-index: 2;
-      width: 82%;
-      color: #2b1e10;
-      font-family: 'Caveat', cursive;
-      font-size: 17px;
-      line-height: 1.3;
-      text-align: center;
+      top: 20px;
+      left: 20px;
+      z-index: 10;
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      backdrop-filter: blur(5px);
     }
   </style>
 </head>
 <body>
 
-  <div class="app-viewport">
-
-    <div id="page-1" class="page active">
-      <div class="card-container">
-        <h1 class="greeting-title">Happy Birthday!</h1>
-        
-        <div class="envelope-box">
-          <div class="red-envelope" id="envelopeBtn">
-            <div class="ribbon-seal"></div>
-          </div>
-        </div>
-
-        <p class="instruction-text">Click the seal to open</p>
-      </div>
-    </div>
-
-    <div id="page-2" class="page">
-      <div class="studio-card">
-        <div class="studio-content">
-          
-          <button class="btn-back-nav" id="backBtn">&larr; Back</button>
-
-          <div class="names-header">
-            FROM: Sadiqq ➔ FOR: Salmoo
-          </div>
-
-          <div class="lock-box">
-            <span>🔒 LOCK SCREEN</span>
-            <span class="pin-code">9128</span>
-          </div>
-
-          <div class="grid-4-icons">
-            <div class="icon-square">
-              <span class="emoji">📝</span>
-              <span>Note</span>
-            </div>
-            <div class="icon-square">
-              <span class="emoji">🖼️</span>
-              <span>Media</span>
-            </div>
-            <div class="icon-square">
-              <span class="emoji">🎵</span>
-              <span>Music</span>
-            </div>
-            <div class="icon-square">
-              <span class="emoji">🎙️</span>
-              <span>Voice</span>
-            </div>
-          </div>
-
-          <div class="paper-wrapper">
-            <img src="https://i.postimg.cc/wBk2mPkQ/file-000000006c808211abc4a25a9e15a08a.png" class="paper-bg" alt="Paper">
-            <div class="paper-text">
-              Dhalasho farxad leh qofkayga aan ugu jeclahay adduunka! ❤️
-            </div>
-          </div>
-
+  <div id="page-1" class="page active">
+    <div class="envelope-card">
+      <h1 class="greeting-title">Happy Birthday!</h1>
+      
+      <div class="envelope-box">
+        <div class="red-envelope" onclick="openPage2()">
+          <div class="ribbon-seal"></div>
         </div>
       </div>
-    </div>
 
+      <p class="instruction-text">Click the seal to open</p>
+    </div>
+  </div>
+
+  <div id="page-2" class="page">
+    <button class="btn-back" onclick="openPage1()">&larr; Back</button>
+    <canvas id="confettiCanvas"></canvas>
+
+    <div class="card-box">
+      <h1 class="card-title">Happy Birthday!</h1>
+      <div style="font-size: 26px;">🎉</div>
+      <p style="font-size: 11px; opacity: 0.9;">I hope this little gift will make you happy ❤️</p>
+      <button style="background: #fff; color: #000; border: none; padding: 8px 18px; border-radius: 20px; font-weight: 700; font-size: 11px; cursor: pointer;">Click here ✨</button>
+    </div>
   </div>
 
   <script>
-    // EVENT LISTENERS FOR RELIABLE CLICKING
-    document.addEventListener('DOMContentLoaded', function() {
-      const page1 = document.getElementById('page-1');
-      const page2 = document.getElementById('page-2');
-      const envelopeBtn = document.getElementById('envelopeBtn');
-      const backBtn = document.getElementById('backBtn');
+    // PAGE SWITCHING
+    function openPage2() {
+      document.getElementById('page-1').classList.remove('active');
+      document.getElementById('page-2').classList.add('active');
+      startConfetti();
+    }
 
-      envelopeBtn.addEventListener('click', function() {
-        page1.classList.remove('active');
-        setTimeout(() => {
-          page2.classList.add('active');
-        }, 100);
-      });
+    function openPage1() {
+      document.getElementById('page-2').classList.remove('active');
+      document.getElementById('page-1').classList.add('active');
+    }
 
-      backBtn.addEventListener('click', function() {
-        page2.classList.remove('active');
-        setTimeout(() => {
-          page1.classList.add('active');
-        }, 100);
-      });
-    });
+    // CONFETTI ANIMATION
+    function startConfetti() {
+      const canvas = document.getElementById('confettiCanvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const particles = [];
+      const colors = ['#f44336', '#e91e63', '#9c27b0', '#2196f3', '#ffeb3b', '#4caf50'];
+
+      for (let i = 0; i < 80; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 3 + 1,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          vx: Math.random() * 2 - 1,
+          vy: Math.random() * 1.5 + 0.5
+        });
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.fill();
+
+          p.x += p.vx;
+          p.y += p.vy;
+
+          if (p.y > canvas.height) p.y = 0;
+        });
+        requestAnimationFrame(draw);
+      }
+      draw();
+    }
   </script>
 
 </body>
