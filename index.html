@@ -8,6 +8,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  
+  <!-- Buululeer Library (Canvas Confetti) -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
 
@@ -17,30 +20,15 @@
     <section id="page1" class="page active">
       <h1 class="script-title">Happy Birthday!</h1>
       
-      <div class="envelope-wrapper" onclick="showPage('page2')">
+      <div class="envelope-wrapper" onclick="openEnvelope()">
         <img src="https://i.postimg.cc/jdHxK6KL/ab4ad499ea014e3bbfd3074703568aa0.webp" alt="Red Envelope" class="envelope-image">
       </div>
       
       <p class="click-text">Click the seal to open</p>
     </section>
 
-    <!-- PAGE 2: Full Photo Background with Confetti / Buululeer Effect -->
+    <!-- PAGE 2: Full Photo Background Page -->
     <section id="page2" class="page photo-page">
-      
-      <!-- Confetti / Buululeer Party Falling Effects -->
-      <div class="confetti-wrapper">
-        <div class="confetti c1"></div>
-        <div class="confetti c2"></div>
-        <div class="confetti c3"></div>
-        <div class="confetti c4"></div>
-        <div class="confetti c5"></div>
-        <div class="confetti c6"></div>
-        <div class="confetti c7"></div>
-        <div class="confetti c8"></div>
-        <div class="confetti c9"></div>
-        <div class="confetti c10"></div>
-      </div>
-
       <div class="photo-overlay">
         <h1 class="script-title-white">Happy Birthday! 🎉</h1>
         <p class="sub-text">I hope this little gift will make you happy ❤️</p>
