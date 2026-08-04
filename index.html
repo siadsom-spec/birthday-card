@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy-bartey</title>
+  <title>Happy Birthday Surprise</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Plus+Jakarta+Sans:wght@400;600;700;800;900&family=Amiri:wght@400;700&family=Dancing+Script:wght@600;700&family=Pacifico&family=Reenie+Beanie&family=Cairo:wght@400;700&family=Readex+Pro:wght@400;600&family=Cinzel:wght@600&family=Permanent+Marker&family=Sacramento&family=Bubblegum+Sans&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
-  <!-- GSAP & Three.js Libraries for 3D Particle Cake Animation -->
+  <!-- GSAP & Three.js Libraries -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
@@ -457,6 +457,130 @@
     .edit-active-only { display: none !important; }
     .editing-mode-active .edit-active-only { display: inline-flex !important; align-items: center; gap: 4px; }
 
+    /* CAKE BOGGA - SECTIONS & ANIMATION SIDA FIIDIYOWGA */
+    .cake-show-page {
+      background: radial-gradient(circle at center, #1b002c 0%, #05000c 100%);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .cake-display-container {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 20px;
+      animation: fadeInScale 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    .cake-wrapper {
+      position: relative;
+      width: 140px;
+      height: 120px;
+      margin-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      animation: bounceCake 2s infinite ease-in-out;
+    }
+
+    .candle {
+      width: 10px;
+      height: 30px;
+      background: linear-gradient(to bottom, #ff4081, #ffffff);
+      border-radius: 4px;
+      position: absolute;
+      top: -20px;
+      z-index: 3;
+    }
+
+    .candle-flame {
+      width: 14px;
+      height: 20px;
+      background: radial-gradient(ellipse at center, #ffeb3b 0%, #ff5722 70%, transparent 100%);
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      position: absolute;
+      top: -38px;
+      z-index: 4;
+      animation: flameFlicker 0.6s infinite alternate ease-in-out;
+      box-shadow: 0 0 15px #ffeb3b, 0 0 25px #ff5722;
+    }
+
+    .cake-top-layer {
+      width: 90px;
+      height: 30px;
+      background: #ffb6c1;
+      border-radius: 12px 12px 4px 4px;
+      box-shadow: inset 0 -4px 0 rgba(0,0,0,0.1);
+      z-index: 3;
+    }
+
+    .cake-middle-layer {
+      width: 120px;
+      height: 35px;
+      background: #ff69b4;
+      border-radius: 8px 8px 4px 4px;
+      margin-top: -5px;
+      box-shadow: inset 0 -4px 0 rgba(0,0,0,0.1);
+      z-index: 2;
+    }
+
+    .cake-bottom-layer {
+      width: 150px;
+      height: 40px;
+      background: #ff1493;
+      border-radius: 8px 8px 12px 12px;
+      margin-top: -5px;
+      box-shadow: 0 8px 25px rgba(255, 20, 147, 0.6);
+      z-index: 1;
+    }
+
+    .cake-glow-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 42px;
+      color: #ffffff;
+      text-shadow: 0 0 10px #ff1493, 0 0 20px #ff1493, 0 0 40px #ff69b4;
+      letter-spacing: 1px;
+      margin-top: 5px;
+      animation: textGlowPulse 1.5s infinite alternate;
+    }
+
+    .cake-wishes-sub {
+      font-size: 14px;
+      color: #e0b0ff;
+      opacity: 0.9;
+      max-width: 280px;
+    }
+
+    .sparkle-btn {
+      box-shadow: 0 0 20px rgba(255, 20, 147, 0.8);
+      transition: transform 0.2s;
+    }
+    .sparkle-btn:hover {
+      transform: scale(1.08);
+    }
+
+    @keyframes flameFlicker {
+      0% { transform: scale(1) rotate(-2deg); opacity: 0.9; }
+      100% { transform: scale(1.15) rotate(2deg); opacity: 1; }
+    }
+
+    @keyframes bounceCake {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes textGlowPulse {
+      0% { text-shadow: 0 0 10px #ff1493, 0 0 20px #ff1493; }
+      100% { text-shadow: 0 0 20px #ff69b4, 0 0 35px #ff1493, 0 0 50px #ffffff; }
+    }
+
     .sub-card-page { background: radial-gradient(circle, #4a000e 0%, #120004 100%); flex-direction: column; padding: 30px 20px; text-align: center; color: #ffffff; gap: 15px; position: relative; overflow: hidden; }
     .sub-card-box { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2); padding: 30px 20px; border-radius: 20px; max-width: 340px; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 15px; }
     .card-icon { font-size: 60px; animation: floatEffect 2s infinite; }
@@ -465,16 +589,11 @@
 </head>
 <body>
 
-  <!-- Hidden SVG Path oo koodka Three.js/GSAP ka tixraacayo -->
-  <svg style="display:none;">
-    <path id="cakeParticlePath" d="M10,80 Q50,10 90,80 T170,80" />
-  </svg>
-
   <div id="audioPlayerContainer"></div>
   <input type="file" id="imageUploader" accept="image/*" style="display: none;">
   <input type="file" id="audioFileUploader" accept="audio/*,video/*" style="display: none;">
 
-  <!-- Batoonka Music-ka -->
+  <!-- Music Button -->
   <button id="musicToggleBtn" class="btn-music-toggle" onclick="togglePlayMusic()">
     <span id="musicIcon">🔊</span> <span id="musicText">Music On</span>
   </button>
@@ -483,6 +602,7 @@
     🔥 Created with Love
   </a>
 
+  <!-- PAGE LOADING -->
   <div id="page-loading" class="page active">
     <h1 id="loaderTitle" class="loader-title">Welcome ❤️</h1>
     <div id="countdownNum" class="countdown-number">10</div>
@@ -492,6 +612,7 @@
     <p id="loadingText" class="loading-text">LOADING YOUR SURPRISE...</p>
   </div>
 
+  <!-- PAGE 1 -->
   <div id="page-1" class="page">
     <div class="envelope-card">
       <h1 class="greeting-title">Happy Birthday!</h1>
@@ -504,6 +625,7 @@
     </div>
   </div>
 
+  <!-- PAGE 2 -->
   <div id="page-2" class="page">
     <canvas id="fireworksCanvas"></canvas>
     <button class="btn-back" onclick="openPageWithCountdown('page-1', 1)">← Back</button>
@@ -515,6 +637,7 @@
     </div>
   </div>
 
+  <!-- PAGE 3 -->
   <div id="page-3" class="page">
     <button class="btn-back" onclick="openPageWithCountdown('page-2', 1)">← Back</button>
     <h1 class="options-title">Choose Your Gift 🎁</h1>
@@ -526,6 +649,7 @@
     </div>
   </div>
 
+  <!-- PAGE MESSAGE -->
   <div id="page-message" class="page">
     <button class="btn-back" onclick="openPageWithCountdown('page-3', 1)">← Back</button>
     <button class="btn-finish-top creator-only" id="finishBtnMessage" onclick="saveToFirebaseAndGetLink()">✨ Finish</button>
@@ -548,6 +672,7 @@
     </div>
   </div>
 
+  <!-- PAGE LETTER -->
   <div id="page-letter" class="page">
     <button class="btn-back" onclick="openPageWithCountdown('page-message', 1)">← Back</button>
     <button class="btn-finish-top creator-only" id="finishBtnLetter" onclick="saveToFirebaseAndGetLink()">✨ Finish</button>
@@ -569,21 +694,28 @@
     </div>
   </div>
 
-  <!-- PAGE CAKE OO OO LEH 3D PARTICLE ANIMATION-KA THREE.JS & GSAP -->
-  <div id="page-cake" class="page sub-card-page">
+  <!-- PAGE CAKE (Kii Fiidiyowga Ooka Kale ah) -->
+  <div id="page-cake" class="page cake-show-page">
     <button class="btn-back" onclick="openPageWithCountdown('page-3', 1)">← Back</button>
     
-    <!-- Canvas-ka Three.js uu ku sawirayo particles-ka -->
     <canvas id="cake3DCanvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none;"></canvas>
 
-    <div class="sub-card-box" style="position: relative; z-index: 5;">
-      <div class="card-icon">🎂✨</div>
-      <h1 class="big-title" style="font-size: 45px;">Make A Wish!</h1>
-      <p style="font-size: 14px; opacity: 0.9;">May all your dreams and wishes come true today and forever ❤️</p>
-      <a href="https://wa.me/" target="_blank" class="btn-finish-link">Send Wish 🎁</a>
+    <div class="cake-display-container">
+      <div class="cake-wrapper">
+        <div class="candle-flame"></div>
+        <div class="candle"></div>
+        <div class="cake-top-layer"></div>
+        <div class="cake-middle-layer"></div>
+        <div class="cake-bottom-layer"></div>
+      </div>
+
+      <h1 class="cake-glow-title">Happy Birthday my Love! ❤️</h1>
+      <p class="cake-wishes-sub">May all your dreams come true today and forever ✨</p>
+      <a href="https://wa.me/" target="_blank" class="btn-finish-link sparkle-btn">Send Wish 🎁</a>
     </div>
   </div>
 
+  <!-- PAGE GIFT -->
   <div id="page-gift" class="page sub-card-page">
     <button class="btn-back" onclick="openPageWithCountdown('page-3', 1)">← Back</button>
     <div class="sub-card-box">
@@ -594,6 +726,7 @@
     </div>
   </div>
 
+  <!-- MODALS -->
   <div id="fontModal" class="custom-font-modal">
     <div class="link-modal-content">
       <h3 style="font-size: 18px;">✨ Dooro Nooca Farta (Font)</h3>
@@ -677,6 +810,7 @@
     </div>
   </div>
 
+  <!-- FIREBASE MODULE -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -1063,7 +1197,7 @@
     });
   </script>
 
-  <!-- SCRIPTS FOR FIREWORKS & THREE.JS / GSAP ANIMATIONS -->
+  <!-- JS SCRIPTS FOR PAGE TRANSITIONS, FIREWORKS & THREE.JS SPARKLES -->
   <script>
     let timerInterval = null;
 
@@ -1101,7 +1235,7 @@
       }, 1000);
     }
 
-    /* FIREWORKS ANIMATION AUTOMATIC SYSTEM FOR PAGE 2 */
+    /* FIREWORKS SYSTEM */
     function initFireworksCanvas() {
       const canvas = document.getElementById('fireworksCanvas');
       const ctx = canvas.getContext('2d');
@@ -1119,7 +1253,6 @@
           this.y = canvas.height;
           this.targetY = Math.random() * (canvas.height * 0.4) + 50;
           this.speed = Math.random() * 3 + 5;
-          this.angle = Math.atan2(this.targetY - this.y, 0);
           this.particles = [];
           this.exploded = false;
           this.color = `hsl(${Math.random() * 360}, 100%, 60%)`;
@@ -1200,7 +1333,7 @@
       animate();
     }
 
-    /* THREE.JS & GSAP PARTICLE ANIMATION FOR CAKE BOGGA (#page-cake) */
+    /* THREE.JS DYNAMIC SPARKLES ANIMATION FOR CAKE BOGGA */
     function initCakeParticleAnimation() {
       const canvas = document.getElementById('cake3DCanvas');
       if (!canvas) return;
@@ -1212,59 +1345,62 @@
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setPixelRatio(window.devicePixelRatio);
 
+      const particlesCount = 250;
       const geometry = new THREE.BufferGeometry();
-      const vertices = [];
+      const positions = new Float32Array(particlesCount * 3);
+      const colors = new Float32Array(particlesCount * 3);
 
-      const path = document.querySelector("#cakeParticlePath");
-      const length = path ? path.getTotalLength() : 400;
+      const colorOptions = [
+        new THREE.Color(0xff1493),
+        new THREE.Color(0xffeb3b),
+        new THREE.Color(0xffffff),
+        new THREE.Color(0x9c27b0)
+      ];
 
-      const tl = gsap.timeline();
+      for (let i = 0; i < particlesCount * 3; i += 3) {
+        positions[i] = (Math.random() - 0.5) * 600;
+        positions[i + 1] = (Math.random() - 0.5) * 600;
+        positions[i + 2] = (Math.random() - 0.5) * 400;
 
-      for (let i = 0; i < length; i += 0.1) {
-        let point = { x: (Math.random() - 0.5) * 300, y: (Math.random() - 0.5) * 300 };
-        if (path) {
-          point = path.getPointAtLength(i);
-        }
-
-        const vector = new THREE.Vector3(point.x, -point.y, 0);
-
-        vector.x += (Math.random() - 0.5) * 30;
-        vector.y += (Math.random() - 0.5) * 30;
-        vector.z += (Math.random() - 0.5) * 70;
-
-        vertices.push(vector.x, vector.y, vector.z);
-
-        tl.from(vector, {
-          x: 600 / 2,
-          y: -552 / 2,
-          z: 0,
-          ease: "power2.inOut",
-          duration: Math.random() * 3 + 2
-        }, i * 0.002);
+        const chosenColor = colorOptions[Math.floor(Math.random() * colorOptions.length)];
+        colors[i] = chosenColor.r;
+        colors[i + 1] = chosenColor.g;
+        colors[i + 2] = chosenColor.b;
       }
 
-      geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
       const material = new THREE.PointsMaterial({
-        color: 0xff1493,
-        size: 3,
+        size: 4,
+        vertexColors: true,
         transparent: true,
-        opacity: 0.8
+        opacity: 0.85
       });
 
-      const particles = new THREE.Points(geometry, material);
-      scene.add(particles);
+      const particleSystem = new THREE.Points(geometry, material);
+      scene.add(particleSystem);
 
-      camera.position.z = 450;
+      camera.position.z = 400;
 
-      function animateCake() {
-        requestAnimationFrame(animateCake);
-        particles.rotation.y += 0.005;
-        particles.rotation.x += 0.002;
+      gsap.to(particleSystem.rotation, {
+        y: Math.PI * 2,
+        duration: 25,
+        repeat: -1,
+        ease: "none"
+      });
+
+      function animateSparkles() {
+        requestAnimationFrame(animateSparkles);
+        const pos = geometry.attributes.position.array;
+        for (let i = 1; i < particlesCount * 3; i += 3) {
+          pos[i] += Math.sin(Date.now() * 0.001 + pos[i - 1]) * 0.3;
+        }
+        geometry.attributes.position.needsUpdate = true;
         renderer.render(scene, camera);
       }
-      
-      animateCake();
+
+      animateSparkles();
     }
   </script>
 
