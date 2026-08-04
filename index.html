@@ -399,7 +399,6 @@
       padding: 5px;
     }
 
-    /* Standardized & Organized Control Panel to prevent overlaps */
     .letter-controls {
       position: absolute;
       top: 10px;
@@ -471,7 +470,7 @@
 
   <div id="audioPlayerContainer"></div>
   <input type="file" id="imageUploader" accept="image/*" style="display: none;">
-  <input type="file" id="audioFileUploader" accept="audio/*,video/*" style="display: none;" onchange="handleAudioFileUpload(event)">
+  <input type="file" id="audioFileUploader" accept="audio/*,video/*" style="display: none;">
 
   <button id="musicToggleBtn" class="btn-music-toggle" onclick="togglePlayMusic()">
     <span id="musicIcon">🔊</span> <span id="musicText">Music On</span>
@@ -767,13 +766,15 @@
         window.customAudioData = e.target.result;
         window.musicLinkValue = ""; 
         window.isMusicPlaying = true;
-        playAudioData(window.customAudioData);
-        updateMusicButtonUI();
+        window.playAudioData(window.customAudioData);
+        window.updateMusicButtonUI();
         alert("Feylkii muusigga si guul leh ayaa loo geliyay! 🎵");
         closeMusicModal();
       };
       reader.readAsDataURL(file);
     };
+
+    document.getElementById('audioFileUploader').addEventListener('change', window.handleAudioFileUpload);
 
     window.saveMusicLinkFromInput = function() {
       const linkVal = document.getElementById('musicLinkInput').value.trim();
@@ -788,8 +789,8 @@
       window.musicLinkValue = linkVal;
       window.customAudioData = ""; 
       window.isMusicPlaying = true;
-      renderMusicPlayer(window.musicLinkValue);
-      updateMusicButtonUI();
+      window.renderMusicPlayer(window.musicLinkValue);
+      window.updateMusicButtonUI();
       alert("✅ Guul! Link-ga heesta waa la aqbalay oo waa la keydiyay! ❤️");
       closeMusicModal();
     };
@@ -840,9 +841,9 @@
         musicIcon.innerText = "🔊";
         musicText.innerText = "Music On";
         if (window.customAudioData) {
-          playAudioData(window.customAudioData);
+          window.playAudioData(window.customAudioData);
         } else if (window.musicLinkValue) {
-          renderMusicPlayer(window.musicLinkValue);
+          window.renderMusicPlayer(window.musicLinkValue);
         }
       }
     };
@@ -991,10 +992,10 @@
       const startMusicOnClick = () => {
         if (!window.isMusicPlaying) {
           window.isMusicPlaying = true;
-          updateMusicButtonUI();
+          window.updateMusicButtonUI();
         }
-        if (window.customAudioData) playAudioData(window.customAudioData);
-        if (window.musicLinkValue) renderMusicPlayer(window.musicLinkValue);
+        if (window.customAudioData) window.playAudioData(window.customAudioData);
+        if (window.musicLinkValue) window.renderMusicPlayer(window.musicLinkValue);
       };
       document.body.addEventListener('click', startMusicOnClick, { once: true });
 
@@ -1036,15 +1037,15 @@
             if (data.bgAudio) {
               window.customAudioData = data.bgAudio;
               window.isMusicPlaying = true;
-              playAudioData(window.customAudioData);
-              updateMusicButtonUI();
+              window.playAudioData(window.customAudioData);
+              window.updateMusicButtonUI();
             }
 
             if (data.musicLink) {
               window.musicLinkValue = data.musicLink;
               window.isMusicPlaying = true;
-              renderMusicPlayer(window.musicLinkValue);
-              updateMusicButtonUI();
+              window.renderMusicPlayer(window.musicLinkValue);
+              window.updateMusicButtonUI();
             }
 
             if (data.s1) document.querySelector('.slot-1').innerHTML = `<img src="${data.s1}">`;
@@ -1059,7 +1060,7 @@
         }
       }
 
-      openPageWithCountdown('page-1', 10);
+      window.openPageWithCountdown('page-1', 10);
     });
   </script>
 
@@ -1098,8 +1099,8 @@
           document.getElementById(targetPageId).classList.add('active');
           
           if (window.isMusicPlaying) {
-            if (window.customAudioData && typeof playAudioData === 'function') playAudioData(window.customAudioData);
-            if (window.musicLinkValue && typeof renderMusicPlayer === 'function') renderMusicPlayer(window.musicLinkValue);
+            if (window.customAudioData && typeof window.playAudioData === 'function') window.playAudioData(window.customAudioData);
+            if (window.musicLinkValue && typeof window.renderMusicPlayer === 'function') window.renderMusicPlayer(window.musicLinkValue);
           }
         }
       }, 1000);
