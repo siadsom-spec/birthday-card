@@ -399,17 +399,22 @@
       padding: 5px;
     }
 
+    /* Standardized & Organized Control Panel to prevent overlaps */
     .letter-controls {
       position: absolute;
       top: 10px;
-      right: 15px;
+      left: 10px;
+      right: 10px;
       display: flex;
       flex-wrap: wrap;
-      gap: 5px;
+      gap: 6px;
       z-index: 50;
-      max-width: 250px;
       justify-content: flex-end;
       align-items: center;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 6px 10px;
+      border-radius: 10px;
+      backdrop-filter: blur(4px);
     }
 
     .btn-edit-text-toggle, .font-trigger-btn, .anim-trigger-btn, .music-link-btn, .custom-color-picker, .custom-size-input {
@@ -421,17 +426,17 @@
       font-size: 10px;
       font-weight: 800;
       cursor: pointer;
-      box-shadow: 0 3px 10px rgba(255, 20, 147, 0.4);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
       transition: 0.2s;
     }
     .btn-edit-text-toggle:hover, .music-link-btn:hover, .font-trigger-btn:hover, .anim-trigger-btn:hover { transform: scale(1.05); }
 
     .font-trigger-btn, .anim-trigger-btn { background: #111; border: 1px solid #ff1493; color: #fff; }
-    .custom-color-picker { width: 26px; height: 24px; padding: 0; border: 1px solid #fff; cursor: pointer; }
-    .custom-size-input { width: 40px; background: #111; border: 1px solid #ff1493; text-align: center; color: #fff; }
+    .custom-color-picker { width: 26px; height: 24px; padding: 0; border: 1px solid #fff; cursor: pointer; border-radius: 4px; }
+    .custom-size-input { width: 42px; background: #111; border: 1px solid #ff1493; text-align: center; color: #fff; border-radius: 4px; }
 
     .edit-active-only { display: none !important; }
-    .editing-mode-active .edit-active-only { display: inline-block !important; }
+    .editing-mode-active .edit-active-only { display: inline-flex !important; align-items: center; gap: 2px; }
 
     .photo-action-container {
       position: absolute;
@@ -546,13 +551,10 @@
     <div class="letter-wrapper-new" id="letterWrapperBox">
       <div class="letter-controls creator-only">
         <button class="music-link-btn edit-active-only" onclick="openMusicModal()">🎵 Music</button>
-        
         <button class="font-trigger-btn edit-active-only" id="currentFontBtn" onclick="openFontModal()">Font</button>
         <button class="anim-trigger-btn edit-active-only" id="currentAnimBtn" onclick="openAnimModal()">Animation</button>
-
         <input type="number" id="fontSizeSelector" class="custom-size-input edit-active-only" value="18" min="10" max="32" onchange="changeFontSize(this.value)" title="Font Size">
         <input type="color" id="fontColorSelector" class="custom-color-picker edit-active-only" value="#222222" onchange="changeFontColor(this.value)" title="Font Color">
-
         <button class="btn-edit-text-toggle" onclick="toggleTextEdit()">✏️ Edit</button>
       </div>
 
@@ -1106,3 +1108,4 @@
 
 </body>
 </html>
+
