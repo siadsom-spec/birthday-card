@@ -98,31 +98,31 @@
     }
     .btn-back:hover { background: rgba(255, 20, 147, 0.8); }
 
+    /* Music button oo kor la dhigay hab qaabaysan */
     .btn-music-toggle {
       position: fixed;
-      top: 60px;
+      top: 15px;
       right: 15px;
-      z-index: 150;
-      background: rgba(0, 0, 0, 0.8);
+      z-index: 200;
+      background: rgba(0, 0, 0, 0.85);
       color: #fff;
       border: 1px solid #ff1493;
-      padding: 7px 12px;
+      padding: 8px 14px;
       border-radius: 20px;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 800;
       cursor: pointer;
-      backdrop-filter: blur(8px);
       display: flex;
       align-items: center;
-      gap: 5px;
-      box-shadow: 0 4px 15px rgba(255, 20, 147, 0.4);
+      gap: 6px;
+      box-shadow: 0 4px 15px rgba(255, 20, 147, 0.5);
       transition: 0.3s;
     }
     .btn-music-toggle:hover { background: rgba(255, 20, 147, 0.8); }
 
     .btn-finish-top {
       position: fixed;
-      top: 15px;
+      top: 60px;
       right: 15px;
       z-index: 150;
       background: linear-gradient(135deg, #00c853, #b2ff59);
@@ -288,7 +288,7 @@
     .ribbon-seal::after { right: 1px; transform: rotate(25deg) scaleX(-1); }
     .instruction-text { font-size: 12px; color: #777777; font-weight: 600; }
 
-    /* --- PAGE 2 SAWAIRKA CUSTOM & BULULER (BLUR) --- */
+    /* --- PAGE 2 SAWIRKA CADAN AH LA'AAN BLUR --- */
     #page-2 {
       position: relative;
       flex-direction: column;
@@ -309,16 +309,16 @@
       background-image: url('https://i.postimg.cc/xdtkf7J0/da1478c736e944eb8f1ec711d8c60617.webp');
       background-size: cover;
       background-position: center;
-      filter: blur(10px) brightness(0.7); /* Bululer ku samee background-ka */
-      transform: scale(1.1); /* Geesaha cawrawga ah si ayan u muuqan */
+      /* Dhafoor/Blur-kii waa la bixiyay si sawirku u ahaado mid aad u cad */
+      filter: none; 
       z-index: 1;
     }
 
     .card-details-box { 
       position: relative;
       z-index: 2;
-      background: rgba(0, 0, 0, 0.55); 
-      border: 1px solid rgba(255, 20, 147, 0.5); 
+      background: rgba(0, 0, 0, 0.75); 
+      border: 1px solid rgba(255, 20, 147, 0.6); 
       padding: 35px 20px; 
       border-radius: 20px; 
       max-width: 340px; 
@@ -328,8 +328,7 @@
       align-items: center; 
       gap: 15px; 
       animation: fadeInScale 0.4s ease; 
-      backdrop-filter: blur(12px); /* Bululer dheeraad ah oo kaardhka dhexdiisa ah */
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
     }
 
     #page-3 { background-image: radial-gradient(circle, #5a0010 0%, #1a0005 100%); flex-direction: column; justify-content: center; padding: 20px; gap: 25px; }
@@ -513,6 +512,7 @@
   <input type="file" id="imageUploader" accept="image/*" style="display: none;">
   <input type="file" id="audioFileUploader" accept="audio/*,video/*" style="display: none;">
 
+  <!-- Batoonka Muusigga oo xagal sare jooga -->
   <button id="musicToggleBtn" class="btn-music-toggle" onclick="togglePlayMusic()">
     <span id="musicIcon">🔊</span> <span id="musicText">Music On</span>
   </button>
@@ -735,6 +735,7 @@
     window.customAudioData = "";
     window.musicLinkValue = "";
     window.isMusicPlaying = true;
+    window.audioInitialized = false;
     window.selectedFontFamily = "Amiri, serif";
     window.selectedTextAnimation = "anim-fade";
 
@@ -807,6 +808,7 @@
         window.customAudioData = e.target.result;
         window.musicLinkValue = ""; 
         window.isMusicPlaying = true;
+        window.audioInitialized = false;
         window.playAudioData(window.customAudioData);
         window.updateMusicButtonUI();
         alert("Feylkii muusigga si guul leh ayaa loo geliyay! 🎵");
@@ -830,41 +832,53 @@
       window.musicLinkValue = linkVal;
       window.customAudioData = ""; 
       window.isMusicPlaying = true;
+      window.audioInitialized = false;
       window.renderMusicPlayer(window.musicLinkValue);
       window.updateMusicButtonUI();
       alert("✅ Guul! Link-ga heesta waa la aqbalay oo waa la keydiyay! ❤️");
       closeMusicModal();
     };
 
+    /* Habka ciyaarista muusigga joogtada ah ee aan damayneyn inta la marayo bogagga */
     window.playAudioData = function(dataUrl) {
       if (!window.isMusicPlaying || !dataUrl) return;
       const container = document.getElementById('audioPlayerContainer');
-      container.innerHTML = `<audio autoplay loop><source src="${dataUrl}" type="audio/mp4"></audio>`;
+      if (!container.innerHTML || !window.audioInitialized) {
+        container.innerHTML = `<audio id="mainAudioElement" autoplay loop><source src="${dataUrl}" type="audio/mp4"></audio>`;
+        window.audioInitialized = true;
+      } else {
+        const aud = document.getElementById('mainAudioElement');
+        if (aud && aud.paused) aud.play();
+      }
     };
 
     window.renderMusicPlayer = function(link) {
       if (!window.isMusicPlaying || !link) return;
       const container = document.getElementById('audioPlayerContainer');
 
-      if (link.includes("youtube.com") || link.includes("youtu.be")) {
-        let videoId = "";
-        if (link.includes("youtu.be/")) {
-          videoId = link.split("youtu.be/")[1]?.split("?")[0];
-        } else if (link.includes("watch?v=")) {
-          videoId = link.split("watch?v=")[1]?.split("&")[0];
-        }
-        if (videoId) {
-          container.innerHTML = `<iframe width="0" height="0" src="https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1" allow="autoplay"></iframe>`;
+      if (!container.innerHTML || !window.audioInitialized) {
+        if (link.includes("youtube.com") || link.includes("youtu.be")) {
+          let videoId = "";
+          if (link.includes("youtu.be/")) {
+            videoId = link.split("youtu.be/")[1]?.split("?")[0];
+          } else if (link.includes("watch?v=")) {
+            videoId = link.split("watch?v=")[1]?.split("&")[0];
+          }
+          if (videoId) {
+            container.innerHTML = `<iframe width="0" height="0" src="https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1" allow="autoplay"></iframe>`;
+            window.audioInitialized = true;
+            return;
+          }
+        } 
+        else if (link.includes("spotify.com")) {
+          let embedUrl = link.replace("/track/", "/embed/track/").replace("/album/", "/embed/album/");
+          container.innerHTML = `<iframe src="${embedUrl}?utm_source=generator&theme=0" width="0" height="0" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>`;
+          window.audioInitialized = true;
           return;
         }
-      } 
-      else if (link.includes("spotify.com")) {
-        let embedUrl = link.replace("/track/", "/embed/track/").replace("/album/", "/embed/album/");
-        container.innerHTML = `<iframe src="${embedUrl}?utm_source=generator&theme=0" width="0" height="0" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>`;
-        return;
+        container.innerHTML = `<audio id="mainAudioElement" autoplay loop><source src="${link}"></audio>`;
+        window.audioInitialized = true;
       }
-
-      container.innerHTML = `<audio autoplay loop><source src="${link}"></audio>`;
     };
 
     window.togglePlayMusic = function() {
@@ -875,6 +889,7 @@
       if (window.isMusicPlaying) {
         window.isMusicPlaying = false;
         container.innerHTML = "";
+        window.audioInitialized = false;
         musicIcon.innerText = "🔇";
         musicText.innerText = "Music Off";
       } else {
@@ -993,7 +1008,7 @@
         btnMsg.innerText = "✨ Done!";
         btnLet.innerText = "✨ Done!";
       } catch (error) {
-        alert("Cillad ayaa dhacday (Xogta ama muusiggu waa weyn yahay): " + error.message);
+        alert("Cillad ayaa dhacday: " + error.message);
         btnMsg.innerText = "✨ Finish";
         btnLet.innerText = "✨ Finish";
       }
@@ -1139,6 +1154,7 @@
           document.getElementById('page-loading').classList.remove('active');
           document.getElementById(targetPageId).classList.add('active');
           
+          /* Heestu ma is taageyso/dameyso marka bogagga la beddelo */
           if (window.isMusicPlaying) {
             if (window.customAudioData && typeof window.playAudioData === 'function') window.playAudioData(window.customAudioData);
             if (window.musicLinkValue && typeof window.renderMusicPlayer === 'function') window.renderMusicPlayer(window.musicLinkValue);
