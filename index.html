@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy Birthday Gift Experience</title>
+  <title>Happy-bartey</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Plus+Jakarta+Sans:wght@400;600;700;800;900&family=Amiri:wght@400;700&family=Dancing+Script:wght@600;700&family=Pacifico&family=Reenie+Beanie&family=Cairo:wght@400;700&family=Readex+Pro:wght@400;600&family=Cinzel:wght@600&family=Permanent+Marker&family=Sacramento&family=Bubblegum+Sans&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
   <style>
     * {
@@ -21,11 +21,48 @@
       height: 100%;
       margin: 0;
       padding: 0;
-      overflow: hidden;
       background-color: #000;
+      overflow-x: hidden;
     }
 
-    /* CONTROLLING PAGES */
+    @keyframes fadeInScale {
+      0% { opacity: 0; transform: scale(0.85) translateY(20px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    @keyframes floatEffect {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 15px rgba(255, 20, 147, 0.4); }
+      50% { box-shadow: 0 0 30px rgba(255, 20, 147, 0.8); }
+    }
+
+    @keyframes bounceAnim {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-12px) scale(1.03); }
+    }
+
+    @keyframes photoPopIn {
+      0% { opacity: 0; transform: scale(0.3) translateY(40px) rotate(-10deg); }
+      70% { transform: scale(1.08) translateY(-5px) rotate(3deg); }
+      100% { opacity: 1; transform: scale(1) translateY(0) rotate(0deg); }
+    }
+
+    @keyframes touchPulseEffect {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.06); box-shadow: 0 0 25px #ff1493; }
+      100% { transform: scale(1); }
+    }
+
+    .anim-fade { animation: fadeInScale 0.8s ease forwards; }
+    .anim-bounce { animation: bounceAnim 1.5s infinite ease-in-out; }
+    .anim-float { animation: floatEffect 2s infinite ease-in-out; }
+    .anim-glow { animation: pulseGlow 1.5s infinite; }
+    .anim-touch { animation: touchPulseEffect 1.2s infinite ease-in-out; }
+
     .page {
       display: none;
       width: 100vw;
@@ -35,348 +72,1037 @@
       position: fixed;
       top: 0;
       left: 0;
+      z-index: 10;
     }
 
     .page.active {
       display: flex;
-      animation: fadeIn 0.6s ease-in-out;
+      animation: fadeInScale 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.97); }
-      to { opacity: 1; transform: scale(1); }
-    }
-
-    /* ================= PAGE 1: ENVELOPE CARD ================= */
-    #page-1 {
-      background-image: radial-gradient(circle, #a80000 0%, #500000 100%);
-      padding: 20px;
-    }
-
-    .envelope-card {
-      background-color: #fdfbf7;
-      width: 100%;
-      max-width: 360px;
-      border-radius: 18px;
-      padding: 40px 20px 30px 20px;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-
-    .greeting-title {
-      font-family: 'Great Vibes', cursive;
-      font-size: 44px;
-      color: #9e1b1b;
-      margin-bottom: 25px;
-    }
-
-    .envelope-box {
-      width: 100%;
-      max-width: 260px;
-      height: 180px;
-      background: #ffffff;
-      border-radius: 12px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 25px;
-      border: 1px solid #f0f0f0;
-      box-shadow: inset 0 0 10px rgba(0,0,0,0.03);
-    }
-
-    .red-envelope {
-      width: 85%;
-      height: 110px;
-      background-color: #9e1b1b;
-      border-radius: 8px;
-      position: relative;
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s ease;
-    }
-
-    .red-envelope:hover {
-      transform: scale(1.05);
-    }
-
-    .red-envelope::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      width: 0;
-      height: 0;
-      border-left: 105px solid transparent;
-      border-right: 105px solid transparent;
-      border-top: 58px solid #7a1212;
-    }
-
-    .ribbon-seal {
-      width: 38px;
-      height: 30px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .ribbon-seal::before,
-    .ribbon-seal::after {
-      content: '';
-      position: absolute;
-      width: 16px;
-      height: 20px;
-      background: #ffffff;
-      border-radius: 50% 50% 0 50%;
-      top: 4px;
-    }
-
-    .ribbon-seal::before {
-      left: 1px;
-      transform: rotate(-25deg);
-    }
-
-    .ribbon-seal::after {
-      right: 1px;
-      transform: rotate(25deg) scaleX(-1);
-    }
-
-    .instruction-text {
-      font-size: 12px;
-      color: #777777;
-      font-weight: 600;
-    }
-
-    /* ================= PAGE 2: FULL IMAGE (NO RED BOX) ================= */
-    #page-2 {
-      background-image: url('https://i.postimg.cc/jqkNPbJ1/da1478c736e944eb8f1ec711d8c60617.webp');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      width: 100vw;
-      height: 100vh;
-      position: fixed;
-      top: 0;
-      left: 0;
-    }
-
-    #confettiCanvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    /* BACK BUTTON */
     .btn-back {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      z-index: 10;
-      background: rgba(0, 0, 0, 0.4);
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      z-index: 100;
+      background: rgba(0, 0, 0, 0.7);
       color: #fff;
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.4);
       padding: 8px 16px;
       border-radius: 20px;
       font-size: 12px;
       font-weight: 700;
       cursor: pointer;
       backdrop-filter: blur(8px);
-      transition: background 0.2s;
+      transition: 0.3s;
     }
+    .btn-back:hover { background: rgba(255, 20, 147, 0.8); }
 
-    .btn-back:hover {
-      background: rgba(0, 0, 0, 0.7);
-    }
-
-    /* OVERLAY TEXT CONTAINER (NO RED BOX / TRANSPARENT) */
-    .text-overlay-container {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      color: #ffffff;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-      text-shadow: 0 4px 15px rgba(0, 0, 0, 0.8), 0 0 25px rgba(255, 255, 255, 0.4);
-      animation: floatPulse 3s infinite ease-in-out;
-    }
-
-    /* ANIMATED TEXT EFFECT */
-    @keyframes floatPulse {
-      0%, 100% {
-        transform: translateY(0) scale(1);
-      }
-      50% {
-        transform: translateY(-8px) scale(1.03);
-      }
-    }
-
-    .big-title {
-      font-family: 'Great Vibes', cursive;
-      font-size: 62px;
-      font-weight: 700;
-      color: #ffffff;
-      line-height: 1.1;
-      letter-spacing: 1px;
-    }
-
-    .popper-icon {
-      font-size: 36px;
-      animation: rotateBounce 2s infinite ease-in-out;
-    }
-
-    @keyframes rotateBounce {
-      0%, 100% { transform: rotate(-10deg) scale(1); }
-      50% { transform: rotate(10deg) scale(1.2); }
-    }
-
-    .big-subtitle {
-      font-size: 16px;
-      font-weight: 700;
-      color: #ffffff;
-      max-width: 320px;
-      line-height: 1.4;
-      background: rgba(0, 0, 0, 0.25);
-      padding: 8px 16px;
+    .btn-music-toggle {
+      position: fixed;
+      top: 60px;
+      right: 15px;
+      z-index: 150;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      border: 1px solid #ff1493;
+      padding: 7px 12px;
       border-radius: 20px;
-      backdrop-filter: blur(4px);
-    }
-
-    .btn-click-here {
-      background: #ffffff;
-      color: #000000;
-      border: none;
-      padding: 10px 24px;
-      border-radius: 25px;
-      font-size: 13px;
+      font-size: 11px;
       font-weight: 800;
       cursor: pointer;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-      transition: all 0.3s ease;
-      margin-top: 5px;
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      box-shadow: 0 4px 15px rgba(255, 20, 147, 0.4);
+      transition: 0.3s;
+    }
+    .btn-music-toggle:hover { background: rgba(255, 20, 147, 0.8); }
+
+    .btn-finish-top {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      z-index: 150;
+      background: linear-gradient(135deg, #00c853, #b2ff59);
+      color: #000;
+      border: 2px solid #ffffff;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0, 200, 83, 0.7);
+      backdrop-filter: blur(8px);
+      animation: pulseGlow 2s infinite;
     }
 
-    .btn-click-here:hover {
-      transform: scale(1.1);
-      background: #ffeb3b;
+    .created-by-badge {
+      position: fixed;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 150;
+      background: rgba(0, 0, 0, 0.85);
+      color: #fff;
+      border: 1px solid #ff1493;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(255, 20, 147, 0.5);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
 
-    /* LAPTOP / DESKTOP RESPONSIVE ADJUSTMENTS */
-    @media (min-width: 768px) {
-      .big-title {
-        font-size: 80px;
-      }
-      .big-subtitle {
-        font-size: 20px;
-        max-width: 450px;
-      }
-      .btn-click-here {
-        font-size: 15px;
-        padding: 12px 30px;
-      }
+    .link-modal, .music-input-modal, .custom-font-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 300;
+      justify-content: center;
+      align-items: center;
+      padding: 15px;
+      backdrop-filter: blur(5px);
     }
+
+    .link-modal-content {
+      background: linear-gradient(145deg, #161616, #0a0a0a);
+      border: 2px solid #ff1493;
+      border-radius: 24px;
+      padding: 25px 20px;
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+      color: #fff;
+      box-shadow: 0 15px 40px rgba(255, 20, 147, 0.4);
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      align-items: center;
+      animation: fadeInScale 0.3s ease;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .share-link-input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid #ff1493;
+      text-align: center;
+      font-size: 12px;
+      background: #000;
+      color: #fff;
+      outline: none;
+    }
+
+    .modal-buttons-group {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .btn-modal {
+      flex: 1;
+      padding: 12px 10px;
+      border-radius: 25px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: 0.3s;
+    }
+
+    .btn-share-whatsapp { background: linear-gradient(135deg, #25D366, #128C7E); color: #fff; }
+    .btn-copy-modal { background: linear-gradient(135deg, #ff1493, #ff69b4); color: #fff; }
+    .btn-modal:hover { transform: scale(1.05); }
+
+    .font-list-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      max-height: 320px;
+      overflow-y: auto;
+      padding-right: 5px;
+    }
+
+    .font-item-option {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 20, 147, 0.3);
+      padding: 12px 15px;
+      border-radius: 12px;
+      color: #fff;
+      cursor: pointer;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: 0.2s;
+    }
+    .font-item-option:hover, .font-item-option.selected {
+      background: rgba(255, 20, 147, 0.25);
+      border-color: #ff1493;
+    }
+
+    #page-loading {
+      background-image: radial-gradient(circle, #7a0016 0%, #2a0008 100%);
+      flex-direction: column;
+      gap: 15px;
+      color: #ffffff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .loader-title { font-family: 'Great Vibes', cursive; font-size: 44px; color: #ff80bf; }
+    .countdown-number { font-size: 90px; font-weight: 900; color: #ffffff; line-height: 1; margin: 10px 0; animation: floatEffect 1s ease-in-out infinite; }
+    
+    .progress-container { width: 80%; max-width: 280px; height: 9px; background: rgba(255, 255, 255, 0.15); border-radius: 20px; overflow: hidden; }
+    .progress-bar { width: 100%; height: 100%; background: linear-gradient(90deg, #ff1493, #ff69b4, #ffeb3b); border-radius: 20px; transition: width 1s linear; }
+    .loading-text { font-size: 14px; font-weight: 700; color: #ffb3d9; }
+
+    #page-1 { background-image: radial-gradient(circle, #a80000 0%, #500000 100%); padding: 20px; }
+    .envelope-card { background-color: #fdfbf7; width: 100%; max-width: 360px; border-radius: 18px; padding: 40px 20px 30px 20px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6); display: flex; flex-direction: column; align-items: center; text-align: center; animation: floatEffect 3s ease-in-out infinite; }
+    .greeting-title { font-family: 'Great Vibes', cursive; font-size: 44px; color: #9e1b1b; margin-bottom: 25px; }
+    .envelope-box { width: 100%; max-width: 260px; height: 180px; background: #ffffff; border-radius: 12px; display: flex; justify-content: center; align-items: center; margin-bottom: 25px; border: 1px solid #f0f0f0; }
+    .red-envelope { width: 85%; height: 110px; background-color: #9e1b1b; border-radius: 8px; position: relative; cursor: pointer; display: flex; justify-content: center; align-items: center; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); transition: transform 0.3s; }
+    .red-envelope:hover { transform: scale(1.05); }
+    .red-envelope::before { content: ''; position: absolute; top: 0; width: 0; height: 0; border-left: 105px solid transparent; border-right: 105px solid transparent; border-top: 58px solid #7a1212; }
+    .ribbon-seal { width: 38px; height: 30px; position: relative; z-index: 2; }
+    .ribbon-seal::before, .ribbon-seal::after { content: ''; position: absolute; width: 16px; height: 20px; background: #ffffff; border-radius: 50% 50% 0 50%; top: 4px; }
+    .ribbon-seal::before { left: 1px; transform: rotate(-25deg); }
+    .ribbon-seal::after { right: 1px; transform: rotate(25deg) scaleX(-1); }
+    .instruction-text { font-size: 12px; color: #777777; font-weight: 600; }
+
+    #page-2 { background-image: radial-gradient(circle, #800015 0%, #300008 100%); flex-direction: column; padding: 20px; text-align: center; color: #fff; gap: 15px; }
+    .card-details-box { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2); padding: 35px 20px; border-radius: 20px; max-width: 340px; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 15px; animation: fadeInScale 0.4s ease; backdrop-filter: blur(5px); }
+
+    #page-3 { background-image: radial-gradient(circle, #5a0010 0%, #1a0005 100%); flex-direction: column; justify-content: center; padding: 20px; gap: 25px; }
+    .options-title { font-family: 'Great Vibes', cursive; font-size: 46px; color: #ff80bf; text-align: center; animation: floatEffect 2s infinite; }
+    .options-container { display: flex; flex-direction: column; gap: 15px; width: 85%; max-width: 300px; margin: 0 auto; }
+    
+    .btn-option { 
+      background: linear-gradient(135deg, rgba(255, 20, 147, 0.25), rgba(255, 105, 180, 0.15)); 
+      border: 2px solid rgba(255, 105, 180, 0.7); 
+      color: #ffffff; 
+      padding: 16px; 
+      border-radius: 30px; 
+      font-size: 17px; 
+      font-weight: 800; 
+      cursor: pointer; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      gap: 12px; 
+      transition: 0.3s; 
+      box-shadow: 0 5px 20px rgba(255, 20, 147, 0.3);
+      animation: bounceAnim 2.5s infinite ease-in-out;
+    }
+    .btn-option:nth-child(2) { animation-delay: 0.3s; }
+    .btn-option:nth-child(3) { animation-delay: 0.6s; }
+    .btn-option:hover { 
+      background: linear-gradient(135deg, #ff1493, #ff69b4); 
+      transform: scale(1.08); 
+      box-shadow: 0 0 25px rgba(255, 20, 147, 0.9);
+    }
+
+    #page-message { background-color: #0d0d0d; overflow-y: auto; padding: 50px 10px 30px 10px; display: none; flex-direction: column; align-items: center; }
+    #page-message.active { display: flex; }
+
+    .collage-wrapper { position: relative; width: 100%; max-width: 400px; background-image: url('https://i.postimg.cc/yxGZMqF5/Picsart-26-08-03-21-36-06-808.png'); background-size: cover; background-position: center; border-radius: 12px; box-shadow: 0 15px 35px rgba(0,0,0,0.8); aspect-ratio: 9 / 16; overflow: hidden; margin: 0 auto; animation: fadeInScale 0.5s ease; }
+    
+    .polaroid-slot { position: absolute; background: rgba(17, 17, 17, 0.65); border-radius: 8px; overflow: hidden; cursor: pointer; display: flex; justify-content: center; align-items: center; border: 2px dashed rgba(255,255,255,0.6); transition: 0.3s; animation: photoPopIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) both; }
+    .slot-1 { top: 1%; right: 26%; width: 23%; height: 15%; animation-delay: 0.1s; }
+    .slot-2 { top: 3%; right: 2%; width: 23%; height: 15%; animation-delay: 0.2s; }
+    .slot-3 { top: 18%; right: 6%; width: 25%; height: 16%; animation-delay: 0.3s; }
+    .slot-4 { top: 27%; right: 2%; width: 26%; height: 17%; animation-delay: 0.4s; }
+    .slot-5 { top: 33%; right: 34%; width: 24%; height: 16%; animation-delay: 0.5s; }
+
+    .polaroid-slot:hover { border-color: #ff1493; background: rgba(255, 20, 147, 0.2); }
+    .polaroid-slot.readonly-mode { cursor: default !important; border: none !important; }
+    .polaroid-slot img, .add-photo-btn-slot img { width: 100%; height: 100%; object-fit: cover; }
+    .polaroid-slot span { color: #ffffff; font-size: 11px; font-weight: 800; text-align: center; }
+
+    .add-photo-btn-slot { 
+      position: absolute; 
+      bottom: 10%; 
+      left: 6%; 
+      width: 32%; 
+      height: 22%; 
+      background: rgba(255, 255, 255, 0.95); 
+      border: 2px dashed #ff1493; 
+      border-radius: 12px; 
+      display: flex; 
+      flex-direction: column; 
+      justify-content: center; 
+      align-items: center; 
+      cursor: pointer; 
+      overflow: hidden; 
+      transition: 0.3s; 
+      box-shadow: 0 5px 15px rgba(255, 20, 147, 0.4);
+      animation: photoPopIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.6s both;
+    }
+    .add-photo-btn-slot:hover { background: #fff; transform: scale(1.05); border-color: #ff69b4; }
+    .add-photo-btn-slot.readonly-mode { cursor: default !important; border: none !important; background: transparent !important; animation: none !important; }
+    .add-photo-text { font-size: 13px; font-weight: 900; color: #ff1493; text-align: center; line-height: 1.2; }
+
+    .floating-envelope-corner { position: absolute; bottom: 15px; right: 15px; width: 110px; background: rgba(0, 0, 0, 0.75); border: 2px solid #ff1493; border-radius: 12px; padding: 6px; display: flex; flex-direction: column; align-items: center; gap: 5px; cursor: pointer; z-index: 30; animation: floatEffect 2s infinite; }
+    .floating-envelope-corner img { width: 100%; height: 70px; object-fit: cover; border-radius: 6px; }
+    .btn-corner-click { background: #ff1493; color: #fff; border: none; border-radius: 10px; font-size: 10px; font-weight: 800; padding: 4px 8px; width: 100%; text-align: center; }
+
+    #page-letter { background-color: #000; overflow-y: auto; padding: 50px 10px 30px 10px; display: none; justify-content: center; align-items: flex-start; }
+    #page-letter.active { display: flex; }
+
+    .letter-wrapper-new { 
+      position: relative; 
+      width: 100%; 
+      max-width: 400px; 
+      background-image: url('https://i.postimg.cc/R0MrNdpD/64d90aa58e80dae7fd6171a945c4c640.jpg'); 
+      background-size: cover; 
+      background-position: center; 
+      border-radius: 12px; 
+      box-shadow: 0 15px 35px rgba(0,0,0,0.8); 
+      aspect-ratio: 9 / 16; 
+      overflow: hidden; 
+      margin: 0 auto; 
+      animation: fadeInScale 0.5s ease; 
+    }
+
+    .custom-letter-text-new {
+      position: absolute;
+      top: 26%;
+      left: 14%;
+      width: 72%;
+      height: 55%;
+      background: transparent;
+      border: none;
+      outline: none;
+      resize: none;
+      font-family: 'Amiri', serif;
+      font-size: 18px;
+      color: #222222;
+      line-height: 1.5;
+      padding: 5px;
+    }
+
+    .letter-controls {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      z-index: 50;
+      max-width: 250px;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .btn-edit-text-toggle, .font-trigger-btn, .anim-trigger-btn, .music-link-btn, .custom-color-picker, .custom-size-input {
+      background: #ff1493;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 5px 8px;
+      font-size: 10px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 3px 10px rgba(255, 20, 147, 0.4);
+      transition: 0.2s;
+    }
+    .btn-edit-text-toggle:hover, .music-link-btn:hover, .font-trigger-btn:hover, .anim-trigger-btn:hover { transform: scale(1.05); }
+
+    .font-trigger-btn, .anim-trigger-btn { background: #111; border: 1px solid #ff1493; color: #fff; }
+    .custom-color-picker { width: 26px; height: 24px; padding: 0; border: 1px solid #fff; cursor: pointer; }
+    .custom-size-input { width: 40px; background: #111; border: 1px solid #ff1493; text-align: center; color: #fff; }
+
+    .edit-active-only { display: none !important; }
+    .editing-mode-active .edit-active-only { display: inline-block !important; }
+
+    .photo-action-container {
+      position: absolute;
+      bottom: 5px;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      z-index: 40;
+    }
+    .btn-remove-active-photo {
+      background: rgba(220, 20, 60, 0.9);
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 9px;
+      font-weight: 800;
+      padding: 3px 6px;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    }
+
+    .sub-card-page { background: radial-gradient(circle, #4a000e 0%, #120004 100%); flex-direction: column; padding: 30px 20px; text-align: center; color: #ffffff; gap: 15px; }
+    .sub-card-box { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2); padding: 30px 20px; border-radius: 20px; max-width: 340px; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 15px; animation: fadeInScale 0.4s ease; }
+    .card-icon { font-size: 60px; animation: floatEffect 2s infinite; }
+    .btn-finish-link { background: linear-gradient(135deg, #ff1493, #ff4081); color: #ffffff; border: 2px solid #ffffff; padding: 12px 30px; border-radius: 30px; font-size: 15px; font-weight: 800; text-decoration: none; display: inline-block; transition: 0.3s; }
+    .btn-finish-link:hover { transform: scale(1.05); }
   </style>
 </head>
 <body>
 
-  <!-- ================= BOGGA 1-AAD ================= -->
-  <div id="page-1" class="page active">
+  <div id="audioPlayerContainer"></div>
+  <input type="file" id="imageUploader" accept="image/*" style="display: none;">
+  <input type="file" id="audioFileUploader" accept="audio/*,video/*" style="display: none;" onchange="handleAudioFileUpload(event)">
+
+  <button id="musicToggleBtn" class="btn-music-toggle" onclick="togglePlayMusic()">
+    <span id="musicIcon">🔊</span> <span id="musicText">Music On</span>
+  </button>
+
+  <a href="#" class="created-by-badge">
+    🔥 Created with Love
+  </a>
+
+  <div id="page-loading" class="page active">
+    <h1 id="loaderTitle" class="loader-title">Welcome ❤️</h1>
+    <div id="countdownNum" class="countdown-number">10</div>
+    <div class="progress-container">
+      <div id="progressBar" class="progress-bar"></div>
+    </div>
+    <p id="loadingText" class="loading-text">LOADING YOUR SURPRISE...</p>
+  </div>
+
+  <div id="page-1" class="page">
     <div class="envelope-card">
       <h1 class="greeting-title">Happy Birthday!</h1>
-      
       <div class="envelope-box">
-        <div class="red-envelope" onclick="openPage2()">
+        <div class="red-envelope" onclick="openPageWithCountdown('page-2', 1)">
           <div class="ribbon-seal"></div>
         </div>
       </div>
-
       <p class="instruction-text">Click the seal to open</p>
     </div>
   </div>
 
-  <!-- ================= BOGGA 2-AAD ================= -->
   <div id="page-2" class="page">
-    <button class="btn-back" onclick="openPage1()">&larr; Back</button>
-    <canvas id="confettiCanvas"></canvas>
-
-    <!-- NO RED BOX - DIRECT TEXT ON FULL IMAGE -->
-    <div class="text-overlay-container">
-      <h1 class="big-title">Happy Birthday!</h1>
-      <div class="popper-icon">🎉</div>
-      <p class="big-subtitle">I hope this little gift will make you happy ❤️</p>
-      <button class="btn-click-here">Click here ✨</button>
+    <button class="btn-back" onclick="openPageWithCountdown('page-1', 1)">← Back</button>
+    <div class="card-details-box">
+      <h1 style="font-family: 'Great Vibes', cursive; font-size: 42px; color: #ff80bf;">Special Moment ✨</h1>
+      <p style="font-size: 13px; opacity: 0.9; line-height: 1.5;">Waxaan kuu diyaariyay haddiyad gaar ah oo ay ka buuxaan farriimo iyo xusuus qiimo leh. Hadda guji batoonka hoose si aad u gasho!</p>
+      <button class="btn-finish-link" style="border:none; cursor:pointer;" onclick="openPageWithCountdown('page-3', 1)">Sii Soco →</button>
     </div>
   </div>
 
+  <div id="page-3" class="page">
+    <button class="btn-back" onclick="openPageWithCountdown('page-2', 1)">← Back</button>
+    <h1 class="options-title">Choose Your Gift 🎁</h1>
+
+    <div class="options-container">
+      <button class="btn-option" onclick="openPageWithCountdown('page-message', 1)"><span>💌</span> Message</button>
+      <button class="btn-option" onclick="openPageWithCountdown('page-cake', 1)"><span>🎂</span> Cake</button>
+      <button class="btn-option" onclick="openPageWithCountdown('page-gift', 1)"><span>🎁</span> Gift</button>
+    </div>
+  </div>
+
+  <div id="page-message" class="page">
+    <button class="btn-back" onclick="openPageWithCountdown('page-3', 1)">← Back</button>
+    <button class="btn-finish-top creator-only" id="finishBtnMessage" onclick="saveToFirebaseAndGetLink()">✨ Finish</button>
+
+    <div class="collage-wrapper">
+      <div class="polaroid-slot slot-1" onclick="triggerUpload(this, 's1')"><span>+ Photo 1</span></div>
+      <div class="polaroid-slot slot-2" onclick="triggerUpload(this, 's2')"><span>+ Photo 2</span></div>
+      <div class="polaroid-slot slot-3" onclick="triggerUpload(this, 's3')"><span>+ Photo 3</span></div>
+      <div class="polaroid-slot slot-4" onclick="triggerUpload(this, 's4')"><span>+ Photo 4</span></div>
+      <div class="polaroid-slot slot-5" onclick="triggerUpload(this, 's5')"><span>+ Photo 5</span></div>
+
+      <div class="add-photo-btn-slot" onclick="triggerUpload(this, 'main')">
+        <span class="add-photo-text">📷<br>+ Add Photo</span>
+      </div>
+
+      <div class="floating-envelope-corner" onclick="openPageWithCountdown('page-letter', 1)">
+        <img src="https://i.postimg.cc/bw53PMRH/392028c9e3d8353cb0076be97f7518ad.jpg" alt="Envelope">
+        <div class="btn-corner-click">Click Here ✉️</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="page-letter" class="page">
+    <button class="btn-back" onclick="openPageWithCountdown('page-message', 1)">← Back</button>
+    <button class="btn-finish-top creator-only" id="finishBtnLetter" onclick="saveToFirebaseAndGetLink()">✨ Finish</button>
+
+    <div class="letter-wrapper-new" id="letterWrapperBox">
+      <div class="letter-controls creator-only">
+        <button class="music-link-btn edit-active-only" onclick="openMusicModal()">🎵 Music</button>
+        
+        <button class="font-trigger-btn edit-active-only" id="currentFontBtn" onclick="openFontModal()">Font</button>
+        <button class="anim-trigger-btn edit-active-only" id="currentAnimBtn" onclick="openAnimModal()">Animation</button>
+
+        <input type="number" id="fontSizeSelector" class="custom-size-input edit-active-only" value="18" min="10" max="32" onchange="changeFontSize(this.value)" title="Font Size">
+        <input type="color" id="fontColorSelector" class="custom-color-picker edit-active-only" value="#222222" onchange="changeFontColor(this.value)" title="Font Color">
+
+        <button class="btn-edit-text-toggle" onclick="toggleTextEdit()">✏️ Edit</button>
+      </div>
+
+      <textarea id="customLetterNote" class="custom-letter-text-new" placeholder="Halkan ku qor farriintaada quruxda badan... ❤️" readonly></textarea>
+    </div>
+  </div>
+
+  <div id="page-cake" class="page sub-card-page">
+    <button class="btn-back" onclick="openPageWithCountdown('page-3', 1)">← Back</button>
+    <div class="sub-card-box">
+      <div class="card-icon">🎂✨</div>
+      <h1 class="big-title" style="font-size: 45px;">Make A Wish!</h1>
+      <p style="font-size: 14px; opacity: 0.9;">May all your dreams and wishes come true today and forever ❤️</p>
+      <a href="https://wa.me/" target="_blank" class="btn-finish-link">Send Wish 🎁</a>
+    </div>
+  </div>
+
+  <div id="page-gift" class="page sub-card-page">
+    <button class="btn-back" onclick="openPageWithCountdown('page-3', 1)">← Back</button>
+    <div class="sub-card-box">
+      <div class="card-icon">🎁❤️</div>
+      <h1 class="big-title" style="font-size: 45px;">Special Gift!</h1>
+      <p style="font-size: 14px; opacity: 0.9;">You are the best gift in my life! Click below to claim your surprise.</p>
+      <a href="https://wa.me/" target="_blank" class="btn-finish-link">Claim Gift 💖</a>
+    </div>
+  </div>
+
+  <div id="fontModal" class="custom-font-modal">
+    <div class="link-modal-content">
+      <h3 style="font-size: 18px;">✨ Dooro Nooca Farta (Font)</h3>
+      <div class="font-list-container">
+        <div class="font-item-option selected" onclick="selectFontCustom(this, 'Amiri, serif', 'Amiri')"><span style="font-family: 'Amiri', serif; font-size: 18px;">Amiri</span><span>✓</span></div>
+        <div class="font-item-option" onclick="selectFontCustom(this, 'Great Vibes, cursive', 'Great Vibes')"><span style="font-family: 'Great Vibes', cursive; font-size: 22px;">Great Vibes</span></div>
+        <div class="font-item-option" onclick="selectFontCustom(this, 'Dancing Script, cursive', 'Dancing Script')"><span style="font-family: 'Dancing Script', cursive; font-size: 20px;">Dancing Script</span></div>
+        <div class="font-item-option" onclick="selectFontCustom(this, 'Pacifico, cursive', 'Pacifico')"><span style="font-family: 'Pacifico', cursive; font-size: 18px;">Pacifico</span></div>
+        <div class="font-item-option" onclick="selectFontCustom(this, 'Reenie Beanie, cursive', 'Handwritten')"><span style="font-family: 'Reenie Beanie', cursive; font-size: 22px;">Handwritten</span></div>
+        <div class="font-item-option" onclick="selectFontCustom(this, 'Cairo, sans-serif', 'Cairo')"><span style="font-family: 'Cairo', sans-serif; font-size: 16px;">Cairo</span></div>
+        <div class="font-item-option" onclick="selectFontCustom(this, 'Readex Pro, sans-serif', 'Readex Pro')"><span style="font-family: 'Readex Pro', sans-serif; font-size: 16px;">Readex Pro</span></div>
+        <div class="font-item-option" onclick="selectFontCustom(this, 'Cinzel, serif', 'Cinzel')"><span style="font-family: 'Cinzel', serif; font-size: 16px;">Cinzel</span></div>
+        <div class="font-item-option" onclick="selectFontCustom(this, 'Permanent Marker, cursive', 'Marker')"><span style="font-family: 'Permanent Marker', cursive; font-size: 16px;">Permanent Marker</span></div>
+        <div class="font-item-option" onclick="selectFontCustom(this, 'Sacramento, cursive', 'Sacramento')"><span style="font-family: 'Sacramento', cursive; font-size: 20px;">Sacramento</span></div>
+        <div class="font-item-option" onclick="selectFontCustom(this, 'Bubblegum Sans, cursive', 'Bubblegum')"><span style="font-family: 'Bubblegum Sans', cursive; font-size: 18px;">Bubblegum Sans</span></div>
+        <div class="font-item-option" onclick="selectFontCustom(this, 'Playfair Display, serif', 'Playfair')"><span style="font-family: 'Playfair Display', serif; font-size: 16px;">Playfair Display</span></div>
+      </div>
+      <button class="btn-modal btn-copy-modal" style="width:100%; margin-top:5px;" onclick="closeFontModal()">Xir / Save</button>
+    </div>
+  </div>
+
+  <div id="animModal" class="custom-font-modal">
+    <div class="link-modal-content">
+      <h3 style="font-size: 18px;">🎬 Dooro Animation-ka Qoraalka</h3>
+      <p style="font-size: 11px; color: #aaa;">Riix si aad u aragto Preview-giisa:</p>
+      
+      <div class="font-list-container">
+        <div class="font-item-option selected" onclick="selectAnimationCustom(this, 'anim-fade', 'Fade & Pop')">
+          <span class="anim-fade" style="font-weight:700;">✨ Fade & Pop (Degdeg u soo bax)</span><span>✓</span>
+        </div>
+        <div class="font-item-option" onclick="selectAnimationCustom(this, 'anim-bounce', 'Bounce Effect')">
+          <span class="anim-bounce" style="font-weight:700;">🎈 Bounce (Lulasho fudud)</span>
+        </div>
+        <div class="font-item-option" onclick="selectAnimationCustom(this, 'anim-float', 'Floating')">
+          <span class="anim-float" style="font-weight:700;">🌊 Floating (Sare iyo Hoose)</span>
+        </div>
+        <div class="font-item-option" onclick="selectAnimationCustom(this, 'anim-glow', 'Glow Pulse')">
+          <span class="anim-glow" style="font-weight:700;">💫 Glow Pulse (Dhalaal joogto ah)</span>
+        </div>
+        <div class="font-item-option" onclick="selectAnimationCustom(this, 'anim-touch', 'Touch / Click Pulse')">
+          <span class="anim-touch" style="font-weight:700;">👆 Touch Pulse (Lulasho Taabasho)</span>
+        </div>
+        <div class="font-item-option" onclick="selectAnimationCustom(this, '', 'None')">
+          <span style="font-weight:700;">❌ Caadi (Animation la'aan)</span>
+        </div>
+      </div>
+
+      <button class="btn-modal btn-copy-modal" style="width:100%; margin-top:5px;" onclick="closeAnimModal()">Xir / Save</button>
+    </div>
+  </div>
+
+  <div id="linkModal" class="link-modal">
+    <div class="link-modal-content">
+      <h3 style="font-size: 18px;">🎉 Link-gii waa diyaar!</h3>
+      <p style="font-size: 12px; color: #ccc;">Ku dir WhatsApp ama Copy dheh link-ga hoose:</p>
+      <input type="text" id="generatedLink" class="share-link-input" readonly>
+      
+      <div class="modal-buttons-group">
+        <button class="btn-modal btn-share-whatsapp" onclick="shareToWhatsApp()">
+          <span>💬</span> Share Link
+        </button>
+        <button class="btn-modal btn-copy-modal" onclick="copyLink()">
+          <span>📋</span> Copy Link
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="musicModal" class="music-input-modal">
+    <div class="link-modal-content">
+      <h3 style="font-size: 18px;">🎵 Dooro Muusigga Heesta</h3>
+      <p style="font-size: 12px; color: #ccc;">Haddii feylku ka weyn yahay 1MB, fadlan isticmaal link YouTube ama Spotify si uusan error u keenin:</p>
+      
+      <button class="btn-modal btn-copy-modal" style="width:100%;" onclick="document.getElementById('audioFileUploader').click()">
+        <span>📁</span> Upload Audio (Gaaban)
+      </button>
+
+      <div style="font-size: 11px; color: #aaa; margin: 5px 0;">-- AMA GELI LINK --</div>
+
+      <input type="text" id="musicLinkInput" class="share-link-input" placeholder="Ku dheji Link-ga YouTube ama Spotify halkan...">
+      
+      <button class="btn-modal btn-share-whatsapp" style="width:100%;" onclick="saveMusicLinkFromInput()">
+        <span>💾</span> Save Link-ga Heesta
+      </button>
+
+      <div class="modal-buttons-group" style="margin-top: 5px;">
+        <button class="btn-modal" style="background: #555; color:#fff;" onclick="closeMusicModal()">Xir / Ka noqo</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyADqAcHRx8CBPp2RE6k4wEqd8E2Ip8Eqkc",
+      authDomain: "datapase-978bb.firebaseapp.com",
+      projectId: "datapase-978bb",
+      storageBucket: "datapase-978bb.firebasestorage.app",
+      messagingSenderId: "605525714762",
+      appId: "1:605525714762:web:98e4cb3c0c769da4c7c3b3",
+      measurementId: "G-ZJ8WNFQ8NL"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    window.uploadedImages = {};
+    window.isReadOnlyMode = false;
+    window.customAudioData = "";
+    window.musicLinkValue = "";
+    window.isMusicPlaying = true;
+    window.selectedFontFamily = "Amiri, serif";
+    window.selectedTextAnimation = "anim-fade";
+
+    let activeSlotKey = '';
+    let currentElement = null;
+
+    window.triggerUpload = function(element, key) {
+      if (window.isReadOnlyMode) return;
+      activeSlotKey = key;
+      currentElement = element;
+      document.getElementById('imageUploader').click();
+    };
+
+    window.toggleTextEdit = function() {
+      const textarea = document.getElementById('customLetterNote');
+      const wrapperBox = document.getElementById('letterWrapperBox');
+      
+      if (textarea.hasAttribute('readonly')) {
+        textarea.removeAttribute('readonly');
+        textarea.focus();
+        wrapperBox.classList.add('editing-mode-active');
+      } else {
+        textarea.setAttribute('readonly', true);
+        wrapperBox.classList.remove('editing-mode-active');
+      }
+    };
+
+    window.openFontModal = function() { document.getElementById('fontModal').style.display = 'flex'; };
+    window.closeFontModal = function() { document.getElementById('fontModal').style.display = 'none'; };
+    window.selectFontCustom = function(element, fontVal, fontName) {
+      document.querySelectorAll('#fontModal .font-item-option').forEach(el => el.classList.remove('selected'));
+      element.classList.add('selected');
+
+      window.selectedFontFamily = fontVal;
+      document.getElementById('customLetterNote').style.fontFamily = fontVal;
+      document.getElementById('currentFontBtn').innerText = fontName;
+      closeFontModal();
+    };
+
+    window.openAnimModal = function() { document.getElementById('animModal').style.display = 'flex'; };
+    window.closeAnimModal = function() { document.getElementById('animModal').style.display = 'none'; };
+    window.selectAnimationCustom = function(element, animClass, animName) {
+      document.querySelectorAll('#animModal .font-item-option').forEach(el => el.classList.remove('selected'));
+      element.classList.add('selected');
+
+      window.selectedTextAnimation = animClass;
+      document.getElementById('currentAnimBtn').innerText = animName;
+
+      const textarea = document.getElementById('customLetterNote');
+      textarea.className = "custom-letter-text-new " + animClass;
+    };
+
+    window.changeFontSize = function(sizeVal) { document.getElementById('customLetterNote').style.fontSize = sizeVal + 'px'; };
+    window.changeFontColor = function(colorVal) { document.getElementById('customLetterNote').style.color = colorVal; };
+
+    window.openMusicModal = function() { document.getElementById('musicModal').style.display = 'flex'; };
+    window.closeMusicModal = function() { document.getElementById('musicModal').style.display = 'none'; };
+
+    window.handleAudioFileUpload = function(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      if (file.size > 1000000) {
+        alert("Feylkaaga codku wuu ka weyn yahay 1MB! Fadlan isticmaal link YouTube ama Spotify.");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        window.customAudioData = e.target.result;
+        window.musicLinkValue = ""; 
+        window.isMusicPlaying = true;
+        playAudioData(window.customAudioData);
+        updateMusicButtonUI();
+        alert("Feylkii muusigga si guul leh ayaa loo geliyay! 🎵");
+        closeMusicModal();
+      };
+      reader.readAsDataURL(file);
+    };
+
+    window.saveMusicLinkFromInput = function() {
+      const linkVal = document.getElementById('musicLinkInput').value.trim();
+      const isYouTube = linkVal.includes("youtube.com") || linkVal.includes("youtu.be");
+      const isSpotify = linkVal.includes("spotify.com") || linkVal.includes("open.spotify.com");
+
+      if (!linkVal || (!isYouTube && !isSpotify)) {
+        alert("⚠️ Digniin: Link-ga aad gelisay waa QALDAN yahay ama ma aha YouTube / Spotify sax ah. Fadlan hubi oo dib u soo geli!");
+        return;
+      }
+
+      window.musicLinkValue = linkVal;
+      window.customAudioData = ""; 
+      window.isMusicPlaying = true;
+      renderMusicPlayer(window.musicLinkValue);
+      updateMusicButtonUI();
+      alert("✅ Guul! Link-ga heesta waa la aqbalay oo waa la keydiyay! ❤️");
+      closeMusicModal();
+    };
+
+    window.playAudioData = function(dataUrl) {
+      if (!window.isMusicPlaying || !dataUrl) return;
+      const container = document.getElementById('audioPlayerContainer');
+      container.innerHTML = `<audio autoplay loop><source src="${dataUrl}" type="audio/mp4"></audio>`;
+    };
+
+    window.renderMusicPlayer = function(link) {
+      if (!window.isMusicPlaying || !link) return;
+      const container = document.getElementById('audioPlayerContainer');
+
+      if (link.includes("youtube.com") || link.includes("youtu.be")) {
+        let videoId = "";
+        if (link.includes("youtu.be/")) {
+          videoId = link.split("youtu.be/")[1]?.split("?")[0];
+        } else if (link.includes("watch?v=")) {
+          videoId = link.split("watch?v=")[1]?.split("&")[0];
+        }
+        if (videoId) {
+          container.innerHTML = `<iframe width="0" height="0" src="https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1" allow="autoplay"></iframe>`;
+          return;
+        }
+      } 
+      else if (link.includes("spotify.com")) {
+        let embedUrl = link.replace("/track/", "/embed/track/").replace("/album/", "/embed/album/");
+        container.innerHTML = `<iframe src="${embedUrl}?utm_source=generator&theme=0" width="0" height="0" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>`;
+        return;
+      }
+
+      container.innerHTML = `<audio autoplay loop><source src="${link}"></audio>`;
+    };
+
+    window.togglePlayMusic = function() {
+      const container = document.getElementById('audioPlayerContainer');
+      const musicIcon = document.getElementById('musicIcon');
+      const musicText = document.getElementById('musicText');
+
+      if (window.isMusicPlaying) {
+        window.isMusicPlaying = false;
+        container.innerHTML = "";
+        musicIcon.innerText = "🔇";
+        musicText.innerText = "Music Off";
+      } else {
+        window.isMusicPlaying = true;
+        musicIcon.innerText = "🔊";
+        musicText.innerText = "Music On";
+        if (window.customAudioData) {
+          playAudioData(window.customAudioData);
+        } else if (window.musicLinkValue) {
+          renderMusicPlayer(window.musicLinkValue);
+        }
+      }
+    };
+
+    window.updateMusicButtonUI = function() {
+      const musicIcon = document.getElementById('musicIcon');
+      const musicText = document.getElementById('musicText');
+      if (window.isMusicPlaying) {
+        musicIcon.innerText = "🔊";
+        musicText.innerText = "Music On";
+      } else {
+        musicIcon.innerText = "🔇";
+        musicText.innerText = "Music Off";
+      }
+    };
+
+    window.removeSpecificPhoto = function(key, event) {
+      event.stopPropagation();
+      delete window.uploadedImages[key];
+      
+      if (key === 'main') {
+        document.querySelector('.add-photo-btn-slot').innerHTML = `<span class="add-photo-text">📷<br>+ Add Photo</span>`;
+      } else {
+        const slotNum = key.replace('s', '');
+        document.querySelector(`.slot-${slotNum}`).innerHTML = `<span>+ Photo ${slotNum}</span>`;
+      }
+    };
+
+    document.getElementById('imageUploader').addEventListener('change', function(e) {
+      if (window.isReadOnlyMode) return;
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          const img = new Image();
+          img.onload = function() {
+            const canvas = document.createElement('canvas');
+            const maxDim = 800;
+            let width = img.width;
+            let height = img.height;
+
+            if (width > height) {
+              if (width > maxDim) {
+                height = Math.round((height * maxDim) / width);
+                width = maxDim;
+              }
+            } else {
+              if (height > maxDim) {
+                width = Math.round((width * maxDim) / height);
+                height = maxDim;
+              }
+            }
+
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+            
+            const compressedBase64 = canvas.toDataURL('image/jpeg', 0.75);
+
+            window.uploadedImages[activeSlotKey] = compressedBase64;
+            
+            currentElement.innerHTML = `
+              <img src="${compressedBase64}" style="width:100%; height:100%; object-fit:cover;">
+              <div class="photo-action-container creator-only">
+                <button class="btn-remove-active-photo" onclick="removeSpecificPhoto('${activeSlotKey}', event)">Remove</button>
+              </div>
+            `;
+          };
+          img.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    window.saveToFirebaseAndGetLink = async function() {
+      if (window.isReadOnlyMode) return;
+
+      const btnMsg = document.getElementById('finishBtnMessage');
+      const btnLet = document.getElementById('finishBtnLetter');
+      
+      btnMsg.innerText = "Saving... ⏳";
+      btnLet.innerText = "Saving... ⏳";
+
+      try {
+        const noteText = document.getElementById('customLetterNote').value;
+        const selectedSize = document.getElementById('fontSizeSelector').value;
+        const selectedColor = document.getElementById('fontColorSelector').value;
+        
+        window.uploadedImages['letterNote'] = noteText;
+        window.uploadedImages['letterFont'] = window.selectedFontFamily;
+        window.uploadedImages['letterAnim'] = window.selectedTextAnimation;
+        window.uploadedImages['letterSize'] = selectedSize;
+        window.uploadedImages['letterColor'] = selectedColor;
+        window.uploadedImages['bgAudio'] = window.customAudioData;
+        window.uploadedImages['musicLink'] = window.musicLinkValue;
+
+        const uniqueId = "Happy-bartey-" + Math.random().toString(36).substring(2, 8);
+        await setDoc(doc(db, "surprises", uniqueId), window.uploadedImages);
+
+        const shareableURL = window.location.origin + window.location.pathname + "?id=" + uniqueId;
+        
+        document.getElementById('generatedLink').value = shareableURL;
+        document.getElementById('linkModal').style.display = 'flex';
+        
+        btnMsg.innerText = "✨ Done!";
+        btnLet.innerText = "✨ Done!";
+      } catch (error) {
+        alert("Cillad ayaa dhacday (Xogta ama muusiggu waa weyn yahay): " + error.message);
+        btnMsg.innerText = "✨ Finish";
+        btnLet.innerText = "✨ Finish";
+      }
+    };
+
+    window.copyLink = function() {
+      const copyText = document.getElementById("generatedLink");
+      copyText.select();
+      navigator.clipboard.writeText(copyText.value);
+      alert("Link-ga waa la copiyeey! Waad sii diri kartaa ❤️");
+    };
+
+    window.shareToWhatsApp = function() {
+      const link = document.getElementById("generatedLink").value;
+      const message = encodeURIComponent("Halkan ka eeg hadiydada gaarka ah ee aan kuugu diyaariyay! ❤️🎁:\n" + link);
+      window.open(`https://api.whatsapp.com/send?text=${message}`, '_blank');
+    };
+
+    function startTypingEffect(text, element) {
+      element.value = "";
+      let i = 0;
+      const speed = 45; 
+      function typeWriter() {
+        if (i < text.length) {
+          element.value += text.charAt(i);
+          i++;
+          setTimeout(typeWriter, speed);
+        }
+      }
+      typeWriter();
+    }
+
+    window.addEventListener('load', async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const cardId = urlParams.get('id');
+
+      const startMusicOnClick = () => {
+        if (!window.isMusicPlaying) {
+          window.isMusicPlaying = true;
+          updateMusicButtonUI();
+        }
+        if (window.customAudioData) playAudioData(window.customAudioData);
+        if (window.musicLinkValue) renderMusicPlayer(window.musicLinkValue);
+      };
+      document.body.addEventListener('click', startMusicOnClick, { once: true });
+
+      if (cardId) {
+        window.isReadOnlyMode = true;
+
+        document.querySelectorAll('.creator-only').forEach(btn => btn.style.display = 'none');
+
+        document.querySelectorAll('.polaroid-slot, .add-photo-btn-slot').forEach(slot => {
+          slot.classList.add('readonly-mode');
+          slot.onclick = null;
+        });
+
+        const letterArea = document.getElementById('customLetterNote');
+        letterArea.readOnly = true;
+
+        try {
+          const docRef = doc(db, "surprises", cardId);
+          const docSnap = await getDoc(docRef);
+
+          if (docSnap.exists()) {
+            const data = docSnap.data();
+
+            if (data.letterNote) {
+              startTypingEffect(data.letterNote, letterArea);
+            }
+
+            if (data.letterFont) {
+              window.selectedFontFamily = data.letterFont;
+              letterArea.style.fontFamily = data.letterFont;
+            }
+            if (data.letterAnim) {
+              window.selectedTextAnimation = data.letterAnim;
+              letterArea.className = "custom-letter-text-new " + data.letterAnim;
+            }
+            if (data.letterSize) letterArea.style.fontSize = data.letterSize + 'px';
+            if (data.letterColor) letterArea.style.color = data.letterColor;
+            
+            if (data.bgAudio) {
+              window.customAudioData = data.bgAudio;
+              window.isMusicPlaying = true;
+              playAudioData(window.customAudioData);
+              updateMusicButtonUI();
+            }
+
+            if (data.musicLink) {
+              window.musicLinkValue = data.musicLink;
+              window.isMusicPlaying = true;
+              renderMusicPlayer(window.musicLinkValue);
+              updateMusicButtonUI();
+            }
+
+            if (data.s1) document.querySelector('.slot-1').innerHTML = `<img src="${data.s1}">`;
+            if (data.s2) document.querySelector('.slot-2').innerHTML = `<img src="${data.s2}">`;
+            if (data.s3) document.querySelector('.slot-3').innerHTML = `<img src="${data.s3}">`;
+            if (data.s4) document.querySelector('.slot-4').innerHTML = `<img src="${data.s4}">`;
+            if (data.s5) document.querySelector('.slot-5').innerHTML = `<img src="${data.s5}">`;
+            if (data.main) document.querySelector('.add-photo-btn-slot').innerHTML = `<img src="${data.main}">`;
+          }
+        } catch (err) {
+          console.error("Error loading surprise card:", err);
+        }
+      }
+
+      openPageWithCountdown('page-1', 10);
+    });
+  </script>
+
   <script>
-    // PAGE SWITCHING FUNCTIONS
-    function openPage2() {
-      document.getElementById('page-1').classList.remove('active');
-      document.getElementById('page-2').classList.add('active');
-      startConfetti();
-    }
+    let timerInterval = null;
 
-    function openPage1() {
-      document.getElementById('page-2').classList.remove('active');
-      document.getElementById('page-1').classList.add('active');
-    }
+    window.openPageWithCountdown = function(targetPageId, durationSeconds) {
+      clearInterval(timerInterval);
+      
+      let timeLeft = durationSeconds;
+      const countdownNum = document.getElementById('countdownNum');
+      const progressBar = document.getElementById('progressBar');
+      const loadingText = document.getElementById('loadingText');
+      
+      countdownNum.innerText = timeLeft;
+      progressBar.style.width = '100%';
 
-    // CONFETTI ANIMATION SCRIPT
-    function startConfetti() {
-      const canvas = document.getElementById('confettiCanvas');
-      const ctx = canvas.getContext('2d');
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+      document.getElementById('page-loading').classList.add('active');
 
-      window.addEventListener('resize', () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-      });
-
-      const particles = [];
-      const colors = ['#f44336', '#e91e63', '#9c27b0', '#2196f3', '#ffeb3b', '#4caf50', '#ff9800'];
-
-      for (let i = 0; i < 90; i++) {
-        particles.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          r: Math.random() * 3.5 + 1,
-          color: colors[Math.floor(Math.random() * colors.length)],
-          vx: Math.random() * 2 - 1,
-          vy: Math.random() * 1.5 + 0.5
-        });
+      if (durationSeconds > 1) {
+        loadingText.innerText = "LOADING YOUR SURPRISE...";
+      } else {
+        loadingText.innerText = "LOADING...";
       }
 
-      function draw() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        particles.forEach(p => {
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = p.color;
-          ctx.fill();
-
-          p.x += p.vx;
-          p.y += p.vy;
-
-          if (p.y > canvas.height) p.y = 0;
-          if (p.x > canvas.width) p.x = 0;
-          if (p.x < 0) p.x = canvas.width;
-        });
-        requestAnimationFrame(draw);
-      }
-      draw();
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        if (timeLeft >= 0) {
+          countdownNum.innerText = timeLeft;
+          progressBar.style.width = (timeLeft / durationSeconds) * 100 + '%';
+        }
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          document.getElementById('page-loading').classList.remove('active');
+          document.getElementById(targetPageId).classList.add('active');
+          
+          if (window.isMusicPlaying) {
+            if (window.customAudioData && typeof playAudioData === 'function') playAudioData(window.customAudioData);
+            if (window.musicLinkValue && typeof renderMusicPlayer === 'function') renderMusicPlayer(window.musicLinkValue);
+          }
+        }
+      }, 1000);
     }
   </script>
 
 </body>
 </html>
-
