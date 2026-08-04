@@ -49,6 +49,28 @@
       50% { transform: translateY(-12px) scale(1.03); }
     }
 
+    /* BULULER / BIR-BIRQAYO QARXAYO (BURSTING SPARKLE EFFECT) */
+    @keyframes bululerBurst {
+      0% {
+        box-shadow: 0 0 0 0 rgba(255, 20, 147, 0.9), 0 0 10px #fff, 0 0 20px #ff1493;
+        filter: brightness(1);
+      }
+      50% {
+        box-shadow: 0 0 25px 15px rgba(255, 105, 180, 0.8), 0 0 30px #ffff00, 0 0 50px #ff007f;
+        filter: brightness(1.4);
+      }
+      100% {
+        box-shadow: 0 0 45px 30px rgba(255, 255, 255, 0), 0 0 60px #ff1493, 0 0 80px #ff69b4;
+        filter: brightness(1);
+      }
+    }
+
+    .bululer-effect {
+      animation: bululerBurst 1.8s infinite ease-in-out;
+      border: 2px solid #fff !important;
+      text-shadow: 0 0 8px #fff, 0 0 15px #ff1493;
+    }
+
     .anim-fade { animation: fadeInScale 0.8s ease forwards; }
     .anim-bounce { animation: bounceAnim 1.5s infinite ease-in-out; }
     .anim-float { animation: floatEffect 2s infinite ease-in-out; }
@@ -457,7 +479,7 @@
     .edit-active-only { display: none !important; }
     .editing-mode-active .edit-active-only { display: inline-flex !important; align-items: center; gap: 4px; }
 
-    /* CAKE BOGGA - SECTIONS & ANIMATION SIDA FIIDIYOWGA */
+    /* CAKE BOGGA - SECTIONS & ANIMATION */
     .cake-show-page {
       background: radial-gradient(circle at center, #1b002c 0%, #05000c 100%);
       flex-direction: column;
@@ -559,7 +581,6 @@
     }
 
     .sparkle-btn {
-      box-shadow: 0 0 20px rgba(255, 20, 147, 0.8);
       transition: transform 0.2s;
     }
     .sparkle-btn:hover {
@@ -633,7 +654,7 @@
     <div class="card-details-box">
       <h1 style="font-family: 'Great Vibes', cursive; font-size: 42px; color: #ff80bf;">Special Moment ✨</h1>
       <p style="font-size: 13px; opacity: 0.9; line-height: 1.5;">Waxaan kuu diyaariyay haddiyad gaar ah oo ay ka buuxaan farriimo iyo xusuus qiimo leh. Hadda guji batoonka hoose si aad u gasho!</p>
-      <button class="btn-finish-link" style="border:none; cursor:pointer;" onclick="openPageWithCountdown('page-3', 1)">Sii Soco →</button>
+      <button class="btn-finish-link bululer-effect" style="cursor:pointer;" onclick="openPageWithCountdown('page-3', 1)">Sii Soco →</button>
     </div>
   </div>
 
@@ -644,7 +665,7 @@
 
     <div class="options-container">
       <button class="btn-option" onclick="openPageWithCountdown('page-message', 1)"><span>💌</span> Message</button>
-      <button class="btn-option" onclick="openPageWithCountdown('page-cake', 1)"><span>🎂</span> Cake</button>
+      <button class="btn-option bululer-effect" onclick="openPageWithCountdown('page-cake', 1)"><span>🎂</span> Cake</button>
       <button class="btn-option" onclick="openPageWithCountdown('page-gift', 1)"><span>🎁</span> Gift</button>
     </div>
   </div>
@@ -694,7 +715,7 @@
     </div>
   </div>
 
-  <!-- PAGE CAKE (Kii Fiidiyowga Ooka Kale ah) -->
+  <!-- PAGE CAKE -->
   <div id="page-cake" class="page cake-show-page">
     <button class="btn-back" onclick="openPageWithCountdown('page-3', 1)">← Back</button>
     
@@ -711,7 +732,7 @@
 
       <h1 class="cake-glow-title">Happy Birthday my Love! ❤️</h1>
       <p class="cake-wishes-sub">May all your dreams come true today and forever ✨</p>
-      <a href="https://wa.me/" target="_blank" class="btn-finish-link sparkle-btn">Send Wish 🎁</a>
+      <a href="https://wa.me/" target="_blank" class="btn-finish-link sparkle-btn bululer-effect">Send Wish 🎁</a>
     </div>
   </div>
 
@@ -722,7 +743,7 @@
       <div class="card-icon">🎁❤️</div>
       <h1 class="big-title" style="font-size: 45px;">Special Gift!</h1>
       <p style="font-size: 14px; opacity: 0.9;">You are the best gift in my life! Click below to claim your surprise.</p>
-      <a href="https://wa.me/" target="_blank" class="btn-finish-link">Claim Gift 💖</a>
+      <a href="https://wa.me/" target="_blank" class="btn-finish-link bululer-effect">Claim Gift 💖</a>
     </div>
   </div>
 
