@@ -51,17 +51,10 @@
       100% { opacity: 1; transform: scale(1) translateY(0) rotate(0deg); }
     }
 
-    @keyframes touchPulseEffect {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.06); box-shadow: 0 0 25px #ff1493; }
-      100% { transform: scale(1); }
-    }
-
     .anim-fade { animation: fadeInScale 0.8s ease forwards; }
     .anim-bounce { animation: bounceAnim 1.5s infinite ease-in-out; }
     .anim-float { animation: floatEffect 2s infinite ease-in-out; }
     .anim-glow { animation: pulseGlow 1.5s infinite; }
-    .anim-touch { animation: touchPulseEffect 1.2s infinite ease-in-out; }
 
     .page {
       display: none;
@@ -80,11 +73,12 @@
       animation: fadeInScale 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
+    /* Batoonka Back oo dhanka BIDIX Sare jooga */
     .btn-back {
       position: fixed;
       top: 15px;
       left: 15px;
-      z-index: 100;
+      z-index: 250;
       background: rgba(0, 0, 0, 0.7);
       color: #fff;
       border: 1px solid rgba(255, 255, 255, 0.4);
@@ -98,12 +92,12 @@
     }
     .btn-back:hover { background: rgba(255, 20, 147, 0.8); }
 
-    /* Music button oo kor la dhigay hab qaabaysan */
+    /* Batoonka Music oo dhanka MIDIX Sare jooga */
     .btn-music-toggle {
       position: fixed;
       top: 15px;
       right: 15px;
-      z-index: 200;
+      z-index: 250;
       background: rgba(0, 0, 0, 0.85);
       color: #fff;
       border: 1px solid #ff1493;
@@ -120,11 +114,12 @@
     }
     .btn-music-toggle:hover { background: rgba(255, 20, 147, 0.8); }
 
+    /* Batoonka FINISH oo MIDIX HOOSE kaga dhigan batoonka Muusigga si aysan isku dul dhacin */
     .btn-finish-top {
       position: fixed;
       top: 60px;
       right: 15px;
-      z-index: 150;
+      z-index: 250;
       background: linear-gradient(135deg, #00c853, #b2ff59);
       color: #000;
       border: 2px solid #ffffff;
@@ -134,7 +129,6 @@
       font-weight: 900;
       cursor: pointer;
       box-shadow: 0 4px 20px rgba(0, 200, 83, 0.7);
-      backdrop-filter: blur(8px);
       animation: pulseGlow 2s infinite;
     }
 
@@ -153,7 +147,6 @@
       font-weight: 800;
       text-decoration: none;
       box-shadow: 0 4px 15px rgba(255, 20, 147, 0.5);
-      backdrop-filter: blur(6px);
       display: flex;
       align-items: center;
       gap: 5px;
@@ -167,7 +160,7 @@
       width: 100vw;
       height: 100vh;
       background: rgba(0, 0, 0, 0.85);
-      z-index: 300;
+      z-index: 400;
       justify-content: center;
       align-items: center;
       padding: 15px;
@@ -188,7 +181,6 @@
       flex-direction: column;
       gap: 15px;
       align-items: center;
-      animation: fadeInScale 0.3s ease;
       max-height: 90vh;
       overflow-y: auto;
     }
@@ -229,7 +221,6 @@
 
     .btn-share-whatsapp { background: linear-gradient(135deg, #25D366, #128C7E); color: #fff; }
     .btn-copy-modal { background: linear-gradient(135deg, #ff1493, #ff69b4); color: #fff; }
-    .btn-modal:hover { transform: scale(1.05); }
 
     .font-list-container {
       display: flex;
@@ -238,7 +229,6 @@
       width: 100%;
       max-height: 320px;
       overflow-y: auto;
-      padding-right: 5px;
     }
 
     .font-item-option {
@@ -252,9 +242,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      transition: 0.2s;
     }
-    .font-item-option:hover, .font-item-option.selected {
+    .font-item-option.selected {
       background: rgba(255, 20, 147, 0.25);
       border-color: #ff1493;
     }
@@ -270,7 +259,6 @@
 
     .loader-title { font-family: 'Great Vibes', cursive; font-size: 44px; color: #ff80bf; }
     .countdown-number { font-size: 90px; font-weight: 900; color: #ffffff; line-height: 1; margin: 10px 0; animation: floatEffect 1s ease-in-out infinite; }
-    
     .progress-container { width: 80%; max-width: 280px; height: 9px; background: rgba(255, 255, 255, 0.15); border-radius: 20px; overflow: hidden; }
     .progress-bar { width: 100%; height: 100%; background: linear-gradient(90deg, #ff1493, #ff69b4, #ffeb3b); border-radius: 20px; transition: width 1s linear; }
     .loading-text { font-size: 14px; font-weight: 700; color: #ffb3d9; }
@@ -279,16 +267,14 @@
     .envelope-card { background-color: #fdfbf7; width: 100%; max-width: 360px; border-radius: 18px; padding: 40px 20px 30px 20px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6); display: flex; flex-direction: column; align-items: center; text-align: center; animation: floatEffect 3s ease-in-out infinite; }
     .greeting-title { font-family: 'Great Vibes', cursive; font-size: 44px; color: #9e1b1b; margin-bottom: 25px; }
     .envelope-box { width: 100%; max-width: 260px; height: 180px; background: #ffffff; border-radius: 12px; display: flex; justify-content: center; align-items: center; margin-bottom: 25px; border: 1px solid #f0f0f0; }
-    .red-envelope { width: 85%; height: 110px; background-color: #9e1b1b; border-radius: 8px; position: relative; cursor: pointer; display: flex; justify-content: center; align-items: center; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); transition: transform 0.3s; }
-    .red-envelope:hover { transform: scale(1.05); }
+    .red-envelope { width: 85%; height: 110px; background-color: #9e1b1b; border-radius: 8px; position: relative; cursor: pointer; display: flex; justify-content: center; align-items: center; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); }
     .red-envelope::before { content: ''; position: absolute; top: 0; width: 0; height: 0; border-left: 105px solid transparent; border-right: 105px solid transparent; border-top: 58px solid #7a1212; }
     .ribbon-seal { width: 38px; height: 30px; position: relative; z-index: 2; }
     .ribbon-seal::before, .ribbon-seal::after { content: ''; position: absolute; width: 16px; height: 20px; background: #ffffff; border-radius: 50% 50% 0 50%; top: 4px; }
     .ribbon-seal::before { left: 1px; transform: rotate(-25deg); }
     .ribbon-seal::after { right: 1px; transform: rotate(25deg) scaleX(-1); }
-    .instruction-text { font-size: 12px; color: #777777; font-weight: 600; }
 
-    /* --- PAGE 2 SAWIRKA CADAN AH LA'AAN BLUR --- */
+    /* --- PAGE 2 LEH CANVAS-KA FIREWORKS/FIRECRACKER CIRKA U BAXAYA O QARXAYA --- */
     #page-2 {
       position: relative;
       flex-direction: column;
@@ -309,14 +295,22 @@
       background-image: url('https://i.postimg.cc/xdtkf7J0/da1478c736e944eb8f1ec711d8c60617.webp');
       background-size: cover;
       background-position: center;
-      /* Dhafoor/Blur-kii waa la bixiyay si sawirku u ahaado mid aad u cad */
-      filter: none; 
       z-index: 1;
+    }
+
+    #fireworksCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      pointer-events: none;
     }
 
     .card-details-box { 
       position: relative;
-      z-index: 2;
+      z-index: 5;
       background: rgba(0, 0, 0, 0.75); 
       border: 1px solid rgba(255, 20, 147, 0.6); 
       padding: 35px 20px; 
@@ -352,28 +346,19 @@
       box-shadow: 0 5px 20px rgba(255, 20, 147, 0.3);
       animation: bounceAnim 2.5s infinite ease-in-out;
     }
-    .btn-option:nth-child(2) { animation-delay: 0.3s; }
-    .btn-option:nth-child(3) { animation-delay: 0.6s; }
-    .btn-option:hover { 
-      background: linear-gradient(135deg, #ff1493, #ff69b4); 
-      transform: scale(1.08); 
-      box-shadow: 0 0 25px rgba(255, 20, 147, 0.9);
-    }
 
     #page-message { background-color: #0d0d0d; overflow-y: auto; padding: 50px 10px 30px 10px; display: none; flex-direction: column; align-items: center; }
     #page-message.active { display: flex; }
 
-    .collage-wrapper { position: relative; width: 100%; max-width: 400px; background-image: url('https://i.postimg.cc/yxGZMqF5/Picsart-26-08-03-21-36-06-808.png'); background-size: cover; background-position: center; border-radius: 12px; box-shadow: 0 15px 35px rgba(0,0,0,0.8); aspect-ratio: 9 / 16; overflow: hidden; margin: 0 auto; animation: fadeInScale 0.5s ease; }
+    .collage-wrapper { position: relative; width: 100%; max-width: 400px; background-image: url('https://i.postimg.cc/yxGZMqF5/Picsart-26-08-03-21-36-06-808.png'); background-size: cover; background-position: center; border-radius: 12px; box-shadow: 0 15px 35px rgba(0,0,0,0.8); aspect-ratio: 9 / 16; overflow: hidden; margin: 0 auto; }
     
-    .polaroid-slot { position: absolute; background: rgba(17, 17, 17, 0.65); border-radius: 8px; overflow: hidden; cursor: pointer; display: flex; justify-content: center; align-items: center; border: 2px dashed rgba(255,255,255,0.6); transition: 0.3s; animation: photoPopIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) both; }
-    .slot-1 { top: 1%; right: 26%; width: 23%; height: 15%; animation-delay: 0.1s; }
-    .slot-2 { top: 3%; right: 2%; width: 23%; height: 15%; animation-delay: 0.2s; }
-    .slot-3 { top: 18%; right: 6%; width: 25%; height: 16%; animation-delay: 0.3s; }
-    .slot-4 { top: 27%; right: 2%; width: 26%; height: 17%; animation-delay: 0.4s; }
-    .slot-5 { top: 33%; right: 34%; width: 24%; height: 16%; animation-delay: 0.5s; }
+    .polaroid-slot { position: absolute; background: rgba(17, 17, 17, 0.65); border-radius: 8px; overflow: hidden; cursor: pointer; display: flex; justify-content: center; align-items: center; border: 2px dashed rgba(255,255,255,0.6); }
+    .slot-1 { top: 1%; right: 26%; width: 23%; height: 15%; }
+    .slot-2 { top: 3%; right: 2%; width: 23%; height: 15%; }
+    .slot-3 { top: 18%; right: 6%; width: 25%; height: 16%; }
+    .slot-4 { top: 27%; right: 2%; width: 26%; height: 17%; }
+    .slot-5 { top: 33%; right: 34%; width: 24%; height: 16%; }
 
-    .polaroid-slot:hover { border-color: #ff1493; background: rgba(255, 20, 147, 0.2); }
-    .polaroid-slot.readonly-mode { cursor: default !important; border: none !important; }
     .polaroid-slot img, .add-photo-btn-slot img { width: 100%; height: 100%; object-fit: cover; }
     .polaroid-slot span { color: #ffffff; font-size: 11px; font-weight: 800; text-align: center; }
 
@@ -392,12 +377,7 @@
       align-items: center; 
       cursor: pointer; 
       overflow: hidden; 
-      transition: 0.3s; 
-      box-shadow: 0 5px 15px rgba(255, 20, 147, 0.4);
-      animation: photoPopIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.6s both;
     }
-    .add-photo-btn-slot:hover { background: #fff; transform: scale(1.05); border-color: #ff69b4; }
-    .add-photo-btn-slot.readonly-mode { cursor: default !important; border: none !important; background: transparent !important; animation: none !important; }
     .add-photo-text { font-size: 13px; font-weight: 900; color: #ff1493; text-align: center; line-height: 1.2; }
 
     .floating-envelope-corner { position: absolute; bottom: 15px; right: 15px; width: 110px; background: rgba(0, 0, 0, 0.75); border: 2px solid #ff1493; border-radius: 12px; padding: 6px; display: flex; flex-direction: column; align-items: center; gap: 5px; cursor: pointer; z-index: 30; animation: floatEffect 2s infinite; }
@@ -419,7 +399,6 @@
       aspect-ratio: 9 / 16; 
       overflow: hidden; 
       margin: 0 auto; 
-      animation: fadeInScale 0.5s ease; 
     }
 
     .custom-letter-text-new {
@@ -439,6 +418,7 @@
       padding: 5px;
     }
 
+    /* BAR-KA TOOLS-KA BATOOMADA FARRIIN-KA OOD HAGAAGAY OO BIDIX IYO MIDIX U KALA BAXAY */
     .letter-controls {
       position: absolute;
       top: 10px;
@@ -448,62 +428,46 @@
       flex-wrap: wrap;
       gap: 6px;
       z-index: 50;
-      justify-content: flex-end;
+      justify-content: space-between;
       align-items: center;
-      background: rgba(0, 0, 0, 0.4);
-      padding: 6px 10px;
-      border-radius: 10px;
-      backdrop-filter: blur(4px);
+      background: rgba(0, 0, 0, 0.65);
+      padding: 8px 10px;
+      border-radius: 12px;
+      backdrop-filter: blur(5px);
     }
 
-    .btn-edit-text-toggle, .font-trigger-btn, .anim-trigger-btn, .music-link-btn, .custom-color-picker, .custom-size-input {
-      background: #ff1493;
+    .btn-edit-text-toggle {
+      background: linear-gradient(135deg, #ff1493, #ff4081);
       color: #fff;
       border: none;
-      border-radius: 6px;
+      border-radius: 15px;
+      padding: 6px 14px;
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(255, 20, 147, 0.4);
+    }
+
+    .font-trigger-btn, .anim-trigger-btn, .music-link-btn, .custom-color-picker, .custom-size-input {
+      background: #111;
+      border: 1px solid #ff1493;
+      color: #fff;
+      border-radius: 8px;
       padding: 5px 8px;
       font-size: 10px;
       font-weight: 800;
       cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-      transition: 0.2s;
     }
-    .btn-edit-text-toggle:hover, .music-link-btn:hover, .font-trigger-btn:hover, .anim-trigger-btn:hover { transform: scale(1.05); }
-
-    .font-trigger-btn, .anim-trigger-btn { background: #111; border: 1px solid #ff1493; color: #fff; }
-    .custom-color-picker { width: 26px; height: 24px; padding: 0; border: 1px solid #fff; cursor: pointer; border-radius: 4px; }
-    .custom-size-input { width: 42px; background: #111; border: 1px solid #ff1493; text-align: center; color: #fff; border-radius: 4px; }
+    .custom-color-picker { width: 28px; height: 26px; padding: 0; cursor: pointer; }
+    .custom-size-input { width: 44px; text-align: center; }
 
     .edit-active-only { display: none !important; }
-    .editing-mode-active .edit-active-only { display: inline-flex !important; align-items: center; gap: 2px; }
-
-    .photo-action-container {
-      position: absolute;
-      bottom: 5px;
-      left: 0;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      gap: 5px;
-      z-index: 40;
-    }
-    .btn-remove-active-photo {
-      background: rgba(220, 20, 60, 0.9);
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      font-size: 9px;
-      font-weight: 800;
-      padding: 3px 6px;
-      cursor: pointer;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.5);
-    }
+    .editing-mode-active .edit-active-only { display: inline-flex !important; align-items: center; gap: 4px; }
 
     .sub-card-page { background: radial-gradient(circle, #4a000e 0%, #120004 100%); flex-direction: column; padding: 30px 20px; text-align: center; color: #ffffff; gap: 15px; }
-    .sub-card-box { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2); padding: 30px 20px; border-radius: 20px; max-width: 340px; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 15px; animation: fadeInScale 0.4s ease; }
+    .sub-card-box { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2); padding: 30px 20px; border-radius: 20px; max-width: 340px; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 15px; }
     .card-icon { font-size: 60px; animation: floatEffect 2s infinite; }
-    .btn-finish-link { background: linear-gradient(135deg, #ff1493, #ff4081); color: #ffffff; border: 2px solid #ffffff; padding: 12px 30px; border-radius: 30px; font-size: 15px; font-weight: 800; text-decoration: none; display: inline-block; transition: 0.3s; }
-    .btn-finish-link:hover { transform: scale(1.05); }
+    .btn-finish-link { background: linear-gradient(135deg, #ff1493, #ff4081); color: #ffffff; border: 2px solid #ffffff; padding: 12px 30px; border-radius: 30px; font-size: 15px; font-weight: 800; text-decoration: none; display: inline-block; }
   </style>
 </head>
 <body>
@@ -512,7 +476,7 @@
   <input type="file" id="imageUploader" accept="image/*" style="display: none;">
   <input type="file" id="audioFileUploader" accept="audio/*,video/*" style="display: none;">
 
-  <!-- Batoonka Muusigga oo xagal sare jooga -->
+  <!-- Batoonka Music-ka: MIDIX SARE -->
   <button id="musicToggleBtn" class="btn-music-toggle" onclick="togglePlayMusic()">
     <span id="musicIcon">🔊</span> <span id="musicText">Music On</span>
   </button>
@@ -542,8 +506,13 @@
     </div>
   </div>
 
+  <!-- PAGE 2 OO LEH BULULER / FIREWORKS CIRKA U BAXAYA O QARXAYA -->
   <div id="page-2" class="page">
+    <canvas id="fireworksCanvas"></canvas>
+
+    <!-- Batoonka Back: BIDIX SARE -->
     <button class="btn-back" onclick="openPageWithCountdown('page-1', 1)">← Back</button>
+    
     <div class="card-details-box">
       <h1 style="font-family: 'Great Vibes', cursive; font-size: 42px; color: #ff80bf;">Special Moment ✨</h1>
       <p style="font-size: 13px; opacity: 0.9; line-height: 1.5;">Waxaan kuu diyaariyay haddiyad gaar ah oo ay ka buuxaan farriimo iyo xusuus qiimo leh. Hadda guji batoonka hoose si aad u gasho!</p>
@@ -564,6 +533,7 @@
 
   <div id="page-message" class="page">
     <button class="btn-back" onclick="openPageWithCountdown('page-3', 1)">← Back</button>
+    <!-- Batoonka Finish oo Midix Sare kaga dhigan batoonka Muusigga -->
     <button class="btn-finish-top creator-only" id="finishBtnMessage" onclick="saveToFirebaseAndGetLink()">✨ Finish</button>
 
     <div class="collage-wrapper">
@@ -586,16 +556,22 @@
 
   <div id="page-letter" class="page">
     <button class="btn-back" onclick="openPageWithCountdown('page-message', 1)">← Back</button>
+    <!-- Batoonka Finish -->
     <button class="btn-finish-top creator-only" id="finishBtnLetter" onclick="saveToFirebaseAndGetLink()">✨ Finish</button>
 
     <div class="letter-wrapper-new" id="letterWrapperBox">
       <div class="letter-controls creator-only">
-        <button class="music-link-btn edit-active-only" onclick="openMusicModal()">🎵 Music</button>
-        <button class="font-trigger-btn edit-active-only" id="currentFontBtn" onclick="openFontModal()">Font</button>
-        <button class="anim-trigger-btn edit-active-only" id="currentAnimBtn" onclick="openAnimModal()">Animation</button>
-        <input type="number" id="fontSizeSelector" class="custom-size-input edit-active-only" value="18" min="10" max="32" onchange="changeFontSize(this.value)" title="Font Size">
-        <input type="color" id="fontColorSelector" class="custom-color-picker edit-active-only" value="#222222" onchange="changeFontColor(this.value)" title="Font Color">
-        <button class="btn-edit-text-toggle" onclick="toggleTextEdit()">✏️ Edit</button>
+        <!-- Batoonka EDIT oo BIDIX SARE jooga -->
+        <button class="btn-edit-text-toggle" onclick="toggleTextEdit()">✏️ Edit Text</button>
+
+        <!-- Tool-aladaha kale oo kala baxaya marka Edit la taabto -->
+        <div class="edit-active-only">
+          <button class="music-link-btn" onclick="openMusicModal()">🎵 Music</button>
+          <button class="font-trigger-btn" id="currentFontBtn" onclick="openFontModal()">Font</button>
+          <button class="anim-trigger-btn" id="currentAnimBtn" onclick="openAnimModal()">Anim</button>
+          <input type="number" id="fontSizeSelector" class="custom-size-input" value="18" min="10" max="32" onchange="changeFontSize(this.value)" title="Font Size">
+          <input type="color" id="fontColorSelector" class="custom-color-picker" value="#222222" onchange="changeFontColor(this.value)" title="Font Color">
+        </div>
       </div>
 
       <textarea id="customLetterNote" class="custom-letter-text-new" placeholder="Halkan ku qor farriintaada quruxda badan... ❤️" readonly></textarea>
@@ -646,29 +622,23 @@
   <div id="animModal" class="custom-font-modal">
     <div class="link-modal-content">
       <h3 style="font-size: 18px;">🎬 Dooro Animation-ka Qoraalka</h3>
-      <p style="font-size: 11px; color: #aaa;">Riix si aad u aragto Preview-giisa:</p>
-      
       <div class="font-list-container">
         <div class="font-item-option selected" onclick="selectAnimationCustom(this, 'anim-fade', 'Fade & Pop')">
-          <span class="anim-fade" style="font-weight:700;">✨ Fade & Pop (Degdeg u soo bax)</span><span>✓</span>
+          <span class="anim-fade" style="font-weight:700;">✨ Fade & Pop</span><span>✓</span>
         </div>
         <div class="font-item-option" onclick="selectAnimationCustom(this, 'anim-bounce', 'Bounce Effect')">
-          <span class="anim-bounce" style="font-weight:700;">🎈 Bounce (Lulasho fudud)</span>
+          <span class="anim-bounce" style="font-weight:700;">🎈 Bounce</span>
         </div>
         <div class="font-item-option" onclick="selectAnimationCustom(this, 'anim-float', 'Floating')">
-          <span class="anim-float" style="font-weight:700;">🌊 Floating (Sare iyo Hoose)</span>
+          <span class="anim-float" style="font-weight:700;">🌊 Floating</span>
         </div>
         <div class="font-item-option" onclick="selectAnimationCustom(this, 'anim-glow', 'Glow Pulse')">
-          <span class="anim-glow" style="font-weight:700;">💫 Glow Pulse (Dhalaal joogto ah)</span>
-        </div>
-        <div class="font-item-option" onclick="selectAnimationCustom(this, 'anim-touch', 'Touch / Click Pulse')">
-          <span class="anim-touch" style="font-weight:700;">👆 Touch Pulse (Lulasho Taabasho)</span>
+          <span class="anim-glow" style="font-weight:700;">💫 Glow Pulse</span>
         </div>
         <div class="font-item-option" onclick="selectAnimationCustom(this, '', 'None')">
           <span style="font-weight:700;">❌ Caadi (Animation la'aan)</span>
         </div>
       </div>
-
       <button class="btn-modal btn-copy-modal" style="width:100%; margin-top:5px;" onclick="closeAnimModal()">Xir / Save</button>
     </div>
   </div>
@@ -693,8 +663,6 @@
   <div id="musicModal" class="music-input-modal">
     <div class="link-modal-content">
       <h3 style="font-size: 18px;">🎵 Dooro Muusigga Heesta</h3>
-      <p style="font-size: 12px; color: #ccc;">Haddii feylku ka weyn yahay 1MB, fadlan isticmaal link YouTube ama Spotify si uusan error u keenin:</p>
-      
       <button class="btn-modal btn-copy-modal" style="width:100%;" onclick="document.getElementById('audioFileUploader').click()">
         <span>📁</span> Upload Audio (Gaaban)
       </button>
@@ -825,7 +793,7 @@
       const isSpotify = linkVal.includes("spotify.com") || linkVal.includes("open.spotify.com");
 
       if (!linkVal || (!isYouTube && !isSpotify)) {
-        alert("⚠️ Digniin: Link-ga aad gelisay waa QALDAN yahay ama ma aha YouTube / Spotify sax ah. Fadlan hubi oo dib u soo geli!");
+        alert("⚠️ Digniin: Link-ga aad gelisay waa QALDAN yahay ama ma aha YouTube / Spotify sax ah.");
         return;
       }
 
@@ -839,7 +807,6 @@
       closeMusicModal();
     };
 
-    /* Habka ciyaarista muusigga joogtada ah ee aan damayneyn inta la marayo bogagga */
     window.playAudioData = function(dataUrl) {
       if (!window.isMusicPlaying || !dataUrl) return;
       const container = document.getElementById('audioPlayerContainer');
@@ -916,18 +883,6 @@
       }
     };
 
-    window.removeSpecificPhoto = function(key, event) {
-      event.stopPropagation();
-      delete window.uploadedImages[key];
-      
-      if (key === 'main') {
-        document.querySelector('.add-photo-btn-slot').innerHTML = `<span class="add-photo-text">📷<br>+ Add Photo</span>`;
-      } else {
-        const slotNum = key.replace('s', '');
-        document.querySelector(`.slot-${slotNum}`).innerHTML = `<span>+ Photo ${slotNum}</span>`;
-      }
-    };
-
     document.getElementById('imageUploader').addEventListener('change', function(e) {
       if (window.isReadOnlyMode) return;
       const file = e.target.files[0];
@@ -959,15 +914,9 @@
             ctx.drawImage(img, 0, 0, width, height);
             
             const compressedBase64 = canvas.toDataURL('image/jpeg', 0.75);
-
             window.uploadedImages[activeSlotKey] = compressedBase64;
             
-            currentElement.innerHTML = `
-              <img src="${compressedBase64}" style="width:100%; height:100%; object-fit:cover;">
-              <div class="photo-action-container creator-only">
-                <button class="btn-remove-active-photo" onclick="removeSpecificPhoto('${activeSlotKey}', event)">Remove</button>
-              </div>
-            `;
+            currentElement.innerHTML = `<img src="${compressedBase64}" style="width:100%; height:100%; object-fit:cover;">`;
           };
           img.src = event.target.result;
         };
@@ -1061,7 +1010,6 @@
         document.querySelectorAll('.creator-only').forEach(btn => btn.style.display = 'none');
 
         document.querySelectorAll('.polaroid-slot, .add-photo-btn-slot').forEach(slot => {
-          slot.classList.add('readonly-mode');
           slot.onclick = null;
         });
 
@@ -1075,10 +1023,7 @@
           if (docSnap.exists()) {
             const data = docSnap.data();
 
-            if (data.letterNote) {
-              startTypingEffect(data.letterNote, letterArea);
-            }
-
+            if (data.letterNote) startTypingEffect(data.letterNote, letterArea);
             if (data.letterFont) {
               window.selectedFontFamily = data.letterFont;
               letterArea.style.fontFamily = data.letterFont;
@@ -1117,9 +1062,11 @@
       }
 
       window.openPageWithCountdown('page-1', 10);
+      initFireworksCanvas();
     });
   </script>
 
+  <!-- FIREWORKS / BULULER SCRIPT - FIRECRACKERS BIRBIRQAYA O QARXAYA CIRKA -->
   <script>
     let timerInterval = null;
 
@@ -1153,14 +1100,107 @@
           clearInterval(timerInterval);
           document.getElementById('page-loading').classList.remove('active');
           document.getElementById(targetPageId).classList.add('active');
-          
-          /* Heestu ma is taageyso/dameyso marka bogagga la beddelo */
-          if (window.isMusicPlaying) {
-            if (window.customAudioData && typeof window.playAudioData === 'function') window.playAudioData(window.customAudioData);
-            if (window.musicLinkValue && typeof window.renderMusicPlayer === 'function') window.renderMusicPlayer(window.musicLinkValue);
-          }
         }
       }, 1000);
+    }
+
+    /* FIREWORKS ANIMATION AUTOMATIC SYSTEM FOR PAGE 2 */
+    function initFireworksCanvas() {
+      const canvas = document.getElementById('fireworksCanvas');
+      const ctx = canvas.getContext('2d');
+
+      function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      class Firework {
+        constructor() {
+          this.x = Math.random() * canvas.width;
+          this.y = canvas.height;
+          this.targetY = Math.random() * (canvas.height * 0.4) + 50;
+          this.speed = Math.random() * 3 + 5;
+          this.angle = Math.atan2(this.targetY - this.y, 0);
+          this.particles = [];
+          this.exploded = false;
+          this.color = `hsl(${Math.random() * 360}, 100%, 60%)`;
+        }
+
+        update() {
+          if (!this.exploded) {
+            this.y -= this.speed;
+            if (this.y <= this.targetY) {
+              this.exploded = true;
+              this.createParticles();
+            }
+          } else {
+            this.particles.forEach((p, index) => {
+              p.x += p.vx;
+              p.y += p.vy;
+              p.vy += 0.04; 
+              p.alpha -= 0.015;
+              if (p.alpha <= 0) this.particles.splice(index, 1);
+            });
+          }
+        }
+
+        createParticles() {
+          for (let i = 0; i < 40; i++) {
+            const angle = Math.random() * Math.PI * 2;
+            const speed = Math.random() * 4 + 1;
+            this.particles.push({
+              x: this.x,
+              y: this.y,
+              vx: Math.cos(angle) * speed,
+              vy: Math.sin(angle) * speed,
+              alpha: 1,
+              color: this.color
+            });
+          }
+        }
+
+        draw() {
+          if (!this.exploded) {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, 3, 0, Math.PI * 2);
+            ctx.fillStyle = this.color;
+            ctx.fill();
+          } else {
+            this.particles.forEach(p => {
+              ctx.save();
+              ctx.globalAlpha = p.alpha;
+              ctx.beginPath();
+              ctx.arc(p.x, p.y, 2.5, 0, Math.PI * 2);
+              ctx.fillStyle = p.color;
+              ctx.fill();
+              ctx.restore();
+            });
+          }
+        }
+      }
+
+      let fireworks = [];
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        if (Math.random() < 0.07) {
+          fireworks.push(new Firework());
+        }
+
+        fireworks.forEach((fw, index) => {
+          fw.update();
+          fw.draw();
+          if (fw.exploded && fw.particles.length === 0) {
+            fireworks.splice(index, 1);
+          }
+        });
+
+        requestAnimationFrame(animate);
+      }
+      animate();
     }
   </script>
 
