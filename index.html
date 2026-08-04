@@ -288,8 +288,49 @@
     .ribbon-seal::after { right: 1px; transform: rotate(25deg) scaleX(-1); }
     .instruction-text { font-size: 12px; color: #777777; font-weight: 600; }
 
-    #page-2 { background-image: radial-gradient(circle, #800015 0%, #300008 100%); flex-direction: column; padding: 20px; text-align: center; color: #fff; gap: 15px; }
-    .card-details-box { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2); padding: 35px 20px; border-radius: 20px; max-width: 340px; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 15px; animation: fadeInScale 0.4s ease; backdrop-filter: blur(5px); }
+    /* --- PAGE 2 SAWAIRKA CUSTOM & BULULER (BLUR) --- */
+    #page-2 {
+      position: relative;
+      flex-direction: column;
+      padding: 20px;
+      text-align: center;
+      color: #fff;
+      gap: 15px;
+      overflow: hidden;
+    }
+
+    #page-2::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://i.postimg.cc/xdtkf7J0/da1478c736e944eb8f1ec711d8c60617.webp');
+      background-size: cover;
+      background-position: center;
+      filter: blur(10px) brightness(0.7); /* Bululer ku samee background-ka */
+      transform: scale(1.1); /* Geesaha cawrawga ah si ayan u muuqan */
+      z-index: 1;
+    }
+
+    .card-details-box { 
+      position: relative;
+      z-index: 2;
+      background: rgba(0, 0, 0, 0.55); 
+      border: 1px solid rgba(255, 20, 147, 0.5); 
+      padding: 35px 20px; 
+      border-radius: 20px; 
+      max-width: 340px; 
+      width: 100%; 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      gap: 15px; 
+      animation: fadeInScale 0.4s ease; 
+      backdrop-filter: blur(12px); /* Bululer dheeraad ah oo kaardhka dhexdiisa ah */
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    }
 
     #page-3 { background-image: radial-gradient(circle, #5a0010 0%, #1a0005 100%); flex-direction: column; justify-content: center; padding: 20px; gap: 25px; }
     .options-title { font-family: 'Great Vibes', cursive; font-size: 46px; color: #ff80bf; text-align: center; animation: floatEffect 2s infinite; }
@@ -1109,4 +1150,3 @@
 
 </body>
 </html>
-
