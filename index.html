@@ -8,6 +8,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Plus+Jakarta+Sans:wght@400;600;700;800;900&family=Amiri:wght@400;700&family=Dancing+Script:wght@600;700&family=Pacifico&family=Reenie+Beanie&family=Cairo:wght@400;700&family=Readex+Pro:wght@400;600&family=Cinzel:wght@600&family=Permanent+Marker&family=Sacramento&family=Bubblegum+Sans&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
+  <!-- GSAP & Three.js Libraries for 3D Particle Cake Animation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
   <style>
     * {
       box-sizing: border-box;
@@ -45,12 +49,6 @@
       50% { transform: translateY(-12px) scale(1.03); }
     }
 
-    @keyframes photoPopIn {
-      0% { opacity: 0; transform: scale(0.3) translateY(40px) rotate(-10deg); }
-      70% { transform: scale(1.08) translateY(-5px) rotate(3deg); }
-      100% { opacity: 1; transform: scale(1) translateY(0) rotate(0deg); }
-    }
-
     .anim-fade { animation: fadeInScale 0.8s ease forwards; }
     .anim-bounce { animation: bounceAnim 1.5s infinite ease-in-out; }
     .anim-float { animation: floatEffect 2s infinite ease-in-out; }
@@ -73,7 +71,6 @@
       animation: fadeInScale 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
-    /* Batoonka Back oo dhanka BIDIX Sare jooga */
     .btn-back {
       position: fixed;
       top: 15px;
@@ -92,7 +89,6 @@
     }
     .btn-back:hover { background: rgba(255, 20, 147, 0.8); }
 
-    /* Batoonka Music oo dhanka MIDIX Sare jooga */
     .btn-music-toggle {
       position: fixed;
       top: 15px;
@@ -114,7 +110,6 @@
     }
     .btn-music-toggle:hover { background: rgba(255, 20, 147, 0.8); }
 
-    /* Batoonka FINISH oo MIDIX HOOSE kaga dhigan batoonka Muusigga si aysan isku dul dhacin */
     .btn-finish-top {
       position: fixed;
       top: 60px;
@@ -274,7 +269,6 @@
     .ribbon-seal::before { left: 1px; transform: rotate(-25deg); }
     .ribbon-seal::after { right: 1px; transform: rotate(25deg) scaleX(-1); }
 
-    /* --- PAGE 2 LEH CANVAS-KA FIREWORKS/FIRECRACKER CIRKA U BAXAYA O QARXAYA --- */
     #page-2 {
       position: relative;
       flex-direction: column;
@@ -418,7 +412,6 @@
       padding: 5px;
     }
 
-    /* BAR-KA TOOLS-KA BATOOMADA FARRIIN-KA OOD HAGAAGAY OO BIDIX IYO MIDIX U KALA BAXAY */
     .letter-controls {
       position: absolute;
       top: 10px;
@@ -464,7 +457,7 @@
     .edit-active-only { display: none !important; }
     .editing-mode-active .edit-active-only { display: inline-flex !important; align-items: center; gap: 4px; }
 
-    .sub-card-page { background: radial-gradient(circle, #4a000e 0%, #120004 100%); flex-direction: column; padding: 30px 20px; text-align: center; color: #ffffff; gap: 15px; }
+    .sub-card-page { background: radial-gradient(circle, #4a000e 0%, #120004 100%); flex-direction: column; padding: 30px 20px; text-align: center; color: #ffffff; gap: 15px; position: relative; overflow: hidden; }
     .sub-card-box { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2); padding: 30px 20px; border-radius: 20px; max-width: 340px; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 15px; }
     .card-icon { font-size: 60px; animation: floatEffect 2s infinite; }
     .btn-finish-link { background: linear-gradient(135deg, #ff1493, #ff4081); color: #ffffff; border: 2px solid #ffffff; padding: 12px 30px; border-radius: 30px; font-size: 15px; font-weight: 800; text-decoration: none; display: inline-block; }
@@ -472,11 +465,16 @@
 </head>
 <body>
 
+  <!-- Hidden SVG Path oo koodka Three.js/GSAP ka tixraacayo -->
+  <svg style="display:none;">
+    <path id="cakeParticlePath" d="M10,80 Q50,10 90,80 T170,80" />
+  </svg>
+
   <div id="audioPlayerContainer"></div>
   <input type="file" id="imageUploader" accept="image/*" style="display: none;">
   <input type="file" id="audioFileUploader" accept="audio/*,video/*" style="display: none;">
 
-  <!-- Batoonka Music-ka: MIDIX SARE -->
+  <!-- Batoonka Music-ka -->
   <button id="musicToggleBtn" class="btn-music-toggle" onclick="togglePlayMusic()">
     <span id="musicIcon">🔊</span> <span id="musicText">Music On</span>
   </button>
@@ -506,11 +504,8 @@
     </div>
   </div>
 
-  <!-- PAGE 2 OO LEH BULULER / FIREWORKS CIRKA U BAXAYA O QARXAYA -->
   <div id="page-2" class="page">
     <canvas id="fireworksCanvas"></canvas>
-
-    <!-- Batoonka Back: BIDIX SARE -->
     <button class="btn-back" onclick="openPageWithCountdown('page-1', 1)">← Back</button>
     
     <div class="card-details-box">
@@ -533,7 +528,6 @@
 
   <div id="page-message" class="page">
     <button class="btn-back" onclick="openPageWithCountdown('page-3', 1)">← Back</button>
-    <!-- Batoonka Finish oo Midix Sare kaga dhigan batoonka Muusigga -->
     <button class="btn-finish-top creator-only" id="finishBtnMessage" onclick="saveToFirebaseAndGetLink()">✨ Finish</button>
 
     <div class="collage-wrapper">
@@ -556,15 +550,12 @@
 
   <div id="page-letter" class="page">
     <button class="btn-back" onclick="openPageWithCountdown('page-message', 1)">← Back</button>
-    <!-- Batoonka Finish -->
     <button class="btn-finish-top creator-only" id="finishBtnLetter" onclick="saveToFirebaseAndGetLink()">✨ Finish</button>
 
     <div class="letter-wrapper-new" id="letterWrapperBox">
       <div class="letter-controls creator-only">
-        <!-- Batoonka EDIT oo BIDIX SARE jooga -->
         <button class="btn-edit-text-toggle" onclick="toggleTextEdit()">✏️ Edit Text</button>
 
-        <!-- Tool-aladaha kale oo kala baxaya marka Edit la taabto -->
         <div class="edit-active-only">
           <button class="music-link-btn" onclick="openMusicModal()">🎵 Music</button>
           <button class="font-trigger-btn" id="currentFontBtn" onclick="openFontModal()">Font</button>
@@ -578,9 +569,14 @@
     </div>
   </div>
 
+  <!-- PAGE CAKE OO OO LEH 3D PARTICLE ANIMATION-KA THREE.JS & GSAP -->
   <div id="page-cake" class="page sub-card-page">
     <button class="btn-back" onclick="openPageWithCountdown('page-3', 1)">← Back</button>
-    <div class="sub-card-box">
+    
+    <!-- Canvas-ka Three.js uu ku sawirayo particles-ka -->
+    <canvas id="cake3DCanvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none;"></canvas>
+
+    <div class="sub-card-box" style="position: relative; z-index: 5;">
       <div class="card-icon">🎂✨</div>
       <h1 class="big-title" style="font-size: 45px;">Make A Wish!</h1>
       <p style="font-size: 14px; opacity: 0.9;">May all your dreams and wishes come true today and forever ❤️</p>
@@ -1063,10 +1059,11 @@
 
       window.openPageWithCountdown('page-1', 10);
       initFireworksCanvas();
+      initCakeParticleAnimation();
     });
   </script>
 
-  <!-- FIREWORKS / BULULER SCRIPT - FIRECRACKERS BIRBIRQAYA O QARXAYA CIRKA -->
+  <!-- SCRIPTS FOR FIREWORKS & THREE.JS / GSAP ANIMATIONS -->
   <script>
     let timerInterval = null;
 
@@ -1202,7 +1199,75 @@
       }
       animate();
     }
+
+    /* THREE.JS & GSAP PARTICLE ANIMATION FOR CAKE BOGGA (#page-cake) */
+    function initCakeParticleAnimation() {
+      const canvas = document.getElementById('cake3DCanvas');
+      if (!canvas) return;
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+      const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(window.devicePixelRatio);
+
+      const geometry = new THREE.BufferGeometry();
+      const vertices = [];
+
+      const path = document.querySelector("#cakeParticlePath");
+      const length = path ? path.getTotalLength() : 400;
+
+      const tl = gsap.timeline();
+
+      for (let i = 0; i < length; i += 0.1) {
+        let point = { x: (Math.random() - 0.5) * 300, y: (Math.random() - 0.5) * 300 };
+        if (path) {
+          point = path.getPointAtLength(i);
+        }
+
+        const vector = new THREE.Vector3(point.x, -point.y, 0);
+
+        vector.x += (Math.random() - 0.5) * 30;
+        vector.y += (Math.random() - 0.5) * 30;
+        vector.z += (Math.random() - 0.5) * 70;
+
+        vertices.push(vector.x, vector.y, vector.z);
+
+        tl.from(vector, {
+          x: 600 / 2,
+          y: -552 / 2,
+          z: 0,
+          ease: "power2.inOut",
+          duration: Math.random() * 3 + 2
+        }, i * 0.002);
+      }
+
+      geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+
+      const material = new THREE.PointsMaterial({
+        color: 0xff1493,
+        size: 3,
+        transparent: true,
+        opacity: 0.8
+      });
+
+      const particles = new THREE.Points(geometry, material);
+      scene.add(particles);
+
+      camera.position.z = 450;
+
+      function animateCake() {
+        requestAnimationFrame(animateCake);
+        particles.rotation.y += 0.005;
+        particles.rotation.x += 0.002;
+        renderer.render(scene, camera);
+      }
+      
+      animateCake();
+    }
   </script>
 
 </body>
 </html>
+
